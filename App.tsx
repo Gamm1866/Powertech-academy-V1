@@ -6,19 +6,11 @@
 import React, { useState } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { Routes, Route, Link } from 'react-router-dom';
-import emailjs from '@emailjs/browser';
 import { TechBackground } from './components/QuantumScene';
 import { BentoGrid, MagneticButton } from './components/Diagrams';
 import { PrivacyPolicy } from './components/PrivacyPolicy';
 import { LanguageProvider, useLanguage } from './contexts/LanguageContext';
 import { CheckCircle2, Menu, X, ArrowRight, Zap, ChevronDown, Send } from 'lucide-react';
-
-// --- EmailJS placeholders (replace with your actual IDs) ---
-const EMAILJS_SERVICE_ID  = 'YOUR_EMAILJS_SERVICE_ID';
-const EMAILJS_TEMPLATE_ID = 'YOUR_EMAILJS_TEMPLATE_ID';
-const EMAILJS_PUBLIC_KEY  = 'YOUR_EMAILJS_PUBLIC_KEY';
-// Google Sheets Apps Script webhook URL (set to enable)
-const SHEETS_WEBHOOK_URL  = '';
 
 // --- Static Section Helper ---
 const ParallaxSection = ({
@@ -379,7 +371,7 @@ const Curriculum = () => {
 
 // --- ENROLLMENT FORM ---
 const EnrollmentCTA = () => {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -400,33 +392,29 @@ const EnrollmentCTA = () => {
     setStatus('submitting');
 
     try {
-      // Only call EmailJS when real credentials are configured
-      if (EMAILJS_SERVICE_ID !== 'YOUR_EMAILJS_SERVICE_ID') {
-        await emailjs.send(
-          EMAILJS_SERVICE_ID,
-          EMAILJS_TEMPLATE_ID,
-          {
-            first_name: formData.firstName,
-            last_name: formData.lastName,
-            email: formData.email,
-            phone: formData.phone,
-            to_email: 'sales@powertech.academy',
-          },
-          EMAILJS_PUBLIC_KEY
-        );
-      }
+      const response = await fetch('https://formsubmit.co/ajax/sales@powertech.academy', {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json', 
+          'Accept': 'application/json' 
+        },
+        body: JSON.stringify({
+          name: `${formData.firstName} ${formData.lastName}`,
+          email: formData.email,
+          phone: formData.phone,
+          lang: lang,
+          _subject: 'New PowerTech Lead: ' + formData.firstName + ' ' + formData.lastName,
+          _template: 'table'
+        })
+      });
 
-      // Google Sheets webhook — set SHEETS_WEBHOOK_URL above to enable
-      if (SHEETS_WEBHOOK_URL) {
-        await fetch(SHEETS_WEBHOOK_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ ...formData, submittedAt: new Date().toISOString() }),
-        });
+      const result = await response.json();
+      if (result.success) {
+        setStatus('success');
+        setFormData({ firstName: '', lastName: '', email: '', phone: '', consent: false });
+      } else {
+        setStatus('error');
       }
-
-      setStatus('success');
-      setFormData({ firstName: '', lastName: '', email: '', phone: '', consent: false });
     } catch (err) {
       console.error('Submission error:', err);
       setStatus('error');
