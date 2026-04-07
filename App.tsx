@@ -400,18 +400,21 @@ const EnrollmentCTA = () => {
     setStatus('submitting');
 
     try {
-      await emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        {
-          first_name: formData.firstName,
-          last_name: formData.lastName,
-          email: formData.email,
-          phone: formData.phone,
-          to_email: 'sales@powertech.academy',
-        },
-        EMAILJS_PUBLIC_KEY
-      );
+      // Only call EmailJS when real credentials are configured
+      if (EMAILJS_SERVICE_ID !== 'YOUR_EMAILJS_SERVICE_ID') {
+        await emailjs.send(
+          EMAILJS_SERVICE_ID,
+          EMAILJS_TEMPLATE_ID,
+          {
+            first_name: formData.firstName,
+            last_name: formData.lastName,
+            email: formData.email,
+            phone: formData.phone,
+            to_email: 'sales@powertech.academy',
+          },
+          EMAILJS_PUBLIC_KEY
+        );
+      }
 
       // Google Sheets webhook — set SHEETS_WEBHOOK_URL above to enable
       if (SHEETS_WEBHOOK_URL) {
@@ -523,14 +526,14 @@ const EnrollmentCTA = () => {
                 />
                 <label htmlFor="consent" className="text-sm text-power-muted cursor-pointer leading-relaxed">
                   {t.enrollment.consent}{' '}
-                  <Link
-                    to="/privacy-policy"
+                  <a
+                    href="https://www.powertech.academy/privacy-policy"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-power-accent hover:underline"
                   >
                     {t.enrollment.privacyLink}
-                  </Link>
+                  </a>
                   .
                 </label>
               </div>

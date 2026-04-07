@@ -3,54 +3,24 @@
  * SPDX-License-Identifier: Apache-2.0
 */
 
-import React, { useRef } from 'react';
-import { motion, useMotionValue, useSpring } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
 import { Clock, GraduationCap, MapPin, CircuitBoard, UserCheck } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
-// --- MAGNETIC BUTTON ---
+// --- BUTTON ---
 interface MagneticButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   className?: string;
 }
 
 export const MagneticButton: React.FC<MagneticButtonProps> = ({ children, className, ...props }) => {
-  const ref = useRef<HTMLButtonElement>(null);
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-
-  const xSpring = useSpring(x, { mass: 0.1, stiffness: 150, damping: 12 });
-  const ySpring = useSpring(y, { mass: 0.1, stiffness: 150, damping: 12 });
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!ref.current) return;
-    const { left, top, width, height } = ref.current.getBoundingClientRect();
-    const centerX = left + width / 2;
-    const centerY = top + height / 2;
-    const xVal = (e.clientX - centerX) * 0.3;
-    const yVal = (e.clientY - centerY) * 0.3;
-    x.set(xVal);
-    y.set(yVal);
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
-
   const defaultClasses = "px-6 py-2.5 rounded-full font-medium transition-colors bg-white text-black hover:bg-gray-200 border border-transparent";
 
   return (
-    <motion.button
-      ref={ref}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{ x: xSpring, y: ySpring }}
-      className={className || defaultClasses}
-      {...props as any}
-    >
+    <button className={className || defaultClasses} {...props}>
       {children}
-    </motion.button>
+    </button>
   );
 };
 
