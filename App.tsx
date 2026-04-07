@@ -12,8 +12,6 @@ import { PrivacyPolicy } from './components/PrivacyPolicy';
 import { LanguageProvider, useLanguage } from './contexts/LanguageContext';
 import { CheckCircle2, Menu, X, ArrowRight, Zap, ChevronDown, Send } from 'lucide-react';
 
-const WEB3FORMS_KEY = 'YOUR_WEB3FORMS_KEY';
-
 // --- Static Section Helper ---
 const ParallaxSection = ({
   children,
@@ -394,20 +392,18 @@ const EnrollmentCTA = () => {
     setStatus('submitting');
 
     try {
-      const response = await fetch('https://api.web3forms.com/submit', {
+      const response = await fetch('https://formsubmit.co/ajax/sales@powertech.academy', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
+        headers: { 
+          'Content-Type': 'application/json', 
+          'Accept': 'application/json' 
         },
         body: JSON.stringify({
-          access_key: WEB3FORMS_KEY,
-          subject: 'New PowerTech Lead: ' + formData.firstName + ' ' + formData.lastName,
-          from_name: 'PowerTech Academy Website',
-          name: formData.firstName + ' ' + formData.lastName,
+          name: `${formData.firstName} ${formData.lastName}`,
           email: formData.email,
           phone: formData.phone,
-          language: lang,
+          lang: lang,
+          _subject: 'New PowerTech Lead: ' + formData.firstName + ' ' + formData.lastName,
           _template: 'table'
         })
       });
