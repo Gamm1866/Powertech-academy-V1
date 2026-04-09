@@ -1,5 +1,17 @@
+# PowerTech Academy - Robots.txt Configuration
 User-agent: *
 Allow: /
-Disallow: /privacy-policy
+Disallow: /admin
+Disallow: /private
+Disallow: /temp
 
+# Google Search bot
+User-agent: Googlebot
+Allow: /
+
+# Bing bot
+User-agent: Bingbot
+Allow: /
+
+# Sitemap
 Sitemap: https://www.powertech.academy/sitemap.xml
