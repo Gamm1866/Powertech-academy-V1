@@ -185,10 +185,13 @@ export const FAQPage = () => {
             <meta name="description" content="Preguntas frecuentes sobre el programa de técnico en sistemas de alarmas contra incendio de PowerTech Academy en Hollywood FL." />
           </>
         )}
-        <link rel="canonical" href="https://www.powertech.academy/faq" />
+        <link rel="canonical" href={lang === 'en' ? 'https://www.powertech.academy/faq' : 'https://www.powertech.academy/es/faq'} />
+        <link rel="alternate" hrefLang="en" href="https://www.powertech.academy/faq" />
+        <link rel="alternate" hrefLang="es" href="https://www.powertech.academy/es/faq" />
+        <link rel="alternate" hrefLang="x-default" href="https://www.powertech.academy/faq" />
         <meta property="og:title" content={lang === 'en' ? 'FAQ — Fire Alarm Technician Training | PowerTech Academy' : 'Preguntas Frecuentes — Curso Técnico en Alarmas | PowerTech Academy'} />
         <meta property="og:description" content={lang === 'en' ? "Frequently asked questions about PowerTech Academy's fire alarm program in Hollywood FL." : 'Preguntas frecuentes sobre el programa de técnico en alarmas de PowerTech Academy en Hollywood FL.'} />
-        <meta property="og:url" content="https://www.powertech.academy/faq" />
+        <meta property="og:url" content={lang === 'en' ? 'https://www.powertech.academy/faq' : 'https://www.powertech.academy/es/faq'} />
         <meta property="og:type" content="website" />
         <meta property="og:image" content="https://www.powertech.academy/og-image.png" />
         <meta name="twitter:card" content="summary_large_image" />

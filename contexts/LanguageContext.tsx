@@ -3,7 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, ReactNode } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export type Lang = 'en' | 'es';
 
@@ -327,7 +328,20 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | null>(null);
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [lang, setLang] = useState<Lang>('en');
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const lang: Lang = location.pathname.startsWith('/es') ? 'es' : 'en';
+
+  const setLang = (newLang: Lang) => {
+    const path = location.pathname;
+    if (newLang === 'es' && !path.startsWith('/es')) {
+      navigate('/es' + (path === '/' ? '' : path));
+    } else if (newLang === 'en' && path.startsWith('/es')) {
+      navigate(path.replace(/^\/es/, '') || '/');
+    }
+  };
+
   const t = translations[lang] as TranslationType;
   return (
     <LanguageContext.Provider value={{ lang, setLang, t }}>

@@ -579,24 +579,30 @@ const Footer = () => {
 };
 
 // --- MAIN PAGE LAYOUT ---
-const MainLayout: React.FC = () => (
+const MainLayout: React.FC = () => {
+  const { lang, t } = useLanguage();
+  const isEs = lang === 'es';
+  return (
   <div className="bg-power-bg min-h-screen text-power-text selection:bg-power-accent selection:text-white">
     <Helmet>
-      <html lang="en" />
-      <title>Fire Alarm Technician Training | Hollywood FL | PowerTech Academy</title>
-      <meta name="description" content="Fast-track fire alarm systems training in Hollywood FL. 40 hours, NFPA 72, OSHA certified labs. High-demand career in South Florida. Enroll now — limited seats." />
-      <meta name="keywords" content="fire alarm training Florida, NFPA 72 course, fire alarm technician school Hollywood FL, Broward County vocational training" />
-      <link rel="canonical" href="https://www.powertech.academy/" />
-      <meta property="og:title" content="Fire Alarm Technician Training | PowerTech Academy" />
-      <meta property="og:description" content="Fast-track fire alarm systems training in Hollywood FL. High-demand career in South Florida." />
-      <meta property="og:url" content="https://www.powertech.academy/" />
+      <html lang={lang} />
+      <title>{isEs ? 'Curso Técnico en Alarmas | Hollywood FL | PowerTech Academy' : 'Fire Alarm Technician Training | Hollywood FL | PowerTech Academy'}</title>
+      <meta name="description" content={isEs ? 'Formación técnica en sistemas de alarmas contra incendio en Hollywood FL. 40 horas, NFPA 72, OSHA. Carrera de alta demanda en South Florida. ¡Inscríbete ahora!' : 'Fast-track fire alarm systems training in Hollywood FL. 40 hours, NFPA 72, OSHA certified labs. High-demand career in South Florida. Enroll now — limited seats.'} />
+      <meta name="keywords" content={isEs ? 'curso alarmas contra incendio Florida, NFPA 72, técnico alarmas Hollywood FL, formación vocacional Broward County' : 'fire alarm training Florida, NFPA 72 course, fire alarm technician school Hollywood FL, Broward County vocational training'} />
+      <link rel="canonical" href={isEs ? 'https://www.powertech.academy/es' : 'https://www.powertech.academy/'} />
+      <link rel="alternate" hrefLang="en" href="https://www.powertech.academy/" />
+      <link rel="alternate" hrefLang="es" href="https://www.powertech.academy/es" />
+      <link rel="alternate" hrefLang="x-default" href="https://www.powertech.academy/" />
+      <meta property="og:title" content={isEs ? 'Curso Técnico en Alarmas | PowerTech Academy' : 'Fire Alarm Technician Training | PowerTech Academy'} />
+      <meta property="og:description" content={isEs ? 'Formación técnica en alarmas contra incendio en Hollywood FL. Carrera de alta demanda en South Florida.' : 'Fast-track fire alarm systems training in Hollywood FL. High-demand career in South Florida.'} />
+      <meta property="og:url" content={isEs ? 'https://www.powertech.academy/es' : 'https://www.powertech.academy/'} />
       <meta property="og:type" content="website" />
       <meta property="og:image" content="https://www.powertech.academy/og-image.png" />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content="Fire Alarm Technician Training | PowerTech Academy" />
-      <meta name="twitter:description" content="Fast-track fire alarm systems training in Hollywood FL. High-demand career in South Florida." />
+      <meta name="twitter:title" content={isEs ? 'Curso Técnico en Alarmas | PowerTech Academy' : 'Fire Alarm Technician Training | PowerTech Academy'} />
+      <meta name="twitter:description" content={isEs ? 'Formación técnica en alarmas contra incendio en Hollywood FL.' : 'Fast-track fire alarm systems training in Hollywood FL.'} />
       <meta name="twitter:image" content="https://www.powertech.academy/og-image.png" />
       <meta name="google-site-verification" content="0JJtQz1UBHhPUCTD-ojh7fdof8LBzaesa0TM-_vNpRY" />
     </Helmet>
@@ -611,7 +617,8 @@ const MainLayout: React.FC = () => (
     </main>
     <Footer />
   </div>
-);
+  );
+};
 
 // --- APP WITH ROUTING ---
 const App: React.FC = () => {
@@ -619,8 +626,11 @@ const App: React.FC = () => {
     <LanguageProvider>
       <Routes>
         <Route path="/" element={<MainLayout />} />
+        <Route path="/es" element={<MainLayout />} />
         <Route path="/faq" element={<FAQPage />} />
+        <Route path="/es/faq" element={<FAQPage />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/es/privacy-policy" element={<PrivacyPolicy />} />
       </Routes>
     </LanguageProvider>
   );
