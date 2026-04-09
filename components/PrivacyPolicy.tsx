@@ -4,6 +4,7 @@
  */
 
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { Zap, ArrowLeft } from 'lucide-react';
@@ -13,6 +14,13 @@ export const PrivacyPolicy: React.FC = () => {
 
   return (
     <div className="bg-power-bg min-h-screen text-power-text selection:bg-power-accent selection:text-white">
+      <Helmet>
+        <html lang={lang} />
+        <meta name="robots" content="noindex, nofollow" />
+        <title>{lang === 'en' ? 'Privacy Policy | PowerTech Academy' : 'Política de Privacidad | PowerTech Academy'}</title>
+        <meta name="description" content={lang === 'en' ? 'Privacy Policy for PowerTech Academy. How we collect, use, and protect your personal information.' : 'Política de Privacidad de PowerTech Academy. Cómo recopilamos, usamos y protegemos tu información personal.'} />
+        <link rel="canonical" href="https://www.powertech.academy/privacy-policy" />
+      </Helmet>
       {/* Header */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-power-bg/80 backdrop-blur-md border-b border-white/5">
         <div className="container mx-auto px-6 h-20 flex items-center justify-between">
