@@ -6,9 +6,11 @@
 import React, { useState } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { Routes, Route, Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { TechBackground } from './components/QuantumScene';
 import { BentoGrid, MagneticButton } from './components/Diagrams';
 import { PrivacyPolicy } from './components/PrivacyPolicy';
+import { FAQPage } from './src/pages/FAQPage';
 import { LanguageProvider, useLanguage } from './contexts/LanguageContext';
 import { CheckCircle2, Menu, X, ArrowRight, Zap, ChevronDown, Send } from 'lucide-react';
 
@@ -234,7 +236,7 @@ const Benefits = () => {
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-4 pt-8">
                   <div className="bg-power-card p-6 rounded-2xl border border-power-border h-48 flex flex-col justify-end">
-                    <div className="text-4xl font-bold text-white mb-1">94%</div>
+                    <div className="text-4xl font-bold text-white mb-1">🔥</div>
                     <div className="text-sm text-power-muted">{t.benefits.placementRate}</div>
                   </div>
                   <div className="bg-power-card p-6 rounded-2xl border border-power-border h-32 flex flex-col justify-end">
@@ -250,6 +252,7 @@ const Benefits = () => {
                   <div className="bg-power-card p-6 rounded-2xl border border-power-border h-48 flex flex-col justify-end">
                     <div className="text-4xl font-bold text-power-accent mb-1">$65k+</div>
                     <div className="text-sm text-power-muted">{t.benefits.salary}</div>
+                    <div className="text-xs text-power-muted mt-2 opacity-70">*Fuente: BLS 2024 / Source: BLS 2024</div>
                   </div>
                 </div>
               </div>
@@ -551,7 +554,7 @@ const EnrollmentCTA = () => {
 
 // --- FOOTER ---
 const Footer = () => {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   return (
     <footer className="bg-black py-12 border-t border-white/10">
       <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
@@ -560,6 +563,9 @@ const Footer = () => {
         </div>
         <div className="text-power-muted text-sm">{t.footer.copy}</div>
         <div className="flex gap-6">
+          <Link to="/faq" className="text-gray-500 hover:text-white transition-colors">
+            {lang === 'es' ? 'Preguntas frecuentes' : 'FAQ'}
+          </Link>
           <Link to="/privacy-policy" className="text-gray-500 hover:text-white transition-colors">
             {t.footer.privacy}
           </Link>
@@ -575,6 +581,17 @@ const Footer = () => {
 // --- MAIN PAGE LAYOUT ---
 const MainLayout: React.FC = () => (
   <div className="bg-power-bg min-h-screen text-power-text selection:bg-power-accent selection:text-white">
+    <Helmet>
+      <title>Fire Alarm Technician Training | Hollywood FL | PowerTech Academy</title>
+      <meta name="description" content="Fast-track fire alarm systems training in Hollywood FL. 40 hours, NFPA 72, OSHA certified labs. High-demand career in South Florida. Enroll now — limited seats." />
+      <meta name="keywords" content="fire alarm training Florida, NFPA 72 course, fire alarm technician school Hollywood FL, Broward County vocational training" />
+      <link rel="canonical" href="https://powertech.academy/" />
+      <meta property="og:title" content="Fire Alarm Technician Training | PowerTech Academy" />
+      <meta property="og:description" content="Fast-track fire alarm systems training in Hollywood FL. High-demand career in South Florida." />
+      <meta property="og:url" content="https://powertech.academy/" />
+      <meta property="og:type" content="website" />
+      <meta name="google-site-verification" content="0JJtQz1UBHhPUCTD-ojh7fdof8LBzaesa0TM-_vNpRY" />
+    </Helmet>
     <Navbar />
     <main>
       <Hero />
@@ -594,6 +611,7 @@ const App: React.FC = () => {
     <LanguageProvider>
       <Routes>
         <Route path="/" element={<MainLayout />} />
+        <Route path="/faq" element={<FAQPage />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
       </Routes>
     </LanguageProvider>
