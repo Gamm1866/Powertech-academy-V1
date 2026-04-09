@@ -1,0 +1,166 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a0a0a"/>
+      <stop offset="100%" stop-color="#050505"/>
+    </linearGradient>
+
+    <!-- Orange glow -->
+    <radialGradient id="glow" cx="72%" cy="55%" r="45%">
+      <stop offset="0%" stop-color="#FF4500" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#FF4500" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Left accent glow -->
+    <radialGradient id="glowLeft" cx="8%" cy="80%" r="30%">
+      <stop offset="0%" stop-color="#FF4500" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#FF4500" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Clip path -->
+    <clipPath id="clip">
+      <rect width="1200" height="630" rx="0"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <rect width="1200" height="630" fill="url(#glowLeft)"/>
+
+  <!-- Grid pattern -->
+  <g opacity="0.04" stroke="#FF4500" stroke-width="0.8">
+    <line x1="0" y1="0" x2="0" y2="630"/>
+    <line x1="50" y1="0" x2="50" y2="630"/>
+    <line x1="100" y1="0" x2="100" y2="630"/>
+    <line x1="150" y1="0" x2="150" y2="630"/>
+    <line x1="200" y1="0" x2="200" y2="630"/>
+    <line x1="250" y1="0" x2="250" y2="630"/>
+    <line x1="300" y1="0" x2="300" y2="630"/>
+    <line x1="350" y1="0" x2="350" y2="630"/>
+    <line x1="400" y1="0" x2="400" y2="630"/>
+    <line x1="450" y1="0" x2="450" y2="630"/>
+    <line x1="500" y1="0" x2="500" y2="630"/>
+    <line x1="550" y1="0" x2="550" y2="630"/>
+    <line x1="600" y1="0" x2="600" y2="630"/>
+    <line x1="650" y1="0" x2="650" y2="630"/>
+    <line x1="700" y1="0" x2="700" y2="630"/>
+    <line x1="750" y1="0" x2="750" y2="630"/>
+    <line x1="800" y1="0" x2="800" y2="630"/>
+    <line x1="850" y1="0" x2="850" y2="630"/>
+    <line x1="900" y1="0" x2="900" y2="630"/>
+    <line x1="950" y1="0" x2="950" y2="630"/>
+    <line x1="1000" y1="0" x2="1000" y2="630"/>
+    <line x1="1050" y1="0" x2="1050" y2="630"/>
+    <line x1="1100" y1="0" x2="1100" y2="630"/>
+    <line x1="1150" y1="0" x2="1150" y2="630"/>
+    <line x1="1200" y1="0" x2="1200" y2="630"/>
+    <line x1="0" y1="0" x2="1200" y2="0"/>
+    <line x1="0" y1="50" x2="1200" y2="50"/>
+    <line x1="0" y1="100" x2="1200" y2="100"/>
+    <line x1="0" y1="150" x2="1200" y2="150"/>
+    <line x1="0" y1="200" x2="1200" y2="200"/>
+    <line x1="0" y1="250" x2="1200" y2="250"/>
+    <line x1="0" y1="300" x2="1200" y2="300"/>
+    <line x1="0" y1="350" x2="1200" y2="350"/>
+    <line x1="0" y1="400" x2="1200" y2="400"/>
+    <line x1="0" y1="450" x2="1200" y2="450"/>
+    <line x1="0" y1="500" x2="1200" y2="500"/>
+    <line x1="0" y1="550" x2="1200" y2="550"/>
+    <line x1="0" y1="600" x2="1200" y2="600"/>
+    <line x1="0" y1="650" x2="1200" y2="650"/>
+  </g>
+
+  <!-- Top border accent line -->
+  <rect x="0" y="0" width="1200" height="3" fill="#FF4500" opacity="0.9"/>
+
+  <!-- Left vertical accent -->
+  <rect x="80" y="60" width="3" height="510" fill="#FF4500" opacity="0.25"/>
+
+  <!-- Logo area — lightning bolt icon -->
+  <rect x="110" y="90" width="52" height="52" rx="10" fill="#FF4500"/>
+  <!-- Lightning bolt SVG path centered in the icon box (110+26=136 cx, 90+26=116 cy) -->
+  <path d="M 144 99 L 131 117 L 139 117 L 128 137 L 148 113 L 139 113 Z"
+        fill="white"/>
+
+  <!-- Brand name -->
+  <text x="178" y="120" font-family="'Inter', 'Helvetica Neue', Arial, sans-serif"
+        font-size="28" font-weight="700" fill="#f3f4f6" letter-spacing="-0.5">PowerTech</text>
+  <text x="178" y="148" font-family="'Inter', 'Helvetica Neue', Arial, sans-serif"
+        font-size="28" font-weight="400" fill="#9ca3af" letter-spacing="0">Academy</text>
+
+  <!-- Divider -->
+  <line x1="110" y1="178" x2="580" y2="178" stroke="#27272a" stroke-width="1"/>
+
+  <!-- Main headline -->
+  <text x="110" y="258" font-family="'Inter', 'Helvetica Neue', Arial, sans-serif"
+        font-size="64" font-weight="800" fill="#f3f4f6" letter-spacing="-2">Become a</text>
+  <text x="110" y="338" font-family="'Inter', 'Helvetica Neue', Arial, sans-serif"
+        font-size="64" font-weight="800" fill="#FF4500" letter-spacing="-2">Fire Alarm</text>
+  <text x="110" y="418" font-family="'Inter', 'Helvetica Neue', Arial, sans-serif"
+        font-size="64" font-weight="800" fill="#f3f4f6" letter-spacing="-2">Technician</text>
+
+  <!-- Sub details row -->
+  <!-- Dot 1 -->
+  <circle cx="110" cy="475" r="4" fill="#FF4500"/>
+  <text x="124" y="481" font-family="'Inter', 'Helvetica Neue', Arial, sans-serif"
+        font-size="22" font-weight="500" fill="#9ca3af">2–3 Month Fast-Track</text>
+
+  <!-- Dot 2 -->
+  <circle cx="360" cy="475" r="4" fill="#FF4500"/>
+  <text x="374" y="481" font-family="'Inter', 'Helvetica Neue', Arial, sans-serif"
+        font-size="22" font-weight="500" fill="#9ca3af">NFPA 72</text>
+
+  <!-- Dot 3 -->
+  <circle cx="490" cy="475" r="4" fill="#FF4500"/>
+  <text x="504" y="481" font-family="'Inter', 'Helvetica Neue', Arial, sans-serif"
+        font-size="22" font-weight="500" fill="#9ca3af">Hollywood, FL</text>
+
+  <!-- Location badge bottom -->
+  <rect x="110" y="530" width="220" height="40" rx="20" fill="#FF4500" opacity="0.12"
+        stroke="#FF4500" stroke-width="1" stroke-opacity="0.4"/>
+  <text x="220" y="556" font-family="'Inter', 'Helvetica Neue', Arial, sans-serif"
+        font-size="17" font-weight="700" fill="#FF4500" text-anchor="middle"
+        letter-spacing="1">ADMISSIONS OPEN 2026</text>
+
+  <!-- Right panel — decorative circuit/stats card -->
+  <rect x="760" y="60" width="360" height="510" rx="20"
+        fill="#121212" stroke="#27272a" stroke-width="1"/>
+
+  <!-- Card inner glow -->
+  <rect x="760" y="60" width="360" height="510" rx="20"
+        fill="url(#glow)" opacity="0.4"/>
+
+  <!-- Card top accent -->
+  <rect x="760" y="60" width="360" height="3" rx="0" fill="#FF4500" opacity="0.6"/>
+
+  <!-- Stat 1 — Duration -->
+  <rect x="795" y="110" width="290" height="100" rx="12" fill="#0d0d0d" stroke="#1f1f1f" stroke-width="1"/>
+  <text x="940" y="158" font-family="'Inter', 'Helvetica Neue', Arial, sans-serif"
+        font-size="36" font-weight="800" fill="#f3f4f6" text-anchor="middle">2–3</text>
+  <text x="940" y="183" font-family="'Inter', 'Helvetica Neue', Arial, sans-serif"
+        font-size="14" font-weight="600" fill="#9ca3af" text-anchor="middle"
+        letter-spacing="1.5">MONTHS</text>
+
+  <!-- Stat 2 — Hours -->
+  <rect x="795" y="228" width="290" height="100" rx="12" fill="#0d0d0d" stroke="#1f1f1f" stroke-width="1"/>
+  <text x="940" y="276" font-family="'Inter', 'Helvetica Neue', Arial, sans-serif"
+        font-size="36" font-weight="800" fill="#FF4500" text-anchor="middle">40h</text>
+  <text x="940" y="301" font-family="'Inter', 'Helvetica Neue', Arial, sans-serif"
+        font-size="14" font-weight="600" fill="#9ca3af" text-anchor="middle"
+        letter-spacing="1.5">HANDS-ON TRAINING</text>
+
+  <!-- Stat 3 — Earning potential -->
+  <rect x="795" y="346" width="290" height="100" rx="12" fill="#0d0d0d" stroke="#1f1f1f" stroke-width="1"/>
+  <text x="940" y="394" font-family="'Inter', 'Helvetica Neue', Arial, sans-serif"
+        font-size="36" font-weight="800" fill="#f3f4f6" text-anchor="middle">$65k+</text>
+  <text x="940" y="419" font-family="'Inter', 'Helvetica Neue', Arial, sans-serif"
+        font-size="14" font-weight="600" fill="#9ca3af" text-anchor="middle"
+        letter-spacing="1.5">EARNING POTENTIAL*</text>
+
+  <!-- Card URL label -->
+  <text x="940" y="530" font-family="'Inter', 'Helvetica Neue', Arial, sans-serif"
+        font-size="16" font-weight="500" fill="#4b5563" text-anchor="middle"
+        letter-spacing="0.5">powertech.academy</text>
+</svg>
