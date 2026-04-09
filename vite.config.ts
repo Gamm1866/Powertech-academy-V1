@@ -10,6 +10,18 @@ export default defineConfig(({ mode }) => {
         host: '0.0.0.0',
       },
       plugins: [react()],
+      build: {
+        rollupOptions: {
+          output: {
+            manualChunks: {
+              'vendor-react': ['react', 'react-dom', 'react-router-dom', 'react-helmet-async'],
+              'vendor-motion': ['framer-motion'],
+              'vendor-three': ['three', '@react-three/fiber', '@react-three/drei'],
+              'vendor-ui': ['lucide-react'],
+            },
+          },
+        },
+      },
       define: {
         'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),
         'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY)

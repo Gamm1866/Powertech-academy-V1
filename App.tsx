@@ -3,11 +3,14 @@
  * SPDX-License-Identifier: Apache-2.0
 */
 
-import React, { useState } from 'react';
+import React, { useState, Suspense, lazy } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { Routes, Route, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { TechBackground } from './components/QuantumScene';
+
+const TechBackground = lazy(() =>
+  import('./components/QuantumScene').then(m => ({ default: m.TechBackground }))
+);
 import { BentoGrid, MagneticButton } from './components/Diagrams';
 import { PrivacyPolicy } from './components/PrivacyPolicy';
 import { FAQPage } from './src/pages/FAQPage';
@@ -104,8 +107,10 @@ const Hero = () => {
 
   return (
     <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden pt-20">
-      {/* Three.js particle field */}
-      <TechBackground />
+      {/* Three.js particle field — lazy loaded after paint */}
+      <Suspense fallback={null}>
+        <TechBackground />
+      </Suspense>
 
       {/* SVG grid pattern overlay */}
       <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 1 }}>
