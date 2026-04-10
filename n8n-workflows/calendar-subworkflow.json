@@ -1,0 +1,230 @@
+{
+  "name": "📅 Virtual Advisory — Calendar Tool",
+  "nodes": [
+    {
+      "parameters": { "inputSource": "workflowInputData" },
+      "id": "node-trigger",
+      "name": "Datos del Prospecto",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const { nombre, email, telefono, fecha, hora } = $input.first().json;\n\nconst mesesEs = {\n  'enero':0,'febrero':1,'marzo':2,'abril':3,'mayo':4,'junio':5,\n  'julio':6,'agosto':7,'septiembre':8,'octubre':9,'noviembre':10,'diciembre':11\n};\nconst mesesEn = {\n  'january':0,'february':1,'march':2,'april':3,'may':4,'june':5,\n  'july':6,'august':7,'september':8,'october':9,'november':10,'december':11\n};\n\nlet day, month, year;\nconst f = (fecha||'').toLowerCase().replace(/[,.]/g,'');\nfor (const p of f.split(/\\s+/)) {\n  if (/^\\d{4}$/.test(p)) year = parseInt(p);\n  else if (/^\\d{1,2}$/.test(p) && !day) day = parseInt(p);\n  else if (mesesEs[p] !== undefined) month = mesesEs[p];\n  else if (mesesEn[p] !== undefined) month = mesesEn[p];\n}\n\nif (!day || month === undefined || !year) {\n  const iso = new Date(fecha);\n  if (!isNaN(iso)) { day=iso.getDate(); month=iso.getMonth(); year=iso.getFullYear(); }\n  else return [{ json: { success:false, result:'No pude interpretar la fecha: '+fecha } }];\n}\n\nlet h=10, m=0;\nconst t = (hora||'10:00 AM').toLowerCase();\nconst tm = t.match(/(\\d{1,2})[:]?(\\d{2})?\\s*(am|pm)?/);\nif (tm) {\n  h=parseInt(tm[1]); m=parseInt(tm[2]||'0');\n  if (tm[3]==='pm' && h<12) h+=12;\n  if (tm[3]==='am' && h===12) h=0;\n}\n\nconst pad = n => String(n).padStart(2,'0');\nconst localStart = `${year}-${pad(month+1)}-${pad(day)}T${pad(h)}:${pad(m)}:00`;\nconst endH = h + Math.floor((m+15)/60);\nconst endM = (m+15) % 60;\nconst localEnd = `${year}-${pad(month+1)}-${pad(day)}T${pad(endH)}:${pad(endM)}:00`;\n\nconst dias   = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];\nconst meses  = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];\nconst d = new Date(year, month, day);\nconst displayFecha = `${dias[d.getDay()]} ${day} de ${meses[month]} de ${year}`;\nconst displayHora  = h < 12\n  ? `${pad(h===0?12:h)}:${pad(m)} AM`\n  : `${pad(h===12?12:h-12)}:${pad(m)} PM`;\n\nreturn [{ json: { nombre, email, telefono, localStart, localEnd, displayFecha, displayHora } }];"
+      },
+      "id": "node-parse",
+      "name": "Parse Fecha Hora",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [480, 300]
+    },
+    {
+      "parameters": {
+        "resource": "event",
+        "operation": "getAll",
+        "calendar": { "__rl": true, "value": "primary", "mode": "list", "cachedResultName": "primary" },
+        "returnAll": true,
+        "options": {
+          "timeMin": "={{ $json.localStart }}",
+          "timeMax": "={{ $json.localEnd }}",
+          "timeZone": "America/New_York",
+          "singleEvents": true
+        }
+      },
+      "id": "node-check",
+      "name": "Verificar Disponibilidad",
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1.2,
+      "alwaysOutputData": true,
+      "position": [720, 300],
+      "credentials": {
+        "googleCalendarOAuth2Api": { "id": "REEMPLAZA_GOOGLE_CALENDAR_CREDENTIAL_ID", "name": "Google Calendar account" }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const events = $input.all();\nconst parsed = $('Parse Fecha Hora').first().json;\nreturn [{ json: { ...parsed, eventCount: events.length, slotAvailable: events.length === 0 } }];"
+      },
+      "id": "node-count",
+      "name": "Contar Conflictos",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [960, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict", "version": 2 },
+          "conditions": [
+            {
+              "id": "cond-available",
+              "leftValue": "={{ $json.slotAvailable }}",
+              "rightValue": "",
+              "operator": { "type": "boolean", "operation": "true", "singleValue": true }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "node-if",
+      "name": "¿Horario Disponible?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [1200, 300]
+    },
+    {
+      "parameters": {
+        "resource": "event",
+        "operation": "create",
+        "calendar": { "__rl": true, "value": "primary", "mode": "list", "cachedResultName": "primary" },
+        "start": "={{ $('Parse Fecha Hora').item.json.localStart }}",
+        "end": "={{ $('Parse Fecha Hora').item.json.localEnd }}",
+        "useDefaultReminders": true,
+        "additionalFields": {
+          "summary": "=Virtual Advisory — {{ $('Parse Fecha Hora').item.json.nombre }} | PowerTech Academy",
+          "description": "=📋 DATOS DEL PROSPECTO\n\nNombre: {{ $('Parse Fecha Hora').item.json.nombre }}\nEmail: {{ $('Parse Fecha Hora').item.json.email }}\nTeléfono: {{ $('Parse Fecha Hora').item.json.telefono }}\n\n⏱️ Duración: 15 minutos\n💬 Canal origen: WhatsApp\n🏫 PowerTech Academy — Hollywood, FL",
+          "attendees": "={{ [ { 'email': $('Parse Fecha Hora').item.json.email }, { 'email': 'sales@powertech.academy' } ] }}",
+          "conferenceDataVersion": 1,
+          "sendUpdates": "all",
+          "guestsCanSeeOtherGuests": false,
+          "timezone": "America/New_York"
+        }
+      },
+      "id": "node-create",
+      "name": "Crear Evento + Meet",
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1.2,
+      "position": [1460, 120],
+      "credentials": {
+        "googleCalendarOAuth2Api": { "id": "REEMPLAZA_GOOGLE_CALENDAR_CREDENTIAL_ID", "name": "Google Calendar account" }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Parse Fecha Hora').item.json.email }}",
+        "subject": "=✅ Tu Virtual Advisory está confirmado — PowerTech Academy",
+        "emailType": "html",
+        "message": "=<!DOCTYPE html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width'></head><body style='margin:0;padding:0;background:#050505;font-family:Arial,sans-serif;'><table width='100%' cellpadding='0' cellspacing='0' style='background:#050505;padding:32px 16px;'><tr><td align='center'><table width='580' cellpadding='0' cellspacing='0' style='max-width:580px;width:100%;background:#121212;border-radius:16px;border:1px solid #27272a;overflow:hidden;'><tr><td style='background:#FF4500;height:4px;'></td></tr><tr><td style='padding:32px 36px 20px;'><span style='color:#f3f4f6;font-size:22px;font-weight:800;'>⚡ PowerTech <span style='font-weight:400;color:#9ca3af;'>Academy</span></span></td></tr><tr><td style='padding:0 36px 32px;'><h1 style='color:#f3f4f6;font-size:26px;font-weight:800;margin:0 0 8px;'>✅ ¡Cita confirmada!</h1><p style='color:#9ca3af;font-size:15px;margin:0 0 28px;'>Hola <strong style='color:#f3f4f6;'>{{ $('Parse Fecha Hora').item.json.nombre }}</strong>, tu Virtual Advisory está agendado.</p><table width='100%' cellpadding='0' cellspacing='0' style='background:#0d0d0d;border:1px solid #27272a;border-radius:12px;margin-bottom:24px;'><tr><td style='padding:20px 24px;'><p style='color:#9ca3af;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin:0 0 14px;'>Detalles de tu reunión</p><p style='color:#9ca3af;font-size:14px;margin:0 0 10px;'>📅 <strong style='color:#f3f4f6;'>{{ $('Parse Fecha Hora').item.json.displayFecha }}</strong></p><p style='color:#9ca3af;font-size:14px;margin:0 0 10px;'>⏰ <strong style='color:#f3f4f6;'>{{ $('Parse Fecha Hora').item.json.displayHora }} (hora de Florida)</strong></p><p style='color:#9ca3af;font-size:14px;margin:0 0 10px;'>⏱️ <strong style='color:#f3f4f6;'>15 minutos</strong></p><p style='color:#9ca3af;font-size:14px;margin:0;'>💻 <strong style='color:#f3f4f6;'>Google Meet</strong></p></td></tr></table><table width='100%' cellpadding='0' cellspacing='0' style='margin-bottom:28px;'><tr><td align='center'><a href='{{ $json.conferenceData.entryPoints[0].uri }}' style='display:inline-block;background:#FF4500;color:white;text-decoration:none;font-weight:700;font-size:15px;padding:14px 32px;border-radius:50px;'>Unirse a Google Meet →</a></td></tr></table><table width='100%' cellpadding='0' cellspacing='0' style='background:#0d0d0d;border:1px solid #27272a;border-radius:12px;margin-bottom:28px;'><tr><td style='padding:20px 24px;'><p style='color:#9ca3af;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin:0 0 12px;'>¿Qué esperar?</p><p style='color:#9ca3af;font-size:14px;margin:0 0 6px;'>• Detalles completos del programa y currículo</p><p style='color:#9ca3af;font-size:14px;margin:0 0 6px;'>• Proceso de admisión y próximos cohorts</p><p style='color:#9ca3af;font-size:14px;margin:0;'>• Sin compromiso — es solo una conversación</p></td></tr></table><p style='color:#4b5563;font-size:13px;text-align:center;margin:0;'>¿Necesitas reagendar? Escríbenos a <a href='mailto:sales@powertech.academy' style='color:#FF4500;'>sales@powertech.academy</a> o WhatsApp +1 (786) 460-9020</p></td></tr><tr><td style='background:#0a0a0a;padding:16px 36px;border-top:1px solid #1f1f1f;'><p style='color:#4b5563;font-size:12px;text-align:center;margin:0;'>PowerTech Academy · 3803 N 29th Ave Suite B, Hollywood FL 33020 · <a href='https://powertech.academy' style='color:#FF4500;text-decoration:none;'>powertech.academy</a></p></td></tr></table></td></tr></table></body></html>",
+        "options": { "senderName": "PowerTech Academy" }
+      },
+      "id": "node-email-lead",
+      "name": "Email Confirmación → Lead",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [1700, 120],
+      "credentials": {
+        "gmailOAuth2": { "id": "REEMPLAZA_GMAIL_CREDENTIAL_ID", "name": "Gmail account" }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "sales@powertech.academy",
+        "subject": "=🔔 Nuevo Advisory agendado — {{ $('Parse Fecha Hora').item.json.nombre }}",
+        "emailType": "html",
+        "message": "=<!DOCTYPE html><html><head><meta charset='utf-8'></head><body style='margin:0;padding:0;background:#050505;font-family:Arial,sans-serif;'><table width='100%' cellpadding='0' cellspacing='0' style='background:#050505;padding:32px 16px;'><tr><td align='center'><table width='580' cellpadding='0' cellspacing='0' style='max-width:580px;width:100%;background:#121212;border-radius:16px;border:1px solid #27272a;overflow:hidden;'><tr><td style='background:#FF4500;height:4px;'></td></tr><tr><td style='padding:32px 36px;'><h1 style='color:#f3f4f6;font-size:22px;font-weight:800;margin:0 0 4px;'>🔔 Nuevo Advisory agendado</h1><p style='color:#9ca3af;font-size:14px;margin:0 0 28px;'>Captado vía WhatsApp · Bot Diana</p><table width='100%' cellpadding='0' cellspacing='0' style='background:#0d0d0d;border:1px solid #27272a;border-radius:12px;margin-bottom:20px;'><tr><td style='padding:20px 24px;'><p style='color:#9ca3af;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin:0 0 14px;'>Datos del Prospecto</p><p style='color:#9ca3af;font-size:14px;margin:0 0 8px;'>👤 <strong style='color:#f3f4f6;'>{{ $('Parse Fecha Hora').item.json.nombre }}</strong></p><p style='color:#9ca3af;font-size:14px;margin:0 0 8px;'>📧 <a href='mailto:{{ $('Parse Fecha Hora').item.json.email }}' style='color:#FF4500;'>{{ $('Parse Fecha Hora').item.json.email }}</a></p><p style='color:#9ca3af;font-size:14px;margin:0;'>📱 {{ $('Parse Fecha Hora').item.json.telefono }}</p></td></tr></table><table width='100%' cellpadding='0' cellspacing='0' style='background:#0d0d0d;border:1px solid #27272a;border-radius:12px;margin-bottom:20px;'><tr><td style='padding:20px 24px;'><p style='color:#9ca3af;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin:0 0 14px;'>Reunión</p><p style='color:#9ca3af;font-size:14px;margin:0 0 8px;'>📅 <strong style='color:#f3f4f6;'>{{ $('Parse Fecha Hora').item.json.displayFecha }}</strong></p><p style='color:#9ca3af;font-size:14px;margin:0 0 8px;'>⏰ <strong style='color:#f3f4f6;'>{{ $('Parse Fecha Hora').item.json.displayHora }} EST</strong></p><p style='color:#9ca3af;font-size:14px;margin:0;'>🔗 <a href='{{ $('Crear Evento + Meet').item.json.conferenceData.entryPoints[0].uri }}' style='color:#FF4500;'>Abrir Google Meet</a></p></td></tr></table></td></tr></table></td></tr></table></body></html>",
+        "options": { "senderName": "Bot Diana — PowerTech" }
+      },
+      "id": "node-email-team",
+      "name": "Email Notificación → Equipo",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [1940, 120],
+      "credentials": {
+        "gmailOAuth2": { "id": "REEMPLAZA_GMAIL_CREDENTIAL_ID", "name": "Gmail account" }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "schema": {
+          "__rl": true,
+          "value": "public",
+          "mode": "list"
+        },
+        "table": {
+          "__rl": true,
+          "value": "leads",
+          "mode": "list"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "nombre":        "={{ $('Parse Fecha Hora').item.json.nombre }}",
+            "email":         "={{ $('Parse Fecha Hora').item.json.email }}",
+            "telefono":      "={{ $('Parse Fecha Hora').item.json.telefono }}",
+            "fecha_advisory":"={{ $('Parse Fecha Hora').item.json.localStart }}",
+            "estado":        "advisory_agendado",
+            "canal_origen":  "whatsapp",
+            "meet_link":     "={{ $('Crear Evento + Meet').item.json.conferenceData.entryPoints[0].uri }}",
+            "created_at":    "={{ new Date().toISOString() }}"
+          }
+        },
+        "options": { "queryBatching": "independently" }
+      },
+      "id": "node-postgres",
+      "name": "Guardar Lead en CRM",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [2180, 120],
+      "credentials": {
+        "postgres": { "id": "REEMPLAZA_POSTGRES_CREDENTIAL_ID", "name": "Postgres account" }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "r1",
+              "name": "success",
+              "value": true,
+              "type": "boolean"
+            },
+            {
+              "id": "r2",
+              "name": "result",
+              "value": "=✅ Advisory agendado para el {{ $('Parse Fecha Hora').item.json.displayFecha }} a las {{ $('Parse Fecha Hora').item.json.displayHora }} (hora de Florida). Link de Google Meet: {{ $('Crear Evento + Meet').item.json.conferenceData.entryPoints[0].uri }}. Se enviaron emails de confirmación a {{ $('Parse Fecha Hora').item.json.email }} y al equipo de admisiones.",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "node-success",
+      "name": "Retornar Confirmación",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [2420, 120]
+    },
+    {
+      "parameters": {
+        "jsCode": "const { nombre, displayFecha, displayHora, localStart } = $json;\n\nconst base = new Date(localStart);\nconst slots = [];\nconst businessHours = [9,10,11,14,15,16];\n\nlet checkDate = new Date(base);\nlet daysChecked = 0;\n\nwhile (slots.length < 3 && daysChecked < 14) {\n  if (slots.length > 0 || daysChecked > 0) {\n    checkDate.setDate(checkDate.getDate() + 1);\n  }\n  daysChecked++;\n  const dow = checkDate.getDay();\n  if (dow === 0 || dow === 6) continue;\n  for (const h of businessHours) {\n    if (h === base.getHours() && checkDate.getDate() === base.getDate()) continue;\n    const dias  = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];\n    const meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];\n    const ampm  = h < 12 ? `${h}:00 AM` : `${h === 12 ? 12 : h - 12}:00 PM`;\n    slots.push(`${dias[checkDate.getDay()]} ${checkDate.getDate()} de ${meses[checkDate.getMonth()]} a las ${ampm}`);\n    if (slots.length >= 3) break;\n  }\n}\n\nreturn [{ json: {\n  success: false,\n  result: `El horario del ${displayFecha} a las ${displayHora} no está disponible. Te ofrezco estas alternativas:\\n\\n1. ${slots[0]}\\n2. ${slots[1]}\\n3. ${slots[2]}\\n\\n¿Cuál te viene mejor?`\n}}];"
+      },
+      "id": "node-alternatives",
+      "name": "Proponer Alternativas",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1460, 480]
+    }
+  ],
+  "connections": {
+    "Datos del Prospecto":       { "main": [[{ "node": "Parse Fecha Hora",          "type": "main", "index": 0 }]] },
+    "Parse Fecha Hora":          { "main": [[{ "node": "Verificar Disponibilidad",  "type": "main", "index": 0 }]] },
+    "Verificar Disponibilidad":  { "main": [[{ "node": "Contar Conflictos",         "type": "main", "index": 0 }]] },
+    "Contar Conflictos":         { "main": [[{ "node": "¿Horario Disponible?",      "type": "main", "index": 0 }]] },
+    "¿Horario Disponible?": {
+      "main": [
+        [{ "node": "Crear Evento + Meet",   "type": "main", "index": 0 }],
+        [{ "node": "Proponer Alternativas", "type": "main", "index": 0 }]
+      ]
+    },
+    "Crear Evento + Meet":         { "main": [[{ "node": "Email Confirmación → Lead",   "type": "main", "index": 0 }]] },
+    "Email Confirmación → Lead":   { "main": [[{ "node": "Email Notificación → Equipo", "type": "main", "index": 0 }]] },
+    "Email Notificación → Equipo": { "main": [[{ "node": "Guardar Lead en CRM",         "type": "main", "index": 0 }]] },
+    "Guardar Lead en CRM":         { "main": [[{ "node": "Retornar Confirmación",        "type": "main", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1" },
+  "tags": []
+}

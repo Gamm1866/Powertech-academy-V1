@@ -1,0 +1,703 @@
+{
+  "name": "Powertech Whatsapp",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": ["messages"],
+        "options": {}
+      },
+      "id": "4d3a3bc7-0adb-4e8e-ae06-3a558ec74320",
+      "name": "WhatsApp Trigger",
+      "type": "n8n-nodes-base.whatsAppTrigger",
+      "position": [-688, 320],
+      "webhookId": "5c26a149-2024-45f5-8a7d-cfda8ec29ece",
+      "typeVersion": 1,
+      "credentials": {
+        "whatsAppTriggerApi": { "id": "PlNmMwfC1PR7vIEz", "name": "WhatsApp OAuth account 2" }
+      }
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "=messages",
+        "options": {}
+      },
+      "id": "6660caac-37a2-4245-989a-04ef2cc9bc9a",
+      "name": "Filtrardor",
+      "type": "n8n-nodes-base.splitOut",
+      "position": [-496, 320],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": { "version": 2, "leftValue": "", "caseSensitive": true, "typeValidation": "strict" },
+                "conditions": [
+                  {
+                    "operator": { "type": "boolean", "operation": "true", "singleValue": true },
+                    "leftValue": "={{ $json.type == 'audio' && Boolean($json.audio) }}",
+                    "rightValue": "audio",
+                    "id": "e04acfcd-cb7b-41d7-8c2c-73e0e0f3c8fe"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Audio"
+            },
+            {
+              "conditions": {
+                "options": { "version": 2, "leftValue": "", "caseSensitive": true, "typeValidation": "strict" },
+                "combinator": "and",
+                "conditions": [
+                  {
+                    "id": "82aa5ff4-c9b6-4187-a27e-c7c5d9bfdda0",
+                    "operator": { "type": "boolean", "operation": "true", "singleValue": true },
+                    "leftValue": "={{ $json.type == 'video' && Boolean($json.video) }}",
+                    "rightValue": ""
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "Video"
+            },
+            {
+              "conditions": {
+                "options": { "version": 2, "leftValue": "", "caseSensitive": true, "typeValidation": "strict" },
+                "combinator": "and",
+                "conditions": [
+                  {
+                    "id": "05b30af4-967b-4824-abdc-84a8292ac0e5",
+                    "operator": { "type": "boolean", "operation": "true", "singleValue": true },
+                    "leftValue": "={{ $json.type == 'image' && Boolean($json.image) }}",
+                    "rightValue": ""
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "Imagen"
+            }
+          ]
+        },
+        "options": { "fallbackOutput": "extra", "renameFallbackOutput": "Texto" }
+      },
+      "id": "0234c063-3f31-48ca-bb0b-7cdf1c01c221",
+      "name": "Enrutar Mensajes",
+      "type": "n8n-nodes-base.switch",
+      "position": [-304, 288],
+      "typeVersion": 3.2
+    },
+    {
+      "parameters": {
+        "resource": "media",
+        "operation": "mediaUrlGet",
+        "mediaGetId": "={{ $json.audio.id }}"
+      },
+      "id": "2379e7ca-f0ec-499d-9f27-57bf2d28be8b",
+      "name": "Obtener URL | Audio",
+      "type": "n8n-nodes-base.whatsApp",
+      "position": [0, 0],
+      "typeVersion": 1,
+      "webhookId": "33faa5f3-0ebc-4ce6-b1ad-8f29f3a2a833",
+      "credentials": {
+        "whatsAppApi": { "id": "ZCSCZsoUcX85M88h", "name": "WhatsApp account 2" }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "media",
+        "operation": "mediaUrlGet",
+        "mediaGetId": "={{ $json.video.id }}"
+      },
+      "id": "cfe83d47-fad7-4fa6-8521-87da2fec260b",
+      "name": "Obtener URL | Video",
+      "type": "n8n-nodes-base.whatsApp",
+      "position": [0, 208],
+      "typeVersion": 1,
+      "webhookId": "a3233fa7-5c6d-4805-9e74-4b7e6ada5cf6",
+      "credentials": {
+        "whatsAppApi": { "id": "ZCSCZsoUcX85M88h", "name": "WhatsApp account 2" }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "media",
+        "operation": "mediaUrlGet",
+        "mediaGetId": "={{ $('Filtrardor').item.json.image.id }}"
+      },
+      "id": "d602669b-476e-4293-a5f1-89aab01dfa5a",
+      "name": "Obtener URL | Imagen",
+      "type": "n8n-nodes-base.whatsApp",
+      "position": [0, 400],
+      "typeVersion": 1,
+      "webhookId": "99234811-660e-4194-afcc-cea39c2ce0de",
+      "credentials": {
+        "whatsAppApi": { "id": "ZCSCZsoUcX85M88h", "name": "WhatsApp account 2" }
+      }
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "whatsAppApi",
+        "options": {}
+      },
+      "id": "65c3dab5-2ad9-44ea-ae82-9f67efed4c76",
+      "name": "Descargar Audio",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [192, 0],
+      "typeVersion": 4.2,
+      "credentials": {
+        "whatsAppApi": { "id": "ZCSCZsoUcX85M88h", "name": "WhatsApp account 2" }
+      }
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "whatsAppApi",
+        "options": {}
+      },
+      "id": "8768270d-fe9a-463e-a906-eef2b3432b05",
+      "name": "Descargar Video",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [192, 208],
+      "typeVersion": 4.2,
+      "credentials": {
+        "whatsAppApi": { "id": "ZCSCZsoUcX85M88h", "name": "WhatsApp account 2" }
+      }
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "whatsAppApi",
+        "options": {}
+      },
+      "id": "f4c678d1-474d-4dab-8a47-e5df3c5b474d",
+      "name": "Descargar Imagen",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [192, 400],
+      "typeVersion": 4.2,
+      "credentials": {
+        "whatsAppApi": { "id": "ZCSCZsoUcX85M88h", "name": "WhatsApp account 2" }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "audio",
+        "modelId": { "__rl": true, "value": "models/gemini-2.5-flash", "mode": "list", "cachedResultName": "models/gemini-2.5-flash" },
+        "inputType": "binary",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1.1,
+      "position": [384, 0],
+      "id": "789619a4-70a1-4bd5-a7fd-0977d8f37600",
+      "name": "Transcribe a recording",
+      "credentials": {
+        "googlePalmApi": { "id": "V5DOwfBC8AxMePTj", "name": "Google Gemini(PaLM) Api account" }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "video",
+        "operation": "analyze",
+        "modelId": { "__rl": true, "value": "models/gemini-2.5-flash", "mode": "list", "cachedResultName": "models/gemini-2.5-flash" },
+        "text": "=# Contexto\n\nRecibes como input un video enviado por el usuario.\n\n# Tarea\n\nDescribe el video. Lo que más importa es lo que dice la persona en el video.\n\n# Especificaciones\n\nLo esencial es transcribir/parafrasear lo que dice la persona.\n",
+        "inputType": "binary",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [384, 208],
+      "id": "bc600bd4-2585-4a39-b9ff-5b3781bfe10f",
+      "name": "Analizar Video",
+      "credentials": {
+        "googlePalmApi": { "id": "V5DOwfBC8AxMePTj", "name": "Google Gemini(PaLM) Api account" }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=# Contexto\n\nRecibes como input una imagen enviada por el usuario.",
+        "messages": {
+          "messageValues": [
+            { "type": "HumanMessagePromptTemplate", "messageType": "imageBinary" },
+            {
+              "message": "=# Contexto\n\nEres parte de una automatización en N8N. Tu descripción será procesada por un Agente de IA (ChatBot) para PowerTech Academy.\n\n# Tarea\n\nDescribe la imagen y transcribe cualquier texto visible.\n\n# Especificaciones\n\nTen en cuenta para quién trabajas. No añadas detalles irrelevantes para el negocio."
+            }
+          ]
+        }
+      },
+      "id": "a1a5c202-422f-41cf-a9b4-0fa32c612d53",
+      "name": "Explicar Imagen",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "position": [368, 400],
+      "typeVersion": 1.4
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1c1fbe32-c8c4-4416-9871-265321201c16",
+              "name": "mensaje",
+              "value": "={{ $json.content?.parts?.[0]?.text ?? $json.text ?? '' }}\n",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "f3eb60ce-2643-429e-871d-39e4c8fd506b",
+      "name": "Obtener Video",
+      "type": "n8n-nodes-base.set",
+      "position": [672, 160],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b688b35c-523e-4f0a-9201-770c92437519",
+              "name": "content.parts[0].text",
+              "value": "={{ $json.content?.parts?.[0]?.text ?? $json.text ?? $json.transcription ?? '' }}\n",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "d23651e4-18b8-49d0-ad22-c253419c8d1c",
+      "name": "Obtener Mensaje",
+      "type": "n8n-nodes-base.set",
+      "position": [672, 320],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d4b9efeb-9a68-43e3-bc4c-cd207510bddf",
+              "name": "text",
+              "value": "={{ $json.text.body }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [192, 640],
+      "id": "1bae3ce3-4fa6-44b0-88aa-baec857793a4",
+      "name": "Obtener Texto"
+    },
+    {
+      "parameters": {
+        "operation": "push",
+        "list": "={{ $('WhatsApp Trigger').item.json.messages[0].from }}",
+        "messageData": "={{ $json.content.parts[0].text }}",
+        "tail": true
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [880, 320],
+      "id": "c4a598f2-6212-47e3-840c-f54cca5e97f1",
+      "name": "Push Data",
+      "credentials": {
+        "redis": { "id": "Qr0Z5KT80DBaGnP8", "name": "Redis account 2" }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 3
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [1040, 320],
+      "id": "31f27331-808f-4361-9b69-f3906f8407f8",
+      "name": "Pausa",
+      "webhookId": "96c27c05-96e6-490e-ac24-3c38c75c7d9b"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "propertyName": "Mensaje",
+        "key": "={{ $('WhatsApp Trigger').item.json.messages[0].from }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [1200, 320],
+      "id": "f35f9f2a-192a-406e-a893-9423e6194067",
+      "name": "Get Data",
+      "credentials": {
+        "redis": { "id": "Qr0Z5KT80DBaGnP8", "name": "Redis account 2" }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict", "version": 2 },
+          "conditions": [
+            {
+              "id": "199b9525-b40c-4b2f-bdb2-e37166159ee2",
+              "leftValue": "={{ $node[\"Get Data\"].json[\"Mensaje\"][$node[\"Get Data\"].json[\"Mensaje\"].length - 1] }}",
+              "rightValue": "={{ $node[\"Get Data\"].json[\"Mensaje\"][0] }}",
+              "operator": { "type": "string", "operation": "notEquals" }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [1360, 320],
+      "id": "4f633945-cc4f-4f4b-a8e7-cddcf1b0d658",
+      "name": "Mismo Mensaje?"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict", "version": 2 },
+          "conditions": [
+            {
+              "id": "c6cd2b5c-67e3-4648-8c9c-26da4cb40091",
+              "leftValue": "={{ $json.Mensaje }}",
+              "rightValue": 0,
+              "operator": { "type": "array", "operation": "lengthGt", "rightType": "number" }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [1520, 320],
+      "id": "0e28cbd4-bf28-4a63-9aad-a33f0b32655b",
+      "name": "Único Mensaje?"
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "={{ $('WhatsApp Trigger').item.json.messages[0].from }}"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [1680, 320],
+      "id": "1e0d0b3e-e48e-4c30-b242-f76a6163c1c1",
+      "name": "Delete Data",
+      "credentials": {
+        "redis": { "id": "Qr0Z5KT80DBaGnP8", "name": "Redis account 2" }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [1680, 496],
+      "id": "6411d016-74c0-4362-b7eb-2d9ce7de25b8",
+      "name": "NoOp"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Une los textos del array \"Mensaje\" del nodo \"Get Data\"\n// y devuelve un solo campo: \"Mensaje Completo\"\n\nconst mensajes = $node[\"Get Data\"].json[\"Mensaje\"];\n\nif (Array.isArray(mensajes)) {\n  return [\n    {\n      json: {\n        \"Mensaje Completo\": mensajes.join(', ')\n      }\n    }\n  ];\n} else {\n  return [\n    {\n      json: {\n        \"Mensaje Completo\": null\n      }\n    }\n  ];\n}\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1840, 320],
+      "id": "9f86af75-d226-4e58-ae91-0d337e6a7162",
+      "name": "Set Mensaje Completo"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Set Mensaje Completo').item.json['Mensaje Completo'] }}",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "=# Rol\n\nEres un detector de idioma. Analizas el mensaje del usuario y devuelves únicamente el nombre del idioma detectado.\n\n# Contexto\n\nRecibes mensajes en texto libre y debes indicar el idioma principal. Normalmente serán:\n\n- Español\n- Inglés\n\n# Tarea\n\nDetectar el idioma predominante en el mensaje.\nDevolver únicamente el nombre del idioma, escrito tal cual en la lista anterior.\n\n# Especificaciones\n\nSi el idioma no está en la lista, devolver \"Desconocido\".\nSi el mensaje mezcla varios idiomas, devolver el que aparezca de forma más predominante.\nNo uses códigos (es, en, etc.) ni explicaciones.\nNo añadas puntuación, comillas ni texto extra.\n\n# Ejemplos\n\n## Entrada: \"¿Puedes ayudarme con el curso?\"\n## Salida: Español\n\n## Entrada: \"Can you tell me more about the program?\"\n## Salida: Inglés\n\n# Notas\n\n- Si recibes un idioma que no entiendes o no tiene sentido, di que es Español"
+            }
+          ]
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [2000, 320],
+      "id": "bde786d7-d812-4823-8511-bc26ff919c3c",
+      "name": "Traductor"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Recibes el siguiente mensaje: {{ $('Set Mensaje Completo').item.json['Mensaje Completo'] }}\n\n--\n\nResponde SIEMPRE en {{ $json.text }}",
+        "options": {
+          "systemMessage": "=# Rol\n\nEres Diana, Asesora de Admisiones de PowerTech Academy, una escuela técnica privada en Hollywood, Florida, especializada en fire & life safety.\n\nOperas como asistente de WhatsApp. Recibes mensajes de texto, audio transcrito, imágenes analizadas y videos analizados. Siempre respondes en el mismo canal en que el usuario se comunica contigo.\n\nTu misión es atender consultas, calificar prospectos y agendar el Virtual Advisory de 15 minutos — el paso obligatorio antes de cualquier matrícula o visita presencial al campus.\n\nNO te presentes como IA a menos que el usuario te lo pregunte directamente. Si te preguntan, responde con honestidad: \"Soy Diana, asistente virtual de PowerTech Academy\" y continúa con naturalidad.\n\n---\n\n# Tareas\n\n1. Responder consultas sobre el programa de PowerTech Academy.\n2. Calificar el perfil e interés del prospecto (técnico, profesional o empresario).\n3. Conseguir que el prospecto agende el Virtual Advisory gratuito de 15 minutos.\n4. Si el prospecto no quiere agendar aún, ofrecer el brochure por email como alternativa.\n5. Registrar los datos del prospecto cuando corresponda.\n6. Escalar a agente humano si la situación lo requiere.\n\n---\n\n# Contexto\n\nPowerTech Academy es una escuela técnica privada especializada en fire & life safety en South Florida.\n\nPrograma: Fire Alarm Systems Technician — Fast Track\nDuración: 2 a 3 meses (aproximadamente 90 días), intensivo\nModalidad: Teoría virtual + Laboratorios físicos presenciales\nRequisitos: Sin experiencia previa. Mayores de 17 años.\nCampus principal: 3803 N 29th Ave, Suite B, Hollywood, FL 33020\nHorario de oficina: Lunes a viernes, 8:00 AM a 5:00 PM EST\nTeléfono: +1 (786) 460-9020\nEmail: sales@powertech.academy\nSitio web: https://powertech.academy\n\nIMPORTANTE — Certificación:\nPowerTech Academy NO otorga certificación NFPA 72. El programa emite un Certificate of Attendance reconocido por empleadores del sector y facilita la colocación laboral. NUNCA menciones \"certificación NFPA 72\" como beneficio directo del programa.\n\n---\n\n# Manejo de Idioma\n\nDETECCIÓN: El primer mensaje del usuario define el idioma para toda la conversación.\n\nESPAÑOL: Responde 100% en español.\nINGLÉS: Responde 100% en inglés.\nCAMBIO: Si el usuario cambia de idioma, Diana cambia con él sin comentarlo.\nMEZCLA: NUNCA mezcles idiomas en un mismo mensaje.\n\n---\n\n# Reglas de Respuesta\n\n## Canal Texto (WhatsApp)\n- Respuestas claras, directas y conversacionales.\n- Máximo 3-4 oraciones por mensaje.\n- Puedes usar formato básico de WhatsApp: *negrita* para resaltar datos clave.\n- Termina siempre con una pregunta abierta para mantener la conversación activa.\n\n## Canal Audio (ElevenLabs)\n- LÍMITE ESTRICTO: Máximo 110 palabras por respuesta.\n- Lenguaje completamente natural y conversacional. Sin bullets, sin listas, sin asteriscos.\n- Una sola idea por mensaje de audio.\n\n## Regla General\n- NUNCA generes respuestas que superen 150 palabras en total.\n- Una pregunta por turno.\n- Si el usuario mandó un audio, video o imagen, acusa recibo brevemente antes de responder al contenido.\n\n---\n\n# Proceso de Admisión\n\n## 1. Saludo y Calificación\nSaluda con calidez y pregunta por el motivo del mensaje. Identifica el perfil del prospecto.\n\n## 2. Responder y Conectar\nBasado en el perfil, presenta brevemente el beneficio más relevante del programa.\n\n## 3. Ofrecer el Virtual Advisory\nPresenta el Virtual Advisory de 15 minutos por Google Meet como el siguiente paso natural. Es gratuito y sin compromiso. Es obligatorio antes de matrícula o visita presencial.\n\nEjemplo:\n\"Te puedo agendar un Advisory gratuito de 15 min por Google Meet donde te explicamos todo en detalle. ¿Qué día te viene bien esta semana?\"\n\n## 4. Recoger Datos\nCuando el prospecto acepte, solicita: nombre completo, email, número de teléfono, fecha y hora preferida.\nPide los datos de uno en uno, no todos en el mismo mensaje.\n\n## 5. Agendar con la Herramienta\nLlama a la herramienta **calendario** con todos los datos recopilados.\nNUNCA confirmes el agendamiento sin haber llamado primero a la herramienta y recibido una respuesta exitosa.\n\n## 6. Confirmar al Prospecto\nSolo después de que la herramienta confirme, comunica al prospecto:\n\"Listo, tu Advisory está agendado para el [día y fecha] a las [hora]. Te llegará la invitación de Google Meet a tu correo [email]. ¡Nos vemos ahí!\"\n\nSiempre menciona día + fecha completa (ejemplo: \"martes 15 de abril de 2026\").\n\n---\n\n# Edge Cases\n\nPRECIO O COSTO:\nNUNCA des cifras. Redirige siempre al Virtual Advisory.\n\nCAMPUS O VISITA PRESENCIAL:\nInforma la ubicación y redirige al Advisory como primer paso obligatorio.\n\nUSUARIO INDECISO:\nNo presiones. Ofrece el brochure: \"Si prefieres, te mando el brochure por email para que lo revises con calma. ¿Te lo envío?\"\n\n¿ERES IA? / ¿ERES UN BOT?:\nResponde: \"Soy Diana, asistente virtual de PowerTech Academy. ¿En qué te puedo ayudar?\"\n\nCERTIFICACIÓN NFPA 72:\nAclara: \"El programa emite un Certificate of Attendance reconocido por empleadores top del sector.\"\n\nUSUARIO AGRESIVO O FUERA DE TEMA:\nMantén un tono calmado. Si persiste, proporciona el email sales@powertech.academy.\n\n---\n\n# Herramientas\n\n## calendario\nAgenda el Virtual Advisory de 15 minutos vía Google Meet en Google Calendar.\nCuándo usarla: Cuando el prospecto confirme fecha, hora y haya dado su nombre, email y teléfono.\nParámetros requeridos: nombre, email, telefono, fecha, hora.\nREGLA CRÍTICA: NUNCA confirmes el agendamiento al usuario sin haber llamado primero a esta herramienta.\n\n---\n\n# Restricciones Absolutas\n\n1. NUNCA des precios, tarifas o rangos de costo.\n2. NUNCA menciones \"certificación NFPA 72\" como beneficio directo.\n3. NUNCA confirmes un agendamiento sin haber llamado primero a la herramienta calendario.\n4. NUNCA generes respuestas de más de 150 palabras en texto ni más de 110 en audio.\n5. NUNCA hagas más de una pregunta por mensaje.\n6. NUNCA uses formato escrito en respuestas de audio.\n7. NUNCA inventes datos del programa.\n8. SIEMPRE termina con una pregunta o llamada a la acción.\n9. SIEMPRE detecta el idioma del primer mensaje y mantén ese idioma.\n10. SIEMPRE usa día + fecha completa al confirmar un Advisory.\n\n---"
+        }
+      },
+      "id": "a2bd15f0-5186-42b0-895d-0fc83dfad378",
+      "name": "Agente de IA",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "position": [2288, 320],
+      "typeVersion": 1.6
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict", "version": 2 },
+          "conditions": [
+            {
+              "id": "914cc274-6889-4bb2-97f5-24dc9b51228c",
+              "leftValue": "={{ $('Filtrardor').item.json.type }}",
+              "rightValue": "audio",
+              "operator": { "type": "string", "operation": "equals", "name": "filter.operator.equals" }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [2592, 320],
+      "id": "7e227562-d6d7-4be2-a4fb-daa790a63948",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.output }}",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "=# Contexto\n\nVas a recibir como input un mensaje adaptado a una conversación por texto y debes adaptarla a una conversación por audio.\n\n# Tarea\n\nTransforma el input recibido en formato plano.\n\n# Especificaciones\n\nElimina cualquier símbolo como #@/-* etc. Solo devuelve texto plano.\nElimina signos de exclamación e interrogación.\nElimina saltos de línea (\\n). El output debe ser texto plano continuo.\n\n# Ejemplo de Entrada:\n\nNuestro horario es:\\n\\n- Lunes a Viernes: 9:00 a 17:00\\n\\n¿A qué hora te gustaría?\n\n# Ejemplo de Salida:\n\nNuestro horario es de lunes a viernes de 9 a 17. A qué hora te gustaría."
+            }
+          ]
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [2800, 224],
+      "id": "41c0d92a-6c1e-40ee-ad23-a49c559f5eae",
+      "name": "Eliminar Carácteres"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.elevenlabs.io/v1/text-to-speech/CwhRBWXzGAHq8TQ4Fs17",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"text\": \"{{ $json.text }}\"\n}",
+        "options": {}
+      },
+      "id": "d53d3a14-40ed-4d54-83cd-6b0b97282b50",
+      "name": "Elevenlabs",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [3120, 224],
+      "credentials": {
+        "httpHeaderAuth": { "id": "alVIHJafHaRFJ1M4", "name": "Header Auth account" }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "1040495995809229",
+        "recipientPhoneNumber": "={{ $('Filtrardor').item.json.from }}",
+        "messageType": "audio",
+        "mediaPath": "useMedian8n",
+        "additionalFields": {}
+      },
+      "id": "26cfc308-2222-4a90-8666-77162372c19b",
+      "name": "Enviar Audio",
+      "type": "n8n-nodes-base.whatsApp",
+      "position": [3312, 224],
+      "typeVersion": 1,
+      "webhookId": "a2c02666-5ad9-43a7-a36a-04c31dda9d55",
+      "credentials": {
+        "whatsAppApi": { "id": "ZCSCZsoUcX85M88h", "name": "WhatsApp account 2" }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "1040495995809229",
+        "recipientPhoneNumber": "={{ $('Filtrardor').item.json.from }}",
+        "textBody": "={{ $('Agente de IA').item.json.output }}",
+        "additionalFields": { "previewUrl": false }
+      },
+      "id": "1e356b80-fa74-4907-8663-812280aceeca",
+      "name": "Enviar Mensaje",
+      "type": "n8n-nodes-base.whatsApp",
+      "position": [2800, 400],
+      "typeVersion": 1,
+      "webhookId": "a2c02666-5ad9-43a7-a36a-04c31dda9d55",
+      "credentials": {
+        "whatsAppApi": { "id": "ZCSCZsoUcX85M88h", "name": "WhatsApp account 2" }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Filtrardor').item.json.from }}",
+        "tableName": "conversaciones",
+        "contextWindowLength": 20
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.3,
+      "position": [2224, 576],
+      "id": "f0e52d62-672f-4302-986a-b222beb25f30",
+      "name": "Postgres",
+      "credentials": {
+        "postgres": { "id": "oYL501ctMz0bucRt", "name": "Postgres account 2" }
+      }
+    },
+    {
+      "parameters": {
+        "name": "calendario",
+        "description": "Agenda el Virtual Advisory de 15 minutos por Google Meet. Úsala SOLO cuando el prospecto haya confirmado los 5 datos: nombre completo, email, teléfono, fecha y hora preferida. La herramienta verifica disponibilidad en tiempo real, crea el evento con Google Meet, guarda el lead en el CRM y envía emails de confirmación automáticamente. Retorna el link de Meet y la confirmación para compartir con el prospecto. Si el horario no está disponible, retorna 3 alternativas.",
+        "workflowId": {
+          "__rl": true,
+          "value": "REEMPLAZA_CON_ID_DEL_SUBWORKFLOW_CALENDARIO",
+          "mode": "id"
+        },
+        "workflowInputs": {
+          "schema": [
+            { "name": "nombre",   "type": "string", "description": "Nombre completo del prospecto" },
+            { "name": "email",    "type": "string", "description": "Correo electrónico del prospecto" },
+            { "name": "telefono", "type": "string", "description": "Número de teléfono con código de país" },
+            { "name": "fecha",    "type": "string", "description": "Fecha deseada, ej: martes 15 de abril de 2026" },
+            { "name": "hora",     "type": "string", "description": "Hora deseada, ej: 10:00 AM" }
+          ]
+        }
+      },
+      "id": "tool-calendario",
+      "name": "Tool: Calendario",
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2,
+      "position": [2224, 736]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [512, 608],
+      "id": "e08b47e6-6e26-4ee1-bd6f-4ecb4af2e783",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": { "id": "V5DOwfBC8AxMePTj", "name": "Google Gemini(PaLM) Api account" }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [2400, 144],
+      "id": "93123fcc-758b-4e05-afae-ed3b824909b8",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": { "id": "V5DOwfBC8AxMePTj", "name": "Google Gemini(PaLM) Api account" }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## ⭐ PowerTech Academy — Bot Diana\n\nFlujo WhatsApp con agendamiento automático de Virtual Advisory.\n\n**Nuevo:** Tool Calendario conectado al subworkflow 📅\n- Verifica disponibilidad en Google Calendar\n- Crea evento con Google Meet\n- Guarda lead en Postgres CRM\n- Envía emails de confirmación al lead y al equipo\n\n**Credenciales a configurar:**\n- WhatsApp API\n- Google Gemini\n- Redis\n- Postgres\n- Gmail OAuth2 (en subworkflow)\n- Google Calendar OAuth2 (en subworkflow)\n- ElevenLabs Header Auth",
+        "height": 280,
+        "width": 480
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [-2048, 208],
+      "id": "ba22f7d2-c35c-4b13-8770-d0ffe2880afa",
+      "name": "Sticky Note"
+    }
+  ],
+  "connections": {
+    "WhatsApp Trigger": { "main": [[{ "node": "Filtrardor", "type": "main", "index": 0 }]] },
+    "Filtrardor": { "main": [[{ "node": "Enrutar Mensajes", "type": "main", "index": 0 }]] },
+    "Enrutar Mensajes": {
+      "main": [
+        [{ "node": "Obtener URL | Audio",  "type": "main", "index": 0 }],
+        [{ "node": "Obtener URL | Video",  "type": "main", "index": 0 }],
+        [{ "node": "Obtener URL | Imagen", "type": "main", "index": 0 }],
+        [{ "node": "Obtener Texto",        "type": "main", "index": 0 }]
+      ]
+    },
+    "Obtener URL | Audio":  { "main": [[{ "node": "Descargar Audio",  "type": "main", "index": 0 }]] },
+    "Obtener URL | Video":  { "main": [[{ "node": "Descargar Video",  "type": "main", "index": 0 }]] },
+    "Obtener URL | Imagen": { "main": [[{ "node": "Descargar Imagen", "type": "main", "index": 0 }]] },
+    "Descargar Audio":  { "main": [[{ "node": "Transcribe a recording", "type": "main", "index": 0 }]] },
+    "Descargar Video":  { "main": [[{ "node": "Analizar Video",         "type": "main", "index": 0 }]] },
+    "Descargar Imagen": { "main": [[{ "node": "Explicar Imagen",        "type": "main", "index": 0 }]] },
+    "Transcribe a recording": { "main": [[{ "node": "Obtener Mensaje", "type": "main", "index": 0 }]] },
+    "Analizar Video":         { "main": [[{ "node": "Obtener Video",   "type": "main", "index": 0 }]] },
+    "Explicar Imagen":        { "main": [[{ "node": "Obtener Mensaje", "type": "main", "index": 0 }]] },
+    "Obtener Texto":          { "main": [[{ "node": "Obtener Mensaje", "type": "main", "index": 0 }]] },
+    "Obtener Video":          { "main": [[{ "node": "Push Data",       "type": "main", "index": 0 }]] },
+    "Obtener Mensaje":        { "main": [[{ "node": "Push Data",       "type": "main", "index": 0 }]] },
+    "Push Data":              { "main": [[{ "node": "Pausa",           "type": "main", "index": 0 }]] },
+    "Pausa":                  { "main": [[{ "node": "Get Data",        "type": "main", "index": 0 }]] },
+    "Get Data":               { "main": [[{ "node": "Mismo Mensaje?",  "type": "main", "index": 0 }]] },
+    "Mismo Mensaje?": {
+      "main": [
+        [{ "node": "Delete Data",    "type": "main", "index": 0 }],
+        [{ "node": "Único Mensaje?", "type": "main", "index": 0 }]
+      ]
+    },
+    "Único Mensaje?": {
+      "main": [
+        [{ "node": "Delete Data", "type": "main", "index": 0 }],
+        [{ "node": "NoOp",        "type": "main", "index": 0 }]
+      ]
+    },
+    "Delete Data":       { "main": [[{ "node": "Set Mensaje Completo", "type": "main", "index": 0 }]] },
+    "Set Mensaje Completo": { "main": [[{ "node": "Traductor",         "type": "main", "index": 0 }]] },
+    "Traductor":         { "main": [[{ "node": "Agente de IA",         "type": "main", "index": 0 }]] },
+    "Agente de IA":      { "main": [[{ "node": "If",                   "type": "main", "index": 0 }]] },
+    "If": {
+      "main": [
+        [{ "node": "Eliminar Carácteres", "type": "main", "index": 0 }],
+        [{ "node": "Enviar Mensaje",      "type": "main", "index": 0 }]
+      ]
+    },
+    "Eliminar Carácteres": { "main": [[{ "node": "Elevenlabs",   "type": "main", "index": 0 }]] },
+    "Elevenlabs":          { "main": [[{ "node": "Enviar Audio", "type": "main", "index": 0 }]] },
+    "Postgres": {
+      "ai_memory": [[{ "node": "Agente de IA", "type": "ai_memory", "index": 0 }]]
+    },
+    "Tool: Calendario": {
+      "ai_tool": [[{ "node": "Agente de IA", "type": "ai_tool", "index": 0 }]]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [[{ "node": "Explicar Imagen", "type": "ai_languageModel", "index": 0 }]]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          { "node": "Eliminar Carácteres", "type": "ai_languageModel", "index": 0 },
+          { "node": "Traductor",           "type": "ai_languageModel", "index": 0 },
+          { "node": "Agente de IA",        "type": "ai_languageModel", "index": 0 }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1", "binaryMode": "separate" },
+  "tags": []
+}
