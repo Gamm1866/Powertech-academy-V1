@@ -2,11 +2,11 @@
   "name": "📅 Virtual Advisory — Calendar Tool",
   "nodes": [
     {
-      "parameters": { "inputSource": "workflowInputData" },
+      "parameters": {},
       "id": "node-trigger",
       "name": "Datos del Prospecto",
       "type": "n8n-nodes-base.executeWorkflowTrigger",
-      "typeVersion": 1.1,
+      "typeVersion": 1,
       "position": [240, 300]
     },
     {
