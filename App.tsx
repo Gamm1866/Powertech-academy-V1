@@ -16,6 +16,7 @@ import { PrivacyPolicy } from './components/PrivacyPolicy';
 import { FAQPage } from './src/pages/FAQPage';
 import { LanguageProvider, useLanguage } from './contexts/LanguageContext';
 import { CheckCircle2, Menu, X, ArrowRight, Zap, ChevronDown, Send } from 'lucide-react';
+import { trackApplyNowClick, trackEnrollmentFormSubmit, trackWhatsAppClick } from './src/utils/gtag';
 
 // --- Static Section Helper ---
 const ParallaxSection = ({
@@ -34,6 +35,7 @@ const Navbar = () => {
   const { lang, setLang, t } = useLanguage();
 
   const scrollToApply = () => {
+    trackApplyNowClick();
     document.getElementById('apply')?.scrollIntoView({ behavior: 'smooth' });
     setIsOpen(false);
   };
@@ -102,6 +104,7 @@ const Hero = () => {
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
   const scrollToApply = () => {
+    trackApplyNowClick();
     document.getElementById('apply')?.scrollIntoView({ behavior: 'smooth' });
   };
 
@@ -397,6 +400,14 @@ const EnrollmentCTA = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.consent) return;
+
+    trackEnrollmentFormSubmit({
+      nombre: formData.firstName,
+      apellido: formData.lastName,
+      email: formData.email,
+      telefono: formData.phone,
+    });
+
     setStatus('submitting');
 
     try {
@@ -634,6 +645,7 @@ const MainLayout: React.FC = () => {
       href="https://wa.me/17864609020"
       target="_blank"
       rel="noopener noreferrer"
+      onClick={() => trackWhatsAppClick()}
       className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 rounded-full shadow-lg transition-transform hover:scale-110"
       style={{ backgroundColor: '#25D366' }}
       aria-label="Contactar por WhatsApp"
