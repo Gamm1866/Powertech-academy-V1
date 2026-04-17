@@ -420,6 +420,15 @@ const EnrollmentCTA = () => {
       if (result.success) {
         setStatus('success');
         setFormData({ firstName: '', lastName: '', email: '', phone: '', consent: false });
+        // Google Ads conversion tracking
+        if (typeof window !== 'undefined' && typeof (window as Window & { gtag?: Function }).gtag === 'function') {
+          (window as Window & { gtag: Function }).gtag('event', 'conversion', {
+            send_to: 'AW-18072029178/XXXXX',
+            value: 1.0,
+            currency: 'USD',
+          });
+          console.log('Conversion event fired');
+        }
       } else {
         setStatus('error');
       }
