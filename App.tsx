@@ -14,6 +14,7 @@ const TechBackground = lazy(() =>
 import { BentoGrid, MagneticButton } from './components/Diagrams';
 import { PrivacyPolicy } from './components/PrivacyPolicy';
 import { FAQPage } from './src/pages/FAQPage';
+import HollywoodFlPage from './src/pages/HollywoodFlPage';
 import { LanguageProvider, useLanguage } from './contexts/LanguageContext';
 import { CheckCircle2, Menu, X, ArrowRight, Zap, ChevronDown, Send } from 'lucide-react';
 import { trackApplyNowClick, trackEnrollmentFormSubmit, trackWhatsAppClick } from './src/utils/gtag';
@@ -669,6 +670,8 @@ const App: React.FC = () => {
         <Route path="/es/faq" element={<FAQPage />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/es/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/hollywood-fl" element={<HollywoodFlPage />} />
+        <Route path="/es/hollywood-fl" element={<HollywoodFlPage />} />
       </Routes>
     </LanguageProvider>
   );
