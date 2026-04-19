@@ -2,6 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../../contexts/LanguageContext';
+import Header from '../../components/Header';
 
 const translations = {
   es: {
@@ -90,6 +91,7 @@ const HollywoodFlPage: React.FC = () => {
 
   return (
     <>
+      <Header />
       <Helmet>
         <title>{t.metaTitle}</title>
         <meta name="description" content={t.metaDesc} />
