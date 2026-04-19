@@ -77,6 +77,10 @@ const galleryImages = [
   { src: '/images/hollywood/campus-2.jpg', alt: 'Campus entrance' },
   { src: '/images/hollywood/lab-1.jpg', alt: 'Hands-on lab' },
   { src: '/images/hollywood/lab-2.jpg', alt: 'Lab equipment' },
+  ...Array.from({ length: 22 }, (_, i) => ({
+    src: `/images/hollywood/gallery-${i + 5}.jpg`,
+    alt: `Campus gallery ${i + 1}`,
+  })),
 ];
 
 const HollywoodFlPage: React.FC = () => {
