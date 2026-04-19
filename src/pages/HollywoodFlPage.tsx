@@ -9,9 +9,9 @@ const translations = {
     metaTitle: 'Técnico en Alarmas Contra Incendios | Hollywood, FL | PowerTech Academy',
     metaDesc: 'Curso presencial de técnico en alarmas contra incendios en Hollywood, FL. Laboratorio físico, job placement, certificación reconocida. 2-3 meses.',
     heroTitle: 'Técnico en Alarmas Contra Incendios',
-    heroSubtitle: 'Campus presencial en Hollywood, FL • Laboratorio físico • 2-3 meses',
+    heroSubtitle: 'Instalaciones presenciales en Hollywood, FL • Laboratorio físico • 2-3 meses',
     heroCTA: 'Agendar Asesoría Virtual',
-    locationTitle: 'Campus Hollywood, Florida',
+    locationTitle: 'Instalaciones en Hollywood, Florida',
     address: '3803 N 29th Ave, Suite B, Hollywood, FL 33020',
     hours: 'Lunes–Viernes, 8 AM – 5 PM EST',
     galleryTitle: 'Infraestructura y Laboratorio',
@@ -32,12 +32,12 @@ const translations = {
     metaTitle: 'Fire Alarm Technician Training | Hollywood, FL | PowerTech Academy',
     metaDesc: 'Hands-on fire alarm technician training in Hollywood, FL. Physical lab, job placement, recognized certification. 2-3 months.',
     heroTitle: 'Fire Alarm Technician Training',
-    heroSubtitle: 'In-person campus in Hollywood, FL • Hands-on lab • 2-3 months',
+    heroSubtitle: 'In-person facilities in Hollywood, FL • Hands-on lab • 2-3 months',
     heroCTA: 'Schedule Virtual Advisory',
-    locationTitle: 'Hollywood, Florida Campus',
+    locationTitle: 'Hollywood, Florida Facilities',
     address: '3803 N 29th Ave, Suite B, Hollywood, FL 33020',
     hours: 'Mon–Fri, 8 AM – 5 PM EST',
-    galleryTitle: 'Campus & Lab Infrastructure',
+    galleryTitle: 'Facilities & Lab Infrastructure',
     programTitle: 'Fast-Track Program | 40 Hours',
     modules: [
       { title: 'Tools & Safety', hours: '8h' },
@@ -56,7 +56,7 @@ const translations = {
 const localBusinessSchema = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
-  name: 'PowerTech Academy – Hollywood Campus',
+  name: 'PowerTech Academy – Hollywood Facilities',
   image: 'https://powertech.academy/images/hollywood/campus-hero.jpg',
   address: {
     '@type': 'PostalAddress',
@@ -74,13 +74,13 @@ const localBusinessSchema = {
 };
 
 const galleryImages = [
-  { src: '/images/hollywood/campus-1.jpg', alt: 'Campus exterior' },
-  { src: '/images/hollywood/campus-2.jpg', alt: 'Campus entrance' },
+  { src: '/images/hollywood/campus-1.jpg', alt: 'Facilities exterior' },
+  { src: '/images/hollywood/campus-2.jpg', alt: 'Facilities entrance' },
   { src: '/images/hollywood/lab-1.jpg', alt: 'Hands-on lab' },
   { src: '/images/hollywood/lab-2.jpg', alt: 'Lab equipment' },
   ...Array.from({ length: 22 }, (_, i) => ({
     src: `/images/hollywood/gallery-${i + 5}.jpg`,
-    alt: `Campus gallery ${i + 1}`,
+    alt: `Facilities gallery ${i + 1}`,
   })),
 ];
 
@@ -158,7 +158,7 @@ const HollywoodFlPage: React.FC = () => {
             </div>
             <div className="h-80 rounded-xl overflow-hidden">
               <iframe
-                title="PowerTech Academy Hollywood Campus"
+                title="PowerTech Academy Hollywood Facilities"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}

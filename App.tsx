@@ -604,46 +604,42 @@ const Footer = () => {
   );
 };
 
-// --- CAMPUS HOLLYWOOD ---
-const CampusHollywood = () => {
+// --- INSTALACIONES DE APRENDIZAJE ---
+const InstalacionesAprendizaje = () => {
   const { lang: language } = useLanguage();
   return (
     <section className="py-16 md:py-24 bg-gradient-to-b from-[#050505] to-[#0a0a0a] text-white">
       <div className="max-w-6xl mx-auto px-4">
-        {/* Título */}
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bebas-neue font-bold mb-4">
-            {language === 'es' ? '¡Conoce Nuestras Instalaciones!' : 'Visit Our Campus!'}
+            {language === 'es' ? '¡Conoce Nuestras Instalaciones!' : 'Visit Our Facilities!'}
           </h2>
           <p className="text-lg md:text-xl font-barlow text-gray-300 max-w-2xl mx-auto">
             {language === 'es' 
-              ? 'Campus presencial en Hollywood, FL con laboratorio completamente equipado para práctica intensiva.'
-              : 'In-person campus in Hollywood, FL with fully equipped laboratory for hands-on training.'
+              ? 'Laboratorios equipados con tecnología de punta donde desarrollarás las habilidades técnicas en un entorno profesional real.'
+              : 'State-of-the-art laboratories where you\'ll develop technical skills in a real professional environment.'
             }
           </p>
         </div>
 
-        {/* Card con imagen y CTA */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-          {/* Lado izquierdo: Imagen */}
           <div className="h-80 md:h-96 bg-gray-800 rounded-lg overflow-hidden">
             <img 
-              src="/images/hollywood/campus-1.jpg" 
-              alt="Hollywood Campus" 
+              src="/images/hollywood/lab-1.jpg" 
+              alt="Laboratorio de Aprendizaje" 
               className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
             />
           </div>
 
-          {/* Lado derecho: Contenido */}
           <div className="space-y-6">
             <div>
               <h3 className="text-2xl font-barlow-condensed font-bold mb-3 text-[#FF4500]">
-                {language === 'es' ? '🏢 Campus de Hollywood' : '🏢 Hollywood Campus'}
+                {language === 'es' ? '⚙️ Instalaciones de Aprendizaje' : '⚙️ Learning Facilities'}
               </h3>
               <p className="text-gray-300 font-barlow leading-relaxed">
                 {language === 'es'
-                  ? 'Nuestro campus cuenta con laboratorios equipados con tecnología actual, instructores certificados y un ambiente perfecto para tu aprendizaje intensivo de 2-3 meses.'
-                  : 'Our campus features state-of-the-art laboratories, certified instructors, and the perfect environment for your intensive 2-3 month training.'
+                  ? 'Nuestras instalaciones cuentan con paneles de alarma contra incendios, equipamiento de cableado, herramientas de diagnóstico y sistemas completos para que practiques en un entorno controlado y profesional. Todo diseñado para que domines cada competencia del técnico en alarmas.'
+                  : 'Our facilities include fire alarm panels, wiring equipment, diagnostic tools, and complete systems for hands-on practice in a controlled, professional environment. Everything designed for you to master every fire alarm technician competency.'
                 }
               </p>
             </div>
@@ -651,11 +647,11 @@ const CampusHollywood = () => {
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-[#1a1a1a] p-4 rounded-lg border border-[#FF4500]">
                 <p className="text-[#FF4500] font-bebas-neue text-xl font-bold">40h</p>
-                <p className="text-sm text-gray-400 font-barlow">{language === 'es' ? 'Intensivo' : 'Intensive'}</p>
+                <p className="text-sm text-gray-400 font-barlow">{language === 'es' ? 'Práctica' : 'Hands-on'}</p>
               </div>
               <div className="bg-[#1a1a1a] p-4 rounded-lg border border-[#FF4500]">
-                <p className="text-[#FF4500] font-bebas-neue text-xl font-bold">Presencial</p>
-                <p className="text-sm text-gray-400 font-barlow">{language === 'es' ? 'In-Person' : 'In-Person'}</p>
+                <p className="text-[#FF4500] font-bebas-neue text-xl font-bold">Real</p>
+                <p className="text-sm text-gray-400 font-barlow">{language === 'es' ? 'Equipamiento' : 'Equipment'}</p>
               </div>
             </div>
 
@@ -664,7 +660,7 @@ const CampusHollywood = () => {
                 to={language === 'es' ? '/es/hollywood-fl' : '/hollywood-fl'}
                 className="block w-full bg-[#FF4500] hover:bg-[#E63E00] text-white font-barlow-condensed font-bold py-4 px-6 rounded-lg text-center transition-all"
               >
-                {language === 'es' ? '🎯 Conoce el Campus' : '🎯 Explore Campus'}
+                {language === 'es' ? '🎯 Conoce las Instalaciones' : '🎯 Explore Facilities'}
               </Link>
               <a 
                 href={language === 'es' ? '#cta-es' : '#apply'}
@@ -717,7 +713,7 @@ const MainLayout: React.FC = () => {
       <Hero />
       <BentoGrid />
       <Benefits />
-      <CampusHollywood />
+      <InstalacionesAprendizaje />
       <SocialProof />
       <Curriculum />
       <EnrollmentCTA />
