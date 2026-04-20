@@ -695,74 +695,9 @@ const InstalacionesAprendizaje = () => {
   );
 };
 
-// --- CAMPUS TEASER ---
-const CampusTeaser = () => {
-  const { lang } = useLanguage();
-  const isEs = lang === 'es';
-  return (
-    <section className="py-20 bg-power-bg border-t border-power-border">
-      <div className="container mx-auto px-6">
-        <div className="relative rounded-2xl overflow-hidden bg-power-card border border-power-border">
-          {/* Background image with overlay */}
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: 'url(/images/hollywood/campus-hero.jpg)' }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/30" />
-          {/* Content */}
-          <div className="relative z-10 px-8 py-14 md:px-16 md:py-20 max-w-xl">
-            <span className="inline-block text-power-accent text-xs font-bold uppercase tracking-widest mb-4 px-3 py-1 rounded-full border border-power-accent/30 bg-power-accent/10">
-              Hollywood, FL
-            </span>
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 leading-tight">
-              {isEs ? 'Conoce nuestras' : 'Visit our'}
-              <br />
-              <span className="text-power-accent">
-                {isEs ? 'instalaciones' : 'campus & lab'}
-              </span>
-            </h2>
-            <p className="text-power-muted mb-8 text-base leading-relaxed">
-              {isEs
-                ? 'Laboratorio físico equipado, campus presencial en Broward County. Aprende con equipos reales bajo la supervisión de profesionales activos en la industria.'
-                : 'Fully equipped hands-on lab, in-person campus in Broward County. Train with real equipment under the guidance of active industry professionals.'}
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <Link
-                to={isEs ? '/es/hollywood-fl' : '/hollywood-fl'}
-                className="inline-flex items-center gap-2 bg-power-accent hover:bg-[#E63E00] text-white px-6 py-3 rounded-lg font-bold text-sm transition-colors"
-              >
-                {isEs ? 'Ver instalaciones' : 'See the campus'}
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-              <Link
-                to={isEs ? '/es/advisory' : '/advisory'}
-                className="inline-flex items-center gap-2 border border-white/20 hover:border-white/50 text-white px-6 py-3 rounded-lg font-bold text-sm transition-colors"
-              >
-                {isEs ? 'Agendar visita virtual' : 'Schedule virtual tour'}
-              </Link>
-            </div>
-          </div>
-          {/* Stat pills */}
-          <div className="relative z-10 hidden md:flex gap-4 absolute bottom-8 right-8 flex-col items-end">
-            {[
-              { num: '27', label: isEs ? 'Fotos del campus' : 'Campus photos' },
-              { num: '40h', label: isEs ? 'Lab en persona' : 'Hands-on lab' },
-            ].map((s) => (
-              <div key={s.num} className="bg-black/60 backdrop-blur-md border border-white/10 rounded-xl px-5 py-3 text-right">
-                <span className="block text-2xl font-bold text-power-accent font-bebas-neue">{s.num}</span>
-                <span className="block text-xs text-gray-400 uppercase tracking-wider">{s.label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
 // --- MAIN PAGE LAYOUT ---
 const MainLayout: React.FC = () => {
-  const { lang, t } = useLanguage();
+  const { lang } = useLanguage();
   const isEs = lang === 'es';
   return (
   <div className="bg-power-bg min-h-screen text-power-text selection:bg-power-accent selection:text-white">
@@ -796,7 +731,6 @@ const MainLayout: React.FC = () => {
       <InstalacionesAprendizaje />
       <SocialProof />
       <Curriculum />
-      <CampusTeaser />
       <EnrollmentCTA />
     </main>
     <Footer />
