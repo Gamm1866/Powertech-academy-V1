@@ -13,6 +13,7 @@ export const translations = {
     langToggle: 'ES',
     nav: {
       apply: 'Apply Now',
+      advisory: 'Schedule Advisory',
     },
     hero: {
       badge: 'Admissions Open 2026',
@@ -166,6 +167,7 @@ export const translations = {
     langToggle: 'EN',
     nav: {
       apply: 'Aplicar Ahora',
+      advisory: 'Agendar Asesoría',
     },
     hero: {
       badge: 'Admisiones Abiertas 2026',

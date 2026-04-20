@@ -1,0 +1,34 @@
+{
+  "campaign": "Fire Alarm Training Florida",
+  "customer_id": "9525479015",
+  "generated_at": "2026-04-17",
+  "variants": {
+    "titles_en": [
+      "Fire & Life Safety Career",
+      "Fast-Track 2–3 Months",
+      "Broward County Training",
+      "Hands-On Lab Included",
+      "Certificate Upon Completion",
+      "Start Your Career in Florida"
+    ],
+    "titles_es": [
+      "Curso Alarmas Incendio Florida",
+      "Conviértete en Técnico Ahora",
+      "Sin Experiencia Necesaria",
+      "Hollywood FL – Inscripciones",
+      "94% Colocación Laboral"
+    ],
+    "descriptions_es": [
+      "Formación práctica en alarmas contra incendio en Hollywood, FL. Aprende configuración de paneles, cableado y seguridad OSHA. Sin experiencia previa.",
+      "Programa fast-track: 2–3 meses. Certificado de Asistencia + apoyo de colocación laboral en South Florida. Inscríbete hoy.",
+      "Sin experiencia necesaria. 94% de colocación laboral. Inicia tu carrera en Fire & Life Safety en Florida hoy mismo.",
+      "Aprende configuración de paneles, cableado y normativa NFPA 72. Laboratorios presenciales en Hollywood FL. Cupos limitados."
+    ]
+  },
+  "instructions": {
+    "import": "Google Ads → Tu campaña → Grupos de recursos",
+    "titles_en": "Agrega 6 títulos EN para Excelente",
+    "titles_es": "Crea Ad Group 'Búsqueda ES'",
+    "descriptions_es": "Agrega 4 descripciones ES"
+  }
+}
