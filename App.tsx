@@ -16,6 +16,7 @@ import { PrivacyPolicy } from './components/PrivacyPolicy';
 import { FAQPage } from './src/pages/FAQPage';
 import HollywoodFlPage from './src/pages/HollywoodFlPage';
 import Advisory from './src/pages/Advisory';
+import ThankYou from './src/pages/ThankYou';
 import { LanguageProvider, useLanguage } from './contexts/LanguageContext';
 import { CheckCircle2, Menu, X, ArrowRight, Zap, ChevronDown, Send } from 'lucide-react';
 import { trackApplyNowClick, trackEnrollmentFormSubmit, trackWhatsAppClick } from './src/utils/gtag';
@@ -831,6 +832,7 @@ const App: React.FC = () => {
         <Route path="/es/hollywood-fl" element={<HollywoodFlPage />} />
         <Route path="/advisory" element={<Advisory />} />
         <Route path="/es/advisory" element={<Advisory />} />
+        <Route path="/gracias" element={<ThankYou />} />
       </Routes>
     </LanguageProvider>
   );

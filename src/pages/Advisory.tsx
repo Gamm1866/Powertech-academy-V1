@@ -399,7 +399,7 @@ export default function Advisory() {
                   <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_KEY" />
                   <input type="hidden" name="subject" value="Nueva solicitud de Asesoría Virtual — PowerTech Academy" />
                   <input type="hidden" name="from_name" value="PowerTech Academy Landing" />
-                  <input type="hidden" name="redirect" value="false" />
+                  <input type="hidden" name="redirect" value="https://powertech.academy/gracias" />
 
                   <div className="field-group">
                     <div className="field">
