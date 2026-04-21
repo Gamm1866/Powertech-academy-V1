@@ -98,11 +98,12 @@ const HollywoodFlPage: React.FC = () => {
         <meta property="og:title" content={t.metaTitle} />
         <meta property="og:description" content={t.metaDesc} />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={`https://powertech.academy${isES ? '/es' : ''}/hollywood-fl`} />
-        <meta property="og:image" content="https://powertech.academy/images/hollywood/campus-hero.jpg" />
-        <link rel="canonical" href={`https://powertech.academy${isES ? '/es' : ''}/hollywood-fl`} />
-        <link rel="alternate" hrefLang="en" href="https://powertech.academy/hollywood-fl" />
-        <link rel="alternate" hrefLang="es" href="https://powertech.academy/es/hollywood-fl" />
+        <meta property="og:url" content={`https://www.powertech.academy${isES ? '/es' : ''}/hollywood-fl`} />
+        <meta property="og:image" content="https://www.powertech.academy/images/hollywood/campus-hero.jpg" />
+        <link rel="canonical" href={`https://www.powertech.academy${isES ? '/es' : ''}/hollywood-fl`} />
+        <link rel="alternate" hrefLang="en" href="https://www.powertech.academy/hollywood-fl" />
+        <link rel="alternate" hrefLang="es" href="https://www.powertech.academy/es/hollywood-fl" />
+        <link rel="alternate" hrefLang="x-default" href="https://www.powertech.academy/hollywood-fl" />
         <script type="application/ld+json">{JSON.stringify(localBusinessSchema)}</script>
       </Helmet>
 

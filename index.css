@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", sans-serif;
+
+  --color-power-bg: #050505;
+  --color-power-card: #121212;
+  --color-power-border: #27272a;
+  --color-power-accent: #FF4500;
+  --color-power-accentHover: #cc3700;
+  --color-power-text: #f3f4f6;
+  --color-power-muted: #9ca3af;
+
+  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}

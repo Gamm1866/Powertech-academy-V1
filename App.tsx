@@ -118,6 +118,16 @@ const Hero = () => {
   const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 500], [0, 200]);
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+  const [showBg, setShowBg] = React.useState(false);
+  React.useEffect(() => {
+    const cb = () => setShowBg(true);
+    if ('requestIdleCallback' in window) {
+      const id = requestIdleCallback(cb, { timeout: 2000 });
+      return () => cancelIdleCallback(id);
+    }
+    const id = setTimeout(cb, 500);
+    return () => clearTimeout(id);
+  }, []);
 
   const scrollToApply = () => {
     trackApplyNowClick();
@@ -126,10 +136,12 @@ const Hero = () => {
 
   return (
     <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden pt-20">
-      {/* Three.js particle field — lazy loaded after paint */}
-      <Suspense fallback={null}>
-        <TechBackground />
-      </Suspense>
+      {/* Three.js particle field — deferred until browser idle */}
+      {showBg && (
+        <Suspense fallback={null}>
+          <TechBackground />
+        </Suspense>
+      )}
 
       {/* SVG grid pattern overlay */}
       <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 1 }}>

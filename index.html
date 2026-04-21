@@ -6,35 +6,10 @@
     <title>PowerTech Academy - Fire Alarm Technician Training</title>
     <meta name="google-site-verification" content="0JJtQz1UBHhPUCTD-ojh7fdof8LBzaesa0TM-_vNpRY" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ['"Inter"', 'sans-serif'],
-            },
-            colors: {
-              power: {
-                bg: '#050505',
-                card: '#121212',
-                border: '#27272a',
-                accent: '#FF4500', // Safety Orange / Fire Engine Red
-                accentHover: '#cc3700',
-                text: '#f3f4f6',
-                muted: '#9ca3af',
-              }
-            },
-            animation: {
-              'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-            }
-          }
-        }
-      }
-    </script>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"></noscript>
     <style>
       html {
         scroll-behavior: smooth;
@@ -45,7 +20,6 @@
         color: #f3f4f6;
         -webkit-font-smoothing: antialiased;
       }
-      /* Hide scrollbar for clean look */
       ::-webkit-scrollbar {
         width: 8px;
       }
@@ -73,30 +47,14 @@
         pointer-events: none;
       }
     </style>
-  <script type="importmap">
-{
-  "imports": {
-    "react": "https://aistudiocdn.com/react@^19.2.0",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "@react-three/fiber": "https://aistudiocdn.com/@react-three/fiber@^9.4.0",
-    "@react-three/drei": "https://aistudiocdn.com/@react-three/drei@^10.7.7",
-    "three": "https://aistudiocdn.com/three@^0.181.1",
-    "framer-motion": "https://aistudiocdn.com/framer-motion@^12.23.24",
-    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.553.0",
-    "react-router-dom": "https://esm.sh/react-router-dom@6?external=react,react-dom",
-    "@emailjs/browser": "https://esm.sh/@emailjs/browser@4"
-  }
-}
-</script>
-<link rel="stylesheet" href="/index.css">
+    <link rel="stylesheet" href="/index.css">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": ["EducationalOrganization", "LocalBusiness"],
       "name": "PowerTech Academy",
-      "url": "https://powertech.academy",
-      "logo": "https://powertech.academy/favicon.svg",
+      "url": "https://www.powertech.academy",
+      "logo": "https://www.powertech.academy/favicon.svg",
       "description": "Fast-track fire alarm systems technician training in Hollywood FL. NFPA 72, OSHA, hands-on labs. Job placement support. Certificate of Attendance.",
       "telephone": "+17864609020",
       "email": "sales@powertech.academy",
@@ -139,12 +97,18 @@
       "provider": {
         "@type": "Organization",
         "name": "PowerTech Academy",
-        "sameAs": "https://powertech.academy"
+        "sameAs": "https://www.powertech.academy"
       },
       "educationalCredentialAwarded": "Certificate of Attendance",
       "courseMode": ["blended", "onsite"],
       "availableLanguage": ["en", "es"],
       "timeToComplete": "P90D",
+      "offers": {
+        "@type": "Offer",
+        "category": "Paid",
+        "priceCurrency": "USD",
+        "url": "https://www.powertech.academy/enrollment"
+      },
       "hasCourseInstance": {
         "@type": "CourseInstance",
         "courseMode": "blended",
@@ -160,7 +124,7 @@
       }
     }
     </script>
-    <!-- Google Analytics GA4 -->
+    <!-- Google Analytics GA4 + Google Ads -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4TMTJ1CR58"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -169,17 +133,9 @@
       gtag('config', 'G-4TMTJ1CR58');
       gtag('config', 'AW-18072029178');
     </script>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18072029178"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'AW-18072029178');
-    </script>
   </head>
   <body>
     <div id="root"></div>
-  <script type="module" src="/index.tsx"></script>
-</body>
+    <script type="module" src="/index.tsx"></script>
+  </body>
 </html>

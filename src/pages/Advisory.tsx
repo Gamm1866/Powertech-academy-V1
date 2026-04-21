@@ -139,7 +139,10 @@ export default function Advisory() {
       <Helmet>
         <title>{c.metaTitle}</title>
         <meta name="description" content={c.metaDesc} />
-        <link rel="canonical" href={`https://powertech.academy${lang === 'es' ? '/es' : ''}/advisory`} />
+        <link rel="canonical" href={`https://www.powertech.academy${lang === 'es' ? '/es' : ''}/advisory`} />
+        <link rel="alternate" hrefLang="en" href="https://www.powertech.academy/advisory" />
+        <link rel="alternate" hrefLang="es" href="https://www.powertech.academy/es/advisory" />
+        <link rel="alternate" hrefLang="x-default" href="https://www.powertech.academy/advisory" />
       </Helmet>
 
       <div className="min-h-screen bg-[#050505] text-white">
