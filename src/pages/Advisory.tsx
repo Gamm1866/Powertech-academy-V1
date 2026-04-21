@@ -259,38 +259,10 @@ export default function Advisory() {
                         <input id="adv-email" name="email" type="email" required placeholder="juan@correo.com" className={inputCls} />
                       </div>
 
-                      {/* Teléfono + Perfil */}
-                      <div className="grid grid-cols-2 gap-4">
-                        <div>
-                          <label htmlFor="adv-phone" className={labelCls}>{c.fPhone}</label>
-                          <input id="adv-phone" name="phone" type="tel" required placeholder="+1 (786) 000-0000" className={inputCls} />
-                        </div>
-                        <div>
-                          <label htmlFor="adv-profile" className={labelCls}>{c.fProfile}</label>
-                          <select id="adv-profile" name="profile" required defaultValue="" className={inputCls + ' cursor-pointer'}>
-                            <option value="" disabled>{c.selectPlaceholder}</option>
-                            {c.profiles.map((p) => (
-                              <option key={p.v} value={p.v} className="bg-[#161616]">{p.l}</option>
-                            ))}
-                          </select>
-                        </div>
-                      </div>
-
-                      {/* Fecha + Horario */}
-                      <div className="grid grid-cols-2 gap-4">
-                        <div>
-                          <label htmlFor="adv-date" className={labelCls}>{c.fDate}</label>
-                          <input id="adv-date" name="preferred_date" type="date" className={inputCls} />
-                        </div>
-                        <div>
-                          <label htmlFor="adv-time" className={labelCls}>{c.fTime}</label>
-                          <select id="adv-time" name="preferred_time" defaultValue="" className={inputCls + ' cursor-pointer'}>
-                            <option value="">{c.selectPlaceholder}</option>
-                            {c.times.map((t) => (
-                              <option key={t.v} value={t.v} className="bg-[#161616]">{t.l}</option>
-                            ))}
-                          </select>
-                        </div>
+                      {/* Phone */}
+                      <div>
+                        <label htmlFor="adv-phone" className={labelCls}>{c.fPhone}</label>
+                        <input id="adv-phone" name="phone" type="tel" required placeholder="+1 (786) 000-0000" className={inputCls} />
                       </div>
 
                       {/* TCPA */}
