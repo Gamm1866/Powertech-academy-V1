@@ -111,28 +111,6 @@ const labelCls = 'block text-xs font-bold uppercase tracking-wider text-gray-500
 export default function Advisory() {
   const { lang } = useLanguage()
   const c = copy[lang === 'en' ? 'en' : 'es']
-  const [submitted, setSubmitted] = useState(false)
-  const [loading, setLoading] = useState(false)
-
-  useEffect(() => {
-    const input = document.getElementById('adv-date') as HTMLInputElement
-    if (input) input.min = new Date().toISOString().split('T')[0]
-  }, [])
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setLoading(true)
-    const formData = new FormData(e.currentTarget)
-    try {
-      const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: formData })
-      const data = await res.json()
-      if (data.success) setSubmitted(true)
-      else setSubmitted(true)
-    } catch {
-      setSubmitted(true)
-    }
-    setLoading(false)
-  }
 
   return (
     <>
@@ -217,29 +195,14 @@ export default function Advisory() {
 
               {/* ── RIGHT: Form ── */}
               <div className="bg-[#0e0e0e] border border-white/[0.07] rounded-3xl p-8 lg:p-10">
-                {submitted ? (
-                  <div className="flex flex-col items-center text-center py-8 gap-5">
-                    <div className="w-16 h-16 rounded-full bg-[#FF4500]/10 border-2 border-[#FF4500] flex items-center justify-center">
-                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#FF4500" strokeWidth="2.5">
-                        <path d="M20 6L9 17l-5-5" />
-                      </svg>
-                    </div>
-                    <h2 className="text-3xl font-bold text-[#FF4500] tracking-wide">{c.successTitle}</h2>
-                    <p className="text-gray-400 text-sm leading-relaxed max-w-sm">{c.successBody}</p>
-                    <p className="text-xs text-gray-600 uppercase tracking-widest">{c.successHours}</p>
-                    <p className="text-xs text-[#FF4500] tracking-widest">sales@powertech.academy</p>
-                  </div>
-                ) : (
-                  <>
-                    <p className="text-[10px] text-[#FF4500] uppercase tracking-[0.2em] font-bold mb-1">{c.eyebrow}</p>
-                    <h2 className="text-2xl font-bold mb-2">{c.formTitle}</h2>
-                    <p className="text-gray-500 text-sm leading-relaxed mb-8">{c.formDesc}</p>
+                <p className="text-[10px] text-[#FF4500] uppercase tracking-[0.2em] font-bold mb-1">{c.eyebrow}</p>
+                <h2 className="text-2xl font-bold mb-2">{c.formTitle}</h2>
+                <p className="text-gray-500 text-sm leading-relaxed mb-8">{c.formDesc}</p>
 
-                    <form onSubmit={handleSubmit} className="space-y-5">
-                      <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_KEY" />
-                      <input type="hidden" name="subject" value="Nueva solicitud de Asesoría Virtual — PowerTech Academy" />
-                      <input type="hidden" name="from_name" value="PowerTech Academy — /advisory" />
-                      <input type="hidden" name="redirect" value="false" />
+                <form action="https://formsubmit.co/sales@powertech.academy" method="POST" className="space-y-5">
+                  <input type="hidden" name="_subject" value="Nuevo Lead — Virtual Advisory PowerTech Academy" />
+                  <input type="hidden" name="_captcha" value="false" />
+                  <input type="hidden" name="_next" value="https://www.powertech.academy/gracias" />
 
                       {/* Nombre + Apellido */}
                       <div className="grid grid-cols-2 gap-4">
@@ -290,14 +253,11 @@ export default function Advisory() {
                       {/* Submit */}
                       <button
                         type="submit"
-                        disabled={loading}
-                        className="w-full bg-[#FF4500] hover:bg-[#E63E00] disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold text-sm uppercase tracking-widest py-4 rounded-full transition-all hover:scale-[1.02] active:scale-[0.98]"
+                        className="w-full bg-[#FF4500] hover:bg-[#E63E00] text-white font-bold text-sm uppercase tracking-widest py-4 rounded-full transition-all hover:scale-[1.02] active:scale-[0.98]"
                       >
-                        {loading ? c.sendingText : c.submitText}
+                        {c.submitText}
                       </button>
                     </form>
-                  </>
-                )}
               </div>
 
             </div>
