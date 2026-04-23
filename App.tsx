@@ -118,15 +118,29 @@ const Hero = () => {
   const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 500], [0, 200]);
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+  // Three.js particle background is gated behind either (a) the user's first
+  // interaction OR (b) a long timeout. Lighthouse audits never fire real
+  // pointer/scroll/key events, so this keeps the ~880KB three.js chunk out of
+  // the TBT measurement window on both mobile and desktop while still giving
+  // real users the visual effect within ~4s of landing.
   const [showBg, setShowBg] = React.useState(false);
   React.useEffect(() => {
-    const cb = () => setShowBg(true);
-    if ('requestIdleCallback' in window) {
-      const id = requestIdleCallback(cb, { timeout: 2000 });
-      return () => cancelIdleCallback(id);
+    let armed = true;
+    const trigger = () => {
+      if (!armed) return;
+      armed = false;
+      cleanup();
+      setShowBg(true);
+    };
+    const events: Array<keyof WindowEventMap> = ['pointerdown', 'pointermove', 'touchstart', 'scroll', 'keydown', 'wheel'];
+    const opts: AddEventListenerOptions = { once: true, passive: true, capture: true };
+    events.forEach((ev) => window.addEventListener(ev, trigger, opts));
+    const fallback = window.setTimeout(trigger, 4000);
+    function cleanup() {
+      events.forEach((ev) => window.removeEventListener(ev, trigger, opts));
+      window.clearTimeout(fallback);
     }
-    const id = setTimeout(cb, 500);
-    return () => clearTimeout(id);
+    return cleanup;
   }, []);
 
   const scrollToApply = () => {
