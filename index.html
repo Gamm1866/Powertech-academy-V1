@@ -6,48 +6,65 @@
     <title>PowerTech Academy - Fire Alarm Technician Training</title>
     <meta name="google-site-verification" content="0JJtQz1UBHhPUCTD-ojh7fdof8LBzaesa0TM-_vNpRY" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"></noscript>
+
+    <!-- LCP: responsive AVIF preload. Browser picks the right variant via imagesrcset+imagesizes,
+         starts download with HTML instead of waiting for JS parse. Mobile gets 16KB AVIF@480. -->
+    <link
+      rel="preload"
+      as="image"
+      type="image/avif"
+      imagesrcset="/images/hollywood/responsive/lab-1-480.avif 480w, /images/hollywood/responsive/lab-1-768.avif 768w, /images/hollywood/responsive/lab-1-1024.avif 1024w"
+      imagesizes="(max-width: 768px) 100vw, 50vw"
+      fetchpriority="high"
+    />
+
+    <!-- Fonts: preconnect + non-blocking stylesheet with swap fallback -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" />
+    </noscript>
+
+    <!-- Critical inline CSS (above-the-fold only) -->
     <style>
-      html {
-        scroll-behavior: smooth;
-        background-color: #050505;
-      }
+      html { scroll-behavior: smooth; background-color: #050505; }
       body {
         background-color: #050505;
         color: #f3f4f6;
+        margin: 0;
+        font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
         -webkit-font-smoothing: antialiased;
       }
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #050505;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #27272a;
-        border-radius: 4px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #FF4500;
-      }
-      @keyframes scanline {
-        0%   { top: -4px; }
-        100% { top: 100%; }
-      }
+      #root { min-height: 100vh; }
+      ::-webkit-scrollbar { width: 8px; }
+      ::-webkit-scrollbar-track { background: #050505; }
+      ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 4px; }
+      ::-webkit-scrollbar-thumb:hover { background: #FF4500; }
+      @keyframes scanline { 0% { top: -4px; } 100% { top: 100%; } }
       .scan-line-hero {
-        position: absolute;
-        left: 0;
-        width: 100%;
-        height: 2px;
+        position: absolute; left: 0; width: 100%; height: 2px;
         background: linear-gradient(to right, transparent 0%, rgba(255,69,0,0.18) 50%, transparent 100%);
         animation: scanline 9s linear infinite;
         pointer-events: none;
+        will-change: transform;
       }
     </style>
-    <link rel="stylesheet" href="/index.css">
+
+    <!-- Non-critical stylesheet deferred so it doesn't block first paint -->
+    <link
+      rel="preload"
+      as="style"
+      href="/index.css"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript><link rel="stylesheet" href="/index.css" /></noscript>
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -58,34 +75,11 @@
       "description": "Fast-track fire alarm systems technician training in Hollywood FL. NFPA 72, OSHA, hands-on labs. Job placement support. Certificate of Attendance.",
       "telephone": "+17864609020",
       "email": "sales@powertech.academy",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "3803 N 29th Ave, Suite B",
-        "addressLocality": "Hollywood",
-        "addressRegion": "FL",
-        "postalCode": "33020",
-        "addressCountry": "US"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 26.0112,
-        "longitude": -80.1495
-      },
-      "openingHoursSpecification": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-        "opens": "08:00",
-        "closes": "17:00"
-      },
-      "areaServed": [
-        { "@type": "City", "name": "Hollywood" },
-        { "@type": "City", "name": "Miami" },
-        { "@type": "State", "name": "Florida" }
-      ],
-      "hasCredential": {
-        "@type": "EducationalOccupationalCredential",
-        "name": "Certificate of Attendance — Fire Alarm Systems Technician"
-      }
+      "address": { "@type": "PostalAddress", "streetAddress": "3803 N 29th Ave, Suite B", "addressLocality": "Hollywood", "addressRegion": "FL", "postalCode": "33020", "addressCountry": "US" },
+      "geo": { "@type": "GeoCoordinates", "latitude": 26.0112, "longitude": -80.1495 },
+      "openingHoursSpecification": { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "08:00", "closes": "17:00" },
+      "areaServed": [ { "@type": "City", "name": "Hollywood" }, { "@type": "City", "name": "Miami" }, { "@type": "State", "name": "Florida" } ],
+      "hasCredential": { "@type": "EducationalOccupationalCredential", "name": "Certificate of Attendance — Fire Alarm Systems Technician" }
     }
     </script>
     <script type="application/ld+json">
@@ -94,48 +88,44 @@
       "@type": "Course",
       "name": "Fire Alarm Systems Technician — Fast Track",
       "description": "40-hour intensive program covering NFPA 72, OSHA safety, EMT conduit, panel configuration, circuit wiring, and Florida closeout procedures. 65% hands-on lab.",
-      "provider": {
-        "@type": "Organization",
-        "name": "PowerTech Academy",
-        "sameAs": "https://www.powertech.academy"
-      },
+      "provider": { "@type": "Organization", "name": "PowerTech Academy", "sameAs": "https://www.powertech.academy" },
       "educationalCredentialAwarded": "Certificate of Attendance",
       "courseMode": ["blended", "onsite"],
       "availableLanguage": ["en", "es"],
       "timeToComplete": "P90D",
-      "offers": {
-        "@type": "Offer",
-        "category": "Paid",
-        "priceCurrency": "USD",
-        "url": "https://www.powertech.academy/enrollment"
-      },
-      "hasCourseInstance": {
-        "@type": "CourseInstance",
-        "courseMode": "blended",
-        "location": {
-          "@type": "Place",
-          "name": "PowerTech Academy — Hollywood FL Campus",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Hollywood",
-            "addressRegion": "FL"
-          }
-        }
-      }
+      "offers": { "@type": "Offer", "category": "Paid", "priceCurrency": "USD", "url": "https://www.powertech.academy/enrollment" },
+      "hasCourseInstance": { "@type": "CourseInstance", "courseMode": "blended", "location": { "@type": "Place", "name": "PowerTech Academy — Hollywood FL Campus", "address": { "@type": "PostalAddress", "addressLocality": "Hollywood", "addressRegion": "FL" } } }
     }
-    </script>
-    <!-- Google Analytics GA4 + Google Ads -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4TMTJ1CR58"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-4TMTJ1CR58');
-      gtag('config', 'AW-18072029178');
     </script>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
+
+    <!-- Analytics: deferred until after window.load + idle, keeps it off the critical path.
+         Removes ~80-120ms of main-thread work from the initial paint budget on mobile. -->
+    <script>
+      (function () {
+        function loadAnalytics() {
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-4TMTJ1CR58';
+          document.head.appendChild(s);
+          window.dataLayer = window.dataLayer || [];
+          function gtag() { window.dataLayer.push(arguments); }
+          window.gtag = gtag;
+          gtag('js', new Date());
+          gtag('config', 'G-4TMTJ1CR58', { transport_type: 'beacon' });
+          gtag('config', 'AW-18072029178', { transport_type: 'beacon' });
+        }
+        if (document.readyState === 'complete') {
+          ('requestIdleCallback' in window ? requestIdleCallback : setTimeout)(loadAnalytics, 1);
+        } else {
+          window.addEventListener('load', function () {
+            ('requestIdleCallback' in window ? requestIdleCallback : setTimeout)(loadAnalytics, 1);
+          });
+        }
+      })();
+    </script>
   </body>
 </html>

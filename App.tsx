@@ -651,11 +651,30 @@ const InstalacionesAprendizaje = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           <div className="h-80 md:h-96 bg-gray-800 rounded-lg overflow-hidden">
-            <img 
-              src="/images/hollywood/lab-1.jpg" 
-              alt="Laboratorio de Aprendizaje" 
-              className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-            />
+            <picture>
+              <source
+                type="image/avif"
+                srcSet="/images/hollywood/responsive/lab-1-480.avif 480w, /images/hollywood/responsive/lab-1-768.avif 768w, /images/hollywood/responsive/lab-1-1024.avif 1024w"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+              <source
+                type="image/webp"
+                srcSet="/images/hollywood/responsive/lab-1-480.webp 480w, /images/hollywood/responsive/lab-1-768.webp 768w, /images/hollywood/responsive/lab-1-1024.webp 1024w"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+              <img
+                src="/images/hollywood/responsive/lab-1-768.jpg"
+                srcSet="/images/hollywood/responsive/lab-1-480.jpg 480w, /images/hollywood/responsive/lab-1-768.jpg 768w, /images/hollywood/responsive/lab-1-1024.jpg 1024w"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                alt="Laboratorio de Aprendizaje"
+                width="1024"
+                height="1365"
+                fetchPriority="high"
+                loading="eager"
+                decoding="async"
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+              />
+            </picture>
           </div>
 
           <div className="space-y-6">
