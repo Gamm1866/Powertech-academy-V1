@@ -15,6 +15,10 @@ import { BentoGrid, MagneticButton } from './components/Diagrams';
 import { PrivacyPolicy } from './components/PrivacyPolicy';
 import { FAQPage } from './src/pages/FAQPage';
 import HollywoodFlPage from './src/pages/HollywoodFlPage';
+import TrainingFloridaPage from './src/pages/TrainingFloridaPage';
+import WhatDoesATechnicianDo from './src/pages/blog/WhatDoesATechnicianDo';
+import HowLongTraining from './src/pages/blog/HowLongTraining';
+import FireAlarmVsElectrician from './src/pages/blog/FireAlarmVsElectrician';
 import Advisory from './src/pages/Advisory';
 import ThankYou from './src/pages/ThankYou';
 import { LanguageProvider, useLanguage } from './contexts/LanguageContext';
@@ -814,6 +818,10 @@ const App: React.FC = () => {
         <Route path="/es/hollywood-fl" element={<HollywoodFlPage />} />
         <Route path="/advisory" element={<Advisory />} />
         <Route path="/es/advisory" element={<Advisory />} />
+        <Route path="/fire-alarm-technician-training-florida" element={<TrainingFloridaPage />} />
+        <Route path="/blog/what-does-a-fire-alarm-technician-do-florida" element={<WhatDoesATechnicianDo />} />
+        <Route path="/blog/how-long-does-fire-alarm-training-take" element={<HowLongTraining />} />
+        <Route path="/blog/fire-alarm-technician-vs-electrician-florida" element={<FireAlarmVsElectrician />} />
         <Route path="/gracias" element={<ThankYou />} />
       </Routes>
     </LanguageProvider>
