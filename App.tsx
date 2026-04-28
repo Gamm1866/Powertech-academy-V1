@@ -630,15 +630,18 @@ const Footer = () => {
         </div>
         <div className="text-power-muted text-sm">{t.footer.copy}</div>
         <div className="flex gap-6">
-          <Link to="/faq" className="text-gray-500 hover:text-white transition-colors">
+          <Link to={lang === 'es' ? '/es/hollywood-fl' : '/hollywood-fl'} className="text-gray-500 hover:text-white transition-colors">
+            {lang === 'es' ? 'Hollywood FL' : 'Hollywood FL'}
+          </Link>
+          <Link to={lang === 'es' ? '/es/faq' : '/faq'} className="text-gray-500 hover:text-white transition-colors">
             {lang === 'es' ? 'Preguntas frecuentes' : 'FAQ'}
+          </Link>
+          <Link to={lang === 'es' ? '/es/advisory' : '/advisory'} className="text-gray-500 hover:text-white transition-colors">
+            {lang === 'es' ? 'Asesoría gratis' : 'Free Advisory'}
           </Link>
           <Link to="/privacy-policy" className="text-gray-500 hover:text-white transition-colors">
             {t.footer.privacy}
           </Link>
-          <a href="#" className="text-gray-500 hover:text-white transition-colors">
-            {t.footer.terms}
-          </a>
         </div>
       </div>
     </footer>
