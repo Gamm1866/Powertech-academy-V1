@@ -17,9 +17,9 @@ export const translations = {
     },
     hero: {
       badge: 'Admissions Open 2026',
-      h1a: 'Become a',
-      h1b: 'Fire Alarm',
-      h1c: 'Technician',
+      h1a: 'Fire Alarm',
+      h1b: 'Technician',
+      h1c: 'Training',
       sub: 'Fire alarm systems technician training in Hollywood, FL — Broward County. Covers NFPA 72 content, OSHA safety practices, panel configuration, and EMT conduit installation using OSHA-certified safety equipment. Start a career in South Florida in 2 to 3 months.',
       cta: 'Start Your Career',
     },
@@ -171,8 +171,8 @@ export const translations = {
     },
     hero: {
       badge: 'Admisiones Abiertas 2026',
-      h1a: 'Conv\u00e9rtete en',
-      h1b: 'T\u00e9cnico de',
+      h1a: 'Formaci\u00f3n de',
+      h1b: 'T\u00e9cnico en',
       h1c: 'Alarmas',
       sub: 'Formación técnica en sistemas de alarmas contra incendio en Hollywood, FL — Broward County. Cubre contenido NFPA 72, prácticas de seguridad OSHA, configuración de paneles e instalación de canaletas EMT usando implementos de seguridad certificados OSHA. Inicia una carrera en South Florida en 2 a 3 meses.',
       cta: 'Inicia Tu Carrera',
