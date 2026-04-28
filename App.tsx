@@ -771,7 +771,7 @@ const MainLayout: React.FC = () => {
     <Navbar />
     <main>
       <Hero />
-      <BentoGrid />
+      <div id="program"><BentoGrid /></div>
       <Benefits />
       <InstalacionesAprendizaje />
       <SocialProof />
