@@ -749,7 +749,7 @@ const MainLayout: React.FC = () => {
     <Helmet>
       <html lang={lang} />
       <title>{isEs ? 'Curso Técnico en Alarmas | Hollywood FL | PowerTech Academy' : 'Fire Alarm Technician Training | Hollywood FL | PowerTech Academy'}</title>
-      <meta name="description" content={isEs ? 'Formación técnica en sistemas de alarmas contra incendio en Hollywood FL. 40 horas, NFPA 72, OSHA. Carrera de alta demanda en South Florida. ¡Inscríbete ahora!' : 'Fast-track fire alarm systems training in Hollywood FL. 40 hours, NFPA 72, OSHA certified labs. High-demand career in South Florida. Enroll now — limited seats.'} />
+      <meta name="description" content={isEs ? 'Formación técnica en sistemas de alarmas contra incendio en Hollywood, FL. 40 horas, contenido NFPA 72, laboratorios prácticos. PowerTech Academy Certificate of Attendance al completar el programa.' : 'Fire alarm systems technician training in Hollywood, FL. 40-hour program covering NFPA 72 content, hands-on labs, and Florida closeout procedures. PowerTech Academy Certificate of Attendance upon completion.'} />
       <meta name="keywords" content={isEs ? 'curso alarmas contra incendio Florida, NFPA 72, técnico alarmas Hollywood FL, formación vocacional Broward County' : 'fire alarm training Florida, NFPA 72 course, fire alarm technician school Hollywood FL, Broward County vocational training'} />
       <link rel="canonical" href={isEs ? 'https://www.powertech.academy/es' : 'https://www.powertech.academy/'} />
       <link rel="alternate" hrefLang="en" href="https://www.powertech.academy/" />

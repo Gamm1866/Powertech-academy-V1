@@ -20,13 +20,13 @@ export const translations = {
       h1a: 'Become a',
       h1b: 'Fire Alarm',
       h1c: 'Technician',
-      sub: 'Fast-track fire alarm systems technician training in Hollywood, FL — Broward County. Master NFPA 72, OSHA safety, panel configuration, and EMT conduit installation. Start a high-demand career in South Florida in 2 to 3 months.',
+      sub: 'Fire alarm systems technician training in Hollywood, FL — Broward County. Covers NFPA 72 content, OSHA safety practices, panel configuration, and EMT conduit installation using OSHA-certified safety equipment. Start a career in South Florida in 2 to 3 months.',
       cta: 'Start Your Career',
     },
     program: {
       title: 'Program',
       titleAccent: 'Details',
-      sub: 'Everything you need to know about your journey to becoming a certified technician.',
+      sub: 'Everything you need to know about the program and your path to a career in fire alarm systems.',
       duration: 'Duration',
       durationVal: '2 - 3 Months',
       durationSub: 'Fast-track intensive course',
@@ -48,9 +48,9 @@ export const translations = {
       titleAccent: 'Opportunities',
       items: [
         'Join a high-growth employment sector with stable demand across South Florida and Broward County.',
-        'Active job search support connecting graduates with employers in fire alarm and low voltage sectors across South Florida.',
+        'Career guidance resources and job search support included for program completers in the fire alarm and low voltage sectors.',
         'No prior experience required. Open to anyone 17+ in the Hollywood FL and Miami-Dade area.',
-        'Hands-on NFPA 72 training trusted by industry experts and major security firms in Florida.',
+        'Hands-on program covering NFPA 72 content, developed with input from active industry professionals in Florida.',
       ],
       placementRate: 'Active Job Market',
       entryLevel: 'Entry Level',
@@ -60,7 +60,7 @@ export const translations = {
       salary: 'Earning Potential*',
     },
     socialProof: {
-      title: 'Companies that trust our graduates',
+      title: 'Where fire alarm technicians work in South Florida',
     },
     curriculum: {
       title: 'What You',
@@ -174,7 +174,7 @@ export const translations = {
       h1a: 'Conv\u00e9rtete en',
       h1b: 'T\u00e9cnico de',
       h1c: 'Alarmas',
-      sub: 'Formación técnica en sistemas de alarmas contra incendio en Hollywood, FL — Broward County. Domina NFPA 72, seguridad OSHA, configuración de paneles e instalación de canaletas EMT. Inicia una carrera de alta demanda en South Florida en 2 a 3 meses.',
+      sub: 'Formación técnica en sistemas de alarmas contra incendio en Hollywood, FL — Broward County. Cubre contenido NFPA 72, prácticas de seguridad OSHA, configuración de paneles e instalación de canaletas EMT usando implementos de seguridad certificados OSHA. Inicia una carrera en South Florida en 2 a 3 meses.',
       cta: 'Inicia Tu Carrera',
     },
     program: {
@@ -202,9 +202,9 @@ export const translations = {
       titleAccent: 'Oportunidades',
       items: [
         'Únete a un sector de alto crecimiento con demanda estable en South Florida y Broward County.',
-        'Apoyo integral de colocación laboral — el 94% de los graduados encuentran empleo en alarmas, bajo voltaje y seguridad.',
+        'Recursos de orientación profesional y apoyo en búsqueda de empleo incluidos para los completadores del programa en los sectores de alarmas y bajo voltaje.',
         'Sin experiencia previa. Abierto a cualquier persona mayor de 17 años en el área de Hollywood FL y Miami-Dade.',
-        'Entrenamiento práctico bajo NFPA 72, avalado por expertos y grandes empresas de seguridad en Florida.',
+        'Programa práctico basado en contenido NFPA 72, desarrollado con la participación de profesionales activos de la industria en Florida.',
       ],
       placementRate: 'Demanda Laboral Activa',
       entryLevel: 'Nivel de Entrada',
@@ -214,7 +214,7 @@ export const translations = {
       salary: 'Potencial de Ingresos*',
     },
     socialProof: {
-      title: 'Empresas que conf\u00edan en nuestros graduados',
+      title: 'D\u00f3nde trabajan los t\u00e9cnicos de alarmas en South Florida',
     },
     curriculum: {
       title: 'Lo Que',
