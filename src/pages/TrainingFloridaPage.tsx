@@ -124,16 +124,16 @@ const modules = [
 const FAQItem: React.FC<{ q: string; a: string }> = ({ q, a }) => {
   const [open, setOpen] = useState(false);
   return (
-    <div className="border-b border-gray-200">
+    <div className="border-b border-white/10">
       <button
-        className="w-full flex justify-between items-center py-5 text-left text-gray-900 font-semibold text-base hover:text-[#FF4500] transition-colors"
+        className="w-full flex justify-between items-center py-5 text-left text-white font-semibold text-base hover:text-[#FF4500] transition-colors"
         onClick={() => setOpen(!open)}
         aria-expanded={open}
       >
         {q}
         <ChevronDown size={18} className={`shrink-0 ml-4 transition-transform ${open ? 'rotate-180' : ''}`} />
       </button>
-      {open && <p className="pb-5 text-gray-600 text-sm leading-relaxed">{a}</p>}
+      {open && <p className="pb-5 text-gray-400 text-sm leading-relaxed">{a}</p>}
     </div>
   );
 };
@@ -208,20 +208,20 @@ const TrainingFloridaPage: React.FC = () => (
     </section>
 
     {/* CURRICULUM */}
-    <section className="py-20 bg-white px-6">
+    <section className="py-20 bg-[#0a0a0a] px-6">
       <div className="max-w-5xl mx-auto">
-        <h2 className="text-4xl font-bebas-neue font-bold text-[#050505] text-center mb-4">
+        <h2 className="text-4xl font-bebas-neue font-bold text-white text-center mb-4">
           Program Curriculum
         </h2>
-        <p className="text-gray-500 text-center mb-12 max-w-xl mx-auto">
+        <p className="text-gray-400 text-center mb-12 max-w-xl mx-auto">
           Five modules totaling 40 hours — 65% hands-on lab work, 35% theory.
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {modules.map((m) => (
-            <div key={m.num} className="border border-gray-100 rounded-xl p-6 hover:border-[#FF4500]/40 transition-colors">
+            <div key={m.num} className="border border-white/10 rounded-xl p-6 hover:border-[#FF4500]/40 transition-colors">
               <div className="text-[#FF4500] font-bebas-neue text-4xl font-bold mb-3">{m.num}</div>
-              <h3 className="font-bold text-[#050505] mb-2">{m.title}</h3>
-              <p className="text-gray-500 text-sm leading-relaxed">{m.desc}</p>
+              <h3 className="font-bold text-white mb-2">{m.title}</h3>
+              <p className="text-gray-400 text-sm leading-relaxed">{m.desc}</p>
             </div>
           ))}
           <div className="border border-gray-100 rounded-xl p-6 bg-[#050505] flex flex-col justify-center text-center">
@@ -260,9 +260,9 @@ const TrainingFloridaPage: React.FC = () => (
     </section>
 
     {/* FAQ */}
-    <section className="py-20 bg-white px-6">
+    <section className="py-20 bg-[#111111] px-6">
       <div className="max-w-3xl mx-auto">
-        <h2 className="text-4xl font-bebas-neue font-bold text-[#050505] text-center mb-12">
+        <h2 className="text-4xl font-bebas-neue font-bold text-white text-center mb-12">
           Frequently Asked Questions
         </h2>
         <div>

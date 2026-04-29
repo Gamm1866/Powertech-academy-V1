@@ -747,6 +747,73 @@ const InstalacionesAprendizaje = () => {
   );
 };
 
+// --- BLOG SECTION ---
+const blogPosts = [
+  {
+    slug: '/blog/what-does-a-fire-alarm-technician-do-florida',
+    label: 'Career Guide',
+    title: 'What Does a Fire Alarm Technician Do in Florida?',
+    excerpt: 'Installation, inspection, panel programming, troubleshooting — a practical look at the day-to-day work and skills required.',
+  },
+  {
+    slug: '/blog/how-long-does-fire-alarm-training-take',
+    label: 'Training',
+    title: 'How Long Does Fire Alarm Technician Training Take?',
+    excerpt: 'Intensive programs vs apprenticeships vs community college — an honest breakdown of timelines and what each path covers.',
+  },
+  {
+    slug: '/blog/fire-alarm-technician-vs-electrician-florida',
+    label: 'Comparison',
+    title: 'Fire Alarm Technician vs Electrician in Florida',
+    excerpt: 'Entry requirements, licensing timelines, and scope of work — a side-by-side comparison for career changers in Florida.',
+  },
+];
+
+const BlogSection: React.FC = () => {
+  const { lang } = useLanguage();
+  const isEs = lang === 'es';
+  return (
+    <section className="py-20 bg-[#050505] px-6">
+      <div className="max-w-5xl mx-auto">
+        <p className="text-[#FF4500] text-xs font-bold uppercase tracking-widest mb-3 text-center">
+          {isEs ? 'Recursos' : 'Resources'}
+        </p>
+        <h2 className="text-4xl md:text-5xl font-bebas-neue font-bold text-white text-center mb-4">
+          {isEs ? 'Aprende Sobre la Industria' : 'Learn About the Industry'}
+        </h2>
+        <p className="text-gray-400 text-center mb-12 max-w-xl mx-auto">
+          {isEs
+            ? 'Guías prácticas sobre carreras, requisitos de licencia y formación en Florida.'
+            : 'Practical guides on careers, licensing requirements, and training paths in Florida.'}
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {blogPosts.map((post) => (
+            <Link
+              key={post.slug}
+              to={post.slug}
+              className="group border border-white/10 rounded-xl p-6 hover:border-[#FF4500]/40 transition-colors flex flex-col"
+            >
+              <span className="text-[#FF4500] text-xs font-bold uppercase tracking-widest mb-3">{post.label}</span>
+              <h3 className="text-white font-bold text-base leading-snug mb-3 group-hover:text-[#FF4500] transition-colors">
+                {post.title}
+              </h3>
+              <p className="text-gray-400 text-sm leading-relaxed flex-1">{post.excerpt}</p>
+              <span className="text-[#FF4500] text-sm font-semibold mt-4 inline-block">
+                {isEs ? 'Leer artículo →' : 'Read article →'}
+              </span>
+            </Link>
+          ))}
+        </div>
+        <div className="text-center mt-10">
+          <Link to="/blog" className="text-gray-400 hover:text-white text-sm transition-colors">
+            {isEs ? 'Ver todos los artículos →' : 'View all articles →'}
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 // --- MAIN PAGE LAYOUT ---
 const MainLayout: React.FC = () => {
   const { lang } = useLanguage();
@@ -783,6 +850,7 @@ const MainLayout: React.FC = () => {
       <InstalacionesAprendizaje />
       <SocialProof />
       <Curriculum />
+      <BlogSection />
       <EnrollmentCTA />
     </main>
     <Footer />

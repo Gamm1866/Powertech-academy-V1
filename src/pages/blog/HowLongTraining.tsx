@@ -53,11 +53,11 @@ const HowLongTraining: React.FC = () => (
     </section>
 
     {/* ARTICLE */}
-    <article className="py-16 px-6 bg-white">
+    <article className="py-16 px-6 bg-[#0a0a0a]">
       <div className="max-w-3xl mx-auto">
 
         {/* COMPARISON TABLE */}
-        <h2 className="text-2xl font-bold text-[#050505] mb-6">Training Paths at a Glance</h2>
+        <h2 className="text-2xl font-bold text-white mb-6">Training Paths at a Glance</h2>
         <div className="overflow-x-auto mb-12">
           <table className="w-full text-sm border-collapse">
             <thead>
@@ -75,8 +75,8 @@ const HowLongTraining: React.FC = () => (
                 ['Union apprenticeship', '3–4 years', 'On-the-job + classroom', 'Those willing to commit to a multi-year structured program'],
                 ['On-the-job only', 'Varies', 'Supervised field work', 'Those hired by a contractor with internal training'],
               ].map(([path, duration, format, best], i) => (
-                <tr key={path} className={i % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
-                  <td className="px-4 py-3 font-medium text-gray-900">{path}</td>
+                <tr key={path} className={i % 2 === 0 ? 'bg-white/5' : 'bg-transparent'}>
+                  <td className="px-4 py-3 font-medium text-gray-100">{path}</td>
                   <td className="px-4 py-3 text-[#FF4500] font-bold">{duration}</td>
                   <td className="px-4 py-3 text-gray-600">{format}</td>
                   <td className="px-4 py-3 text-gray-600">{best}</td>
@@ -86,57 +86,57 @@ const HowLongTraining: React.FC = () => (
           </table>
         </div>
 
-        <h2 className="text-2xl font-bold text-[#050505] mb-4">The Intensive Program: 2–3 Months</h2>
-        <p className="text-gray-700 leading-relaxed mb-4">
+        <h2 className="text-2xl font-bold text-white mb-4">The Intensive Program: 2–3 Months</h2>
+        <p className="text-gray-300 leading-relaxed mb-4">
           An intensive fire alarm training program condenses the core technical content into a structured schedule of hands-on
           lab sessions and focused instruction. In Florida, programs like PowerTech Academy's 40-hour fast-track cover the
           fundamentals needed to begin working at an entry level — conduit, wiring, panel configuration, NFPA 72 content,
           and Florida-specific closeout procedures.
         </p>
-        <p className="text-gray-700 leading-relaxed mb-4">
+        <p className="text-gray-300 leading-relaxed mb-4">
           The 2–3 month timeline is realistic for this format because the program is structured around a defined curriculum
           rather than open-ended on-the-job learning. You know what you're going to cover, how long it takes, and what
           you'll be able to demonstrate at the end.
         </p>
-        <p className="text-gray-700 leading-relaxed mb-10">
+        <p className="text-gray-300 leading-relaxed mb-10">
           This path works best for people who want to enter the field without committing to a multi-year program and who
           are comfortable with intensive hands-on work.
         </p>
 
-        <h2 className="text-2xl font-bold text-[#050505] mb-4">Community College Programs: 6–12 Months</h2>
-        <p className="text-gray-700 leading-relaxed mb-4">
+        <h2 className="text-2xl font-bold text-white mb-4">Community College Programs: 6–12 Months</h2>
+        <p className="text-gray-300 leading-relaxed mb-4">
           Some Florida community colleges offer electrical technology or low-voltage systems programs that include fire alarm
           content. These programs typically run part-time over one to two semesters and may award an academic certificate or
           associate's degree component.
         </p>
-        <p className="text-gray-700 leading-relaxed mb-10">
+        <p className="text-gray-300 leading-relaxed mb-10">
           The longer timeline is partly structural — semesters run on fixed academic calendars — and partly because the
           curriculum often covers broader electrical topics beyond fire alarm systems. If you want academic credit and a
           slower-paced option, this is a reasonable path. If you want to enter the workforce quickly, the timeline is a
           significant drawback.
         </p>
 
-        <h2 className="text-2xl font-bold text-[#050505] mb-4">Union Apprenticeships: 3–4 Years</h2>
-        <p className="text-gray-700 leading-relaxed mb-4">
+        <h2 className="text-2xl font-bold text-white mb-4">Union Apprenticeships: 3–4 Years</h2>
+        <p className="text-gray-300 leading-relaxed mb-4">
           Union apprenticeships through organizations like IBEW (International Brotherhood of Electrical Workers) are
           structured multi-year programs that combine paid on-the-job hours with classroom instruction. In Florida,
           these programs are competitive to enter and require a combination of applications, aptitude tests, and
           availability of openings.
         </p>
-        <p className="text-gray-700 leading-relaxed mb-10">
+        <p className="text-gray-300 leading-relaxed mb-10">
           The benefit is structured career development and union wage scales throughout the apprenticeship. The tradeoff
           is that you're committing 3 to 4 years before completing the program, and the entry process can take additional
           months waiting for program openings.
         </p>
 
-        <h2 className="text-2xl font-bold text-[#050505] mb-4">What Happens After You Complete Training?</h2>
-        <p className="text-gray-700 leading-relaxed mb-4">
+        <h2 className="text-2xl font-bold text-white mb-4">What Happens After You Complete Training?</h2>
+        <p className="text-gray-300 leading-relaxed mb-4">
           Completing a training program is the starting point, not the finish line. Most entry-level fire alarm technicians
           in Florida begin their careers assisting more experienced technicians on installation and service jobs. The
           real-world skills — reading job-specific drawings, working efficiently in the field, troubleshooting live systems —
           develop over time through supervised work experience.
         </p>
-        <p className="text-gray-700 leading-relaxed mb-0">
+        <p className="text-gray-300 leading-relaxed mb-0">
           The structured training — whether 2 months or 2 years — gives you the technical foundation. The job gives
           you the experience. The two work together, not as substitutes for each other.
         </p>

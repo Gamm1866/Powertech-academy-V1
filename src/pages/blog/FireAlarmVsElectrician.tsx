@@ -54,11 +54,11 @@ const FireAlarmVsElectrician: React.FC = () => (
     </section>
 
     {/* ARTICLE */}
-    <article className="py-16 px-6 bg-white">
+    <article className="py-16 px-6 bg-[#0a0a0a]">
       <div className="max-w-3xl mx-auto">
 
         {/* COMPARISON TABLE */}
-        <h2 className="text-2xl font-bold text-[#050505] mb-6">Side-by-Side Comparison</h2>
+        <h2 className="text-2xl font-bold text-white mb-6">Side-by-Side Comparison</h2>
         <div className="overflow-x-auto mb-12">
           <table className="w-full text-sm border-collapse">
             <thead>
@@ -77,10 +77,10 @@ const FireAlarmVsElectrician: React.FC = () => (
                 ['Work environment', 'Life safety systems, commercial', 'Broad electrical, residential to industrial'],
                 ['Scope of work', 'Specialized — fire alarm systems', 'Broad — power, lighting, controls'],
               ].map(([factor, alarm, elec], i) => (
-                <tr key={factor} className={i % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
-                  <td className="px-4 py-3 font-medium text-gray-900">{factor}</td>
-                  <td className="px-4 py-3 text-gray-700">{alarm}</td>
-                  <td className="px-4 py-3 text-gray-700">{elec}</td>
+                <tr key={factor} className={i % 2 === 0 ? 'bg-white/5' : 'bg-transparent'}>
+                  <td className="px-4 py-3 font-medium text-gray-100">{factor}</td>
+                  <td className="px-4 py-3 text-gray-300">{alarm}</td>
+                  <td className="px-4 py-3 text-gray-300">{elec}</td>
                 </tr>
               ))}
             </tbody>
@@ -88,51 +88,51 @@ const FireAlarmVsElectrician: React.FC = () => (
           <p className="text-xs text-gray-400 mt-2">*Licensing requirements vary by employer and scope. Check with DBPR Florida for current regulations.</p>
         </div>
 
-        <h2 className="text-2xl font-bold text-[#050505] mb-4">What Electricians Do in Florida</h2>
-        <p className="text-gray-700 leading-relaxed mb-4">
+        <h2 className="text-2xl font-bold text-white mb-4">What Electricians Do in Florida</h2>
+        <p className="text-gray-300 leading-relaxed mb-4">
           Licensed electricians in Florida work across a broad range of electrical systems — power distribution, lighting,
           motors, controls, and everything that runs on voltage in a building. The scope is wide, which is part of why
           the licensing requirements are substantial.
         </p>
-        <p className="text-gray-700 leading-relaxed mb-4">
+        <p className="text-gray-300 leading-relaxed mb-4">
           To work as a licensed electrician in Florida, you need to become a Journeyman Electrician first, which typically
           requires completing an apprenticeship program (commonly 4 years, 8,000 hours of on-the-job training plus classroom
           instruction) and passing a state exam administered by the Florida Department of Business and Professional Regulation (DBPR).
         </p>
-        <p className="text-gray-700 leading-relaxed mb-10">
+        <p className="text-gray-300 leading-relaxed mb-10">
           The path to becoming a licensed Master Electrician — required to pull permits and run your own electrical contracting
           business — is even longer. It requires additional years of experience beyond Journeyman status plus another exam.
           This is a well-compensated trade, but the barrier to entry through formal licensing is significant.
         </p>
 
-        <h2 className="text-2xl font-bold text-[#050505] mb-4">What Fire Alarm Technicians Do in Florida</h2>
-        <p className="text-gray-700 leading-relaxed mb-4">
+        <h2 className="text-2xl font-bold text-white mb-4">What Fire Alarm Technicians Do in Florida</h2>
+        <p className="text-gray-300 leading-relaxed mb-4">
           Fire alarm technicians specialize in one category of building systems — life safety. The work involves installing,
           inspecting, testing, programming, and maintaining fire alarm systems that comply with NFPA 72 and Florida building codes.
         </p>
-        <p className="text-gray-700 leading-relaxed mb-4">
+        <p className="text-gray-300 leading-relaxed mb-4">
           The specialization is narrower, which makes the entry path more accessible. Entry-level technicians in Florida
           typically start working under experienced supervision without needing a state license. The licensing landscape
           for fire alarm work in Florida is regulated at the contractor level (the company needs the appropriate license),
           not necessarily the individual technician for entry-level positions.
         </p>
-        <p className="text-gray-700 leading-relaxed mb-10">
+        <p className="text-gray-300 leading-relaxed mb-10">
           This means that a structured training program — covering the technical fundamentals — can get you working in the
           field much faster than the multi-year path required to become a licensed electrician.
         </p>
 
-        <h2 className="text-2xl font-bold text-[#050505] mb-4">Salary Context</h2>
-        <p className="text-gray-700 leading-relaxed mb-4">
+        <h2 className="text-2xl font-bold text-white mb-4">Salary Context</h2>
+        <p className="text-gray-300 leading-relaxed mb-4">
           Both trades offer meaningful earning potential, though comparing them directly is complicated by experience level,
           licensing status, and employer type.
         </p>
-        <p className="text-gray-700 leading-relaxed mb-4">
+        <p className="text-gray-300 leading-relaxed mb-4">
           According to the U.S. Bureau of Labor Statistics (BLS), electrical and electronics installers and repairers
           (the category that includes fire alarm technicians) had a national median annual wage of approximately $65,000
           as of the most recent survey data. Florida wages vary by region, with South Florida generally tracking
           above state average due to cost of living and construction demand.
         </p>
-        <p className="text-gray-700 leading-relaxed mb-10">
+        <p className="text-gray-300 leading-relaxed mb-10">
           Licensed electricians with Journeyman or Master status typically earn more — but that compensation reflects
           years of additional licensing requirements and work experience. Entry-level fire alarm technicians typically
           earn less than licensed journeyman electricians, which is expected given the difference in entry barriers and experience levels.
@@ -142,15 +142,15 @@ const FireAlarmVsElectrician: React.FC = () => (
           Actual compensation varies by employer, experience, location, and role.
         </p>
 
-        <h2 className="text-2xl font-bold text-[#050505] mb-4">Which Path Is Right for You?</h2>
-        <p className="text-gray-700 leading-relaxed mb-4">
+        <h2 className="text-2xl font-bold text-white mb-4">Which Path Is Right for You?</h2>
+        <p className="text-gray-300 leading-relaxed mb-4">
           The right choice depends on your goals, your timeline, and what kind of work you want to do every day.
         </p>
-        <p className="text-gray-700 leading-relaxed mb-4">
+        <p className="text-gray-300 leading-relaxed mb-4">
           If you want to enter the workforce quickly, work with life safety systems in commercial environments, and
           build specialized expertise in a high-demand niche — fire alarm technician is the more accessible starting point.
         </p>
-        <p className="text-gray-700 leading-relaxed mb-0">
+        <p className="text-gray-300 leading-relaxed mb-0">
           If you want the broadest possible scope of electrical work, are willing to commit to a 4-year apprenticeship,
           and have your sights set on eventually running your own electrical contracting business in Florida —
           the licensed electrician path offers that trajectory.

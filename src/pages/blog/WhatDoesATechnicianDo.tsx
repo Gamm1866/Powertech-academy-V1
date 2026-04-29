@@ -53,23 +53,23 @@ const WhatDoesATechnicianDo: React.FC = () => (
     </section>
 
     {/* ARTICLE BODY */}
-    <article className="py-16 px-6 bg-white">
+    <article className="py-16 px-6 bg-[#0a0a0a]">
       <div className="max-w-3xl mx-auto prose prose-gray prose-lg">
 
-        <h2 className="text-2xl font-bold text-[#050505] mt-0 mb-4">The Core Responsibilities</h2>
-        <p className="text-gray-700 leading-relaxed mb-6">
+        <h2 className="text-2xl font-bold text-white mt-0 mb-4">The Core Responsibilities</h2>
+        <p className="text-gray-300 leading-relaxed mb-6">
           Fire alarm technicians are responsible for the full lifecycle of fire alarm systems in commercial and residential buildings.
           That includes installation of new systems, routine inspections, testing, troubleshooting malfunctions, and documenting everything
           for Florida code compliance.
         </p>
-        <p className="text-gray-700 leading-relaxed mb-10">
+        <p className="text-gray-300 leading-relaxed mb-10">
           In Florida, this work is governed by NFPA 72 — the National Fire Alarm and Signaling Code — which sets the standards for
           how systems must be designed, installed, and maintained. Technicians who understand NFPA 72 fundamentals are better equipped
           to work on compliant installations from day one.
         </p>
 
-        <h2 className="text-2xl font-bold text-[#050505] mb-4">A Typical Day on the Job</h2>
-        <p className="text-gray-700 leading-relaxed mb-4">
+        <h2 className="text-2xl font-bold text-white mb-4">A Typical Day on the Job</h2>
+        <p className="text-gray-300 leading-relaxed mb-4">
           No two days are exactly alike, but most fire alarm technician work in Florida involves some combination of these tasks:
         </p>
         <ul className="list-none space-y-3 mb-10">
@@ -84,25 +84,25 @@ const WhatDoesATechnicianDo: React.FC = () => (
           ].map(({ label, desc }) => (
             <li key={label} className="flex gap-3">
               <span className="text-[#FF4500] font-bold shrink-0 mt-1">→</span>
-              <span className="text-gray-700"><strong>{label}:</strong> {desc}</span>
+              <span className="text-gray-300"><strong>{label}:</strong> {desc}</span>
             </li>
           ))}
         </ul>
 
-        <h2 className="text-2xl font-bold text-[#050505] mb-4">Where Fire Alarm Technicians Work in South Florida</h2>
-        <p className="text-gray-700 leading-relaxed mb-4">
+        <h2 className="text-2xl font-bold text-white mb-4">Where Fire Alarm Technicians Work in South Florida</h2>
+        <p className="text-gray-300 leading-relaxed mb-4">
           South Florida has one of the most active construction markets in the country. Miami-Dade, Broward, and Palm Beach counties
           see continuous commercial development — hotels, hospitals, schools, apartment complexes, and office buildings all require
           properly installed and maintained fire alarm systems.
         </p>
-        <p className="text-gray-700 leading-relaxed mb-10">
+        <p className="text-gray-300 leading-relaxed mb-10">
           Technicians typically work for fire alarm contractors, building systems integrators, or property management companies.
           Entry-level positions usually involve assisting experienced technicians on installation jobs before progressing to
           independent inspection and service work.
         </p>
 
-        <h2 className="text-2xl font-bold text-[#050505] mb-4">Skills the Job Actually Requires</h2>
-        <p className="text-gray-700 leading-relaxed mb-4">
+        <h2 className="text-2xl font-bold text-white mb-4">Skills the Job Actually Requires</h2>
+        <p className="text-gray-300 leading-relaxed mb-4">
           You don't need an electrical background to start, but you do need to be comfortable with physical work and detail-oriented tasks.
           The most important skills on day one are:
         </p>
@@ -114,23 +114,23 @@ const WhatDoesATechnicianDo: React.FC = () => (
             'Willingness to follow code documentation carefully',
             'Basic comfort with reading diagrams or floor plans',
           ].map((s) => (
-            <li key={s} className="flex gap-3 text-gray-700">
+            <li key={s} className="flex gap-3 text-gray-300">
               <span className="text-[#FF4500] shrink-0">✓</span> {s}
             </li>
           ))}
         </ul>
-        <p className="text-gray-700 leading-relaxed mb-10">
+        <p className="text-gray-300 leading-relaxed mb-10">
           The technical knowledge — NFPA 72 content, panel programming, conduit work — is what a structured training program builds.
           Physical readiness and attention to detail are what you bring.
         </p>
 
-        <h2 className="text-2xl font-bold text-[#050505] mb-4">How to Get Started in Florida</h2>
-        <p className="text-gray-700 leading-relaxed mb-4">
+        <h2 className="text-2xl font-bold text-white mb-4">How to Get Started in Florida</h2>
+        <p className="text-gray-300 leading-relaxed mb-4">
           In Florida, entry-level fire alarm technicians typically start working under experienced supervision while building
           their hands-on skills. A structured training program that covers NFPA 72 fundamentals, conduit work, and panel
           configuration gives candidates a significant advantage when applying for their first position.
         </p>
-        <p className="text-gray-700 leading-relaxed mb-0">
+        <p className="text-gray-300 leading-relaxed mb-0">
           PowerTech Academy's 40-hour fast-track program in Hollywood, FL is designed specifically for people entering the field
           with no prior experience. The curriculum covers the core technical skills — conduit, wiring, panel config, and Florida
           closeout procedures — using real equipment and OSHA-certified safety practices.
