@@ -282,15 +282,7 @@ const TrainingFloridaPage: React.FC = () => (
         <p className="text-white/90 text-lg mb-10">
           Admissions open for 2026. Limited seats available. Apply in under 2 minutes.
         </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a
-            href="https://wa.me/17864609020?text=Hi%2C%20I%27m%20ready%20to%20apply%20for%20fire%20alarm%20technician%20training"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-white text-[#FF4500] px-10 py-4 rounded-lg font-bold text-lg transition-opacity hover:opacity-90"
-          >
-            Apply via WhatsApp
-          </a>
+        <div className="flex justify-center">
           <Link
             to="/advisory"
             className="inline-block border-2 border-white text-white px-10 py-4 rounded-lg font-bold text-lg transition-opacity hover:opacity-90"

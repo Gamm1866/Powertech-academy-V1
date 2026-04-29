@@ -1,9 +1,9 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useLanguage } from '../../contexts/LanguageContext';
-import { ChevronDown, ArrowLeft } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Header from '../../components/Header';
 
 // Schema JSON-LD
 const getFAQSchema = () => {
@@ -163,7 +163,7 @@ const FAQ_DATA = [
 ];
 
 export const FAQPage = () => {
-  const { lang, setLang } = useLanguage();
+  const { lang } = useLanguage();
   const [openIndex, setOpenIndex] = React.useState<number | null>(null);
 
   const toggleQuestion = (index: number) => {
@@ -200,25 +200,7 @@ export const FAQPage = () => {
         </script>
       </Helmet>
 
-      {/* Header logic */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-power-bg/80 backdrop-blur-md border-b border-white/5">
-        <div className="container mx-auto px-6 h-20 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-            <ArrowLeft className="text-power-accent" />
-            <span className="text-xl font-bold tracking-tight">
-              PowerTech <span className="text-power-muted font-normal">Academy</span>
-            </span>
-          </Link>
-          <div className="flex items-center gap-4">
-            <button
-              onClick={() => setLang(lang === 'en' ? 'es' : 'en')}
-              className="text-power-muted hover:text-white text-sm font-bold uppercase tracking-wider transition-colors px-3 py-1.5 rounded-full border border-power-border hover:border-power-accent/50"
-            >
-              {lang === 'en' ? 'ES' : 'EN'}
-            </button>
-          </div>
-        </div>
-      </nav>
+      <Header />
 
       {/* Main Content */}
       <main className="container mx-auto px-6 pt-32 max-w-4xl">
