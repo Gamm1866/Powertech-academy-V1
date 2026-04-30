@@ -22,7 +22,8 @@ import FireAlarmVsElectrician from './src/pages/blog/FireAlarmVsElectrician';
 import Advisory from './src/pages/Advisory';
 import ThankYou from './src/pages/ThankYou';
 import { LanguageProvider, useLanguage } from './contexts/LanguageContext';
-import { CheckCircle2, Menu, X, ArrowRight, Zap, ChevronDown, Send } from 'lucide-react';
+import { CheckCircle2, ArrowRight, Zap, ChevronDown, Send } from 'lucide-react';
+import Header from './components/Header';
 import { trackApplyNowClick, trackEnrollmentFormSubmit, trackWhatsAppClick } from './src/utils/gtag';
 
 // --- Static Section Helper ---
@@ -35,86 +36,6 @@ const ParallaxSection = ({
   offset?: number;
   speed?: number;
 }) => <div className={className}>{children}</div>;
-
-// --- NAVBAR ---
-const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const { lang, setLang, t } = useLanguage();
-
-  const scrollToApply = () => {
-    trackApplyNowClick();
-    document.getElementById('apply')?.scrollIntoView({ behavior: 'smooth' });
-    setIsOpen(false);
-  };
-
-  return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-power-bg/80 backdrop-blur-md border-b border-white/5">
-      <div className="container mx-auto px-6 h-20 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-power-accent rounded-md flex items-center justify-center">
-            <Zap className="text-white w-5 h-5" fill="currentColor" />
-          </div>
-          <span className="text-xl font-bold tracking-tight">
-            PowerTech <span className="text-power-muted font-normal">Academy</span>
-          </span>
-        </div>
-
-        {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-4">
-          <button
-            onClick={() => setLang(lang === 'en' ? 'es' : 'en')}
-            className="text-power-muted hover:text-white text-sm font-bold uppercase tracking-wider transition-colors px-3 py-1.5 rounded-full border border-power-border hover:border-power-accent/50"
-          >
-            {t.langToggle}
-          </button>
-          <Link
-            to={lang === 'en' ? '/advisory' : '/es/advisory'}
-            className="bg-power-accent hover:bg-[#E63E00] text-white px-5 py-2.5 rounded-lg font-bold text-sm transition-colors"
-          >
-            {t.nav.advisory}
-          </Link>
-          <MagneticButton onClick={scrollToApply}>
-            {t.nav.apply}
-          </MagneticButton>
-        </div>
-
-        {/* Mobile Toggle */}
-        <button className="md:hidden text-white" onClick={() => setIsOpen(!isOpen)}>
-          {isOpen ? <X /> : <Menu />}
-        </button>
-      </div>
-
-      {/* Mobile Menu */}
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="absolute top-20 left-0 right-0 bg-power-card border-b border-power-border p-6 flex flex-col gap-4 md:hidden"
-        >
-          <button
-            onClick={() => { setLang(lang === 'en' ? 'es' : 'en'); }}
-            className="w-full py-3 rounded border border-power-border text-power-muted font-bold text-sm uppercase tracking-wider"
-          >
-            {t.langToggle}
-          </button>
-          <Link
-            to={lang === 'en' ? '/advisory' : '/es/advisory'}
-            onClick={() => setIsOpen(false)}
-            className="w-full py-3 bg-power-accent text-white rounded font-bold text-center"
-          >
-            {t.nav.advisory}
-          </Link>
-          <button
-            onClick={scrollToApply}
-            className="w-full py-3 bg-power-accent rounded text-white font-bold"
-          >
-            {t.nav.apply}
-          </button>
-        </motion.div>
-      )}
-    </nav>
-  );
-};
 
 // --- HERO ---
 const Hero = () => {
@@ -202,13 +123,13 @@ const Hero = () => {
 
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-power-bg/50 to-power-bg pointer-events-none" style={{ zIndex: 1 }} />
 
-      <div className="container mx-auto px-6 text-center" style={{ position: 'relative', zIndex: 10 }}>
-        <motion.div style={{ y: y1, opacity }}>
+      <div className="power-grid items-center" style={{ position: 'relative', zIndex: 10, height: '100%' }}>
+        <motion.div style={{ y: y1, opacity }} className="col-span-12 flex flex-col items-center justify-center text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="inline-block mb-4 px-4 py-1.5 rounded-full border border-power-border bg-white/5 backdrop-blur-sm text-power-accent text-xs font-bold uppercase tracking-widest"
+            className="inline-block mb-4 px-4 py-1.5 rounded-full glass-badge text-power-accent text-xs font-bold uppercase tracking-widest"
           >
             {t.hero.badge}
           </motion.div>
@@ -243,7 +164,7 @@ const Hero = () => {
             className="flex justify-center"
           >
             <MagneticButton
-              className="px-10 py-5 bg-power-accent text-white hover:bg-power-accentHover font-bold text-lg rounded-full flex items-center justify-center gap-2 transition-all"
+              className="px-10 py-5 glass-btn-accent text-white font-bold text-lg rounded-full flex items-center justify-center gap-2"
               onClick={scrollToApply}
             >
               {t.hero.cta} <ArrowRight size={20} />
@@ -270,7 +191,7 @@ const Benefits = () => {
               {t.benefits.items.map((item, i) => (
                 <div
                   key={i}
-                  className="flex items-start gap-4 p-4 rounded-xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/5"
+                  className="flex items-start gap-4 p-4 rounded-xl glass-card-interactive"
                 >
                   <div className="mt-1 w-6 h-6 rounded-full bg-power-accent/20 flex items-center justify-center text-power-accent shrink-0">
                     <CheckCircle2 size={14} />
@@ -289,21 +210,21 @@ const Benefits = () => {
             <ParallaxSection offset={40} className="relative z-10">
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-4 pt-8">
-                  <div className="bg-power-card p-6 rounded-2xl border border-power-border h-48 flex flex-col justify-end">
+                  <div className="glass-card-interactive p-6 rounded-2xl h-48 flex flex-col justify-end">
                     <div className="text-4xl font-bold text-white mb-1">🔥</div>
                     <div className="text-sm text-power-muted">{t.benefits.placementRate}</div>
                   </div>
-                  <div className="bg-power-card p-6 rounded-2xl border border-power-border h-32 flex flex-col justify-end">
+                  <div className="glass-card-interactive p-6 rounded-2xl h-32 flex flex-col justify-end">
                     <div className="text-xl font-bold text-white mb-1">{t.benefits.entryLevel}</div>
                     <div className="text-sm text-power-muted">{t.benefits.entryLevelSub}</div>
                   </div>
                 </div>
                 <div className="space-y-4">
-                  <div className="bg-power-card p-6 rounded-2xl border border-power-border h-32 flex flex-col justify-end">
+                  <div className="glass-card-interactive p-6 rounded-2xl h-32 flex flex-col justify-end">
                     <div className="text-xl font-bold text-white mb-1">{t.benefits.certified}</div>
                     <div className="text-sm text-power-muted">{t.benefits.certifiedSub}</div>
                   </div>
-                  <div className="bg-power-card p-6 rounded-2xl border border-power-border h-48 flex flex-col justify-end">
+                  <div className="glass-card-interactive p-6 rounded-2xl h-48 flex flex-col justify-end">
                     <div className="text-4xl font-bold text-power-accent mb-1">$65k+</div>
                     <div className="text-sm text-power-muted">{t.benefits.salary}</div>
                     <div className="text-xs text-power-muted mt-2 opacity-70">*Fuente: BLS 2024 / Source: BLS 2024</div>
@@ -368,7 +289,7 @@ const Curriculum = () => {
           {t.curriculum.modules.map((mod, i) => (
             <div
               key={i}
-              className="bg-power-card border border-power-border hover:border-power-accent/30 rounded-2xl overflow-hidden transition-colors duration-300"
+              className="glass-card-interactive glass-border-animated rounded-2xl overflow-hidden"
             >
               <button
                 className="w-full flex items-center justify-between p-5 md:p-6 text-left"
@@ -496,7 +417,7 @@ const EnrollmentCTA = () => {
   };
 
   const inputClass =
-    "w-full bg-power-bg border border-power-border rounded-xl px-4 py-3 text-power-text placeholder-power-muted focus:outline-none focus:border-power-accent/60 transition-colors";
+    "w-full glass-input rounded-xl px-4 py-3";
 
   return (
     <section id="apply" className="py-32 bg-power-bg relative overflow-hidden">
@@ -506,7 +427,7 @@ const EnrollmentCTA = () => {
       </div>
 
       <div className="container mx-auto px-6 relative z-10 max-w-2xl">
-        <div className="bg-power-card border border-power-border rounded-3xl p-8 md:p-12 shadow-2xl">
+        <div className="glass-card-elevated rounded-3xl p-8 md:p-12">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">{t.enrollment.heading}</h2>
           <p className="text-power-muted mb-8">{t.enrollment.sub}</p>
 
@@ -607,7 +528,7 @@ const EnrollmentCTA = () => {
               <MagneticButton
                 type="submit"
                 disabled={!formData.consent || status === 'submitting'}
-                className="w-full py-4 bg-power-accent text-white hover:bg-power-accentHover font-bold text-base rounded-full flex items-center justify-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed mt-2"
+                className="w-full py-4 glass-btn-accent text-white font-bold text-base rounded-full flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed mt-2"
               >
                 {status === 'submitting' ? (
                   t.enrollment.submitting
@@ -712,11 +633,11 @@ const InstalacionesAprendizaje = () => {
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              <div className="bg-[#1a1a1a] p-4 rounded-lg border border-[#FF4500]">
+              <div className="glass-card-elevated p-4 rounded-lg">
                 <p className="text-[#FF4500] font-bebas-neue text-xl font-bold">40h</p>
                 <p className="text-sm text-gray-400 font-barlow">{language === 'es' ? 'Práctica' : 'Hands-on'}</p>
               </div>
-              <div className="bg-[#1a1a1a] p-4 rounded-lg border border-[#FF4500]">
+              <div className="glass-card-elevated p-4 rounded-lg">
                 <p className="text-[#FF4500] font-bebas-neue text-xl font-bold">Real</p>
                 <p className="text-sm text-gray-400 font-barlow">{language === 'es' ? 'Equipamiento' : 'Equipment'}</p>
               </div>
@@ -791,7 +712,7 @@ const BlogSection: React.FC = () => {
             <Link
               key={post.slug}
               to={post.slug}
-              className="group border border-white/10 rounded-xl p-6 hover:border-[#FF4500]/40 transition-colors flex flex-col"
+              className="group glass-card-interactive glass-border-animated rounded-xl p-6 flex flex-col"
             >
               <span className="text-[#FF4500] text-xs font-bold uppercase tracking-widest mb-3">{post.label}</span>
               <h3 className="text-white font-bold text-base leading-snug mb-3 group-hover:text-[#FF4500] transition-colors">
@@ -842,7 +763,7 @@ const MainLayout: React.FC = () => {
       <meta name="twitter:image" content="https://www.powertech.academy/og-image.png" />
       <meta name="google-site-verification" content="0JJtQz1UBHhPUCTD-ojh7fdof8LBzaesa0TM-_vNpRY" />
     </Helmet>
-    <Navbar />
+    <Header />
     <main>
       <Hero />
       <div id="program"><BentoGrid /></div>

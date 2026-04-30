@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@plugin './hero.ts';
+@source './node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
 
 @theme {
   --font-sans: "Inter", sans-serif;
@@ -12,4 +14,204 @@
   --color-power-muted: #9ca3af;
 
   --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-fire-glow: fire-glow 4s ease-in-out infinite;
+  --animate-shimmer: shimmer 4s linear infinite;
+}
+
+@layer utilities {
+  /* ─── LAYOUT GRID — 12 col / 88px margin / 24px gutter / stretch ─── */
+  .power-grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 24px;
+    padding-left: 88px;
+    padding-right: 88px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media (max-width: 768px) {
+    .power-grid {
+      padding-left: 24px;
+      padding-right: 24px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+  }
+
+  /* ─── GLASSMORPHISM SYSTEM ──────────────────────────────────────────── */
+
+  /* Subtle background surface */
+  .glass-surface {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  /* Standard glass card */
+  .glass-card {
+    background: rgba(18, 18, 18, 0.65);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow:
+      0 4px 24px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  }
+
+  /* Elevated glass card — accent glow border */
+  .glass-card-elevated {
+    background: rgba(14, 14, 14, 0.75);
+    backdrop-filter: blur(28px) saturate(200%);
+    -webkit-backdrop-filter: blur(28px) saturate(200%);
+    border: 1px solid rgba(255, 69, 0, 0.2);
+    box-shadow:
+      0 8px 40px rgba(0, 0, 0, 0.55),
+      0 0 0 1px rgba(255, 69, 0, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.07),
+      inset 0 -1px 0 rgba(255, 69, 0, 0.08);
+  }
+
+  /* Interactive glass card — hover with fire glow */
+  .glass-card-interactive {
+    background: rgba(18, 18, 18, 0.65);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow:
+      0 4px 24px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  }
+
+  .glass-card-interactive:hover {
+    background: rgba(22, 22, 22, 0.82);
+    border-color: rgba(255, 69, 0, 0.38);
+    box-shadow:
+      0 8px 40px rgba(0, 0, 0, 0.5),
+      0 0 24px rgba(255, 69, 0, 0.14),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+
+  /* Glass badge / pill label */
+  .glass-badge {
+    background: rgba(255, 69, 0, 0.12);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 69, 0, 0.28);
+    box-shadow:
+      0 0 14px rgba(255, 69, 0, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+
+  /* Glass form input */
+  .glass-input {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #f3f4f6;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  }
+
+  .glass-input::placeholder {
+    color: rgba(156, 163, 175, 0.6);
+  }
+
+  .glass-input:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 69, 0, 0.55);
+    box-shadow:
+      0 0 0 3px rgba(255, 69, 0, 0.1),
+      0 0 20px rgba(255, 69, 0, 0.08);
+  }
+
+  /* Glass button — secondary / bordered */
+  .glass-btn {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .glass-btn:hover {
+    background: rgba(255, 255, 255, 0.09);
+    border-color: rgba(255, 69, 0, 0.45);
+    box-shadow: 0 0 18px rgba(255, 69, 0, 0.14);
+  }
+
+  /* Glass button — accent / primary CTA */
+  .glass-btn-accent {
+    background: rgba(255, 69, 0, 0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 140, 0, 0.45);
+    box-shadow:
+      0 0 28px rgba(255, 69, 0, 0.4),
+      0 4px 16px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    transition: background 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .glass-btn-accent:hover {
+    background: rgba(204, 55, 0, 0.95);
+    box-shadow:
+      0 0 40px rgba(255, 69, 0, 0.55),
+      0 4px 20px rgba(0, 0, 0, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  }
+
+  /* Animated shimmer border — hover reveals gradient border */
+  .glass-border-animated {
+    position: relative;
+  }
+
+  .glass-border-animated::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 69, 0, 0.6),
+      rgba(255, 200, 0, 0.25),
+      rgba(255, 69, 0, 0.08),
+      rgba(255, 69, 0, 0.5)
+    );
+    background-size: 300% 300%;
+    animation: shimmer 4s linear infinite;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+
+  .glass-border-animated:hover::before {
+    opacity: 1;
+  }
+
+  /* Ambient fire glow blob */
+  .fire-glow-blob {
+    background: radial-gradient(
+      ellipse,
+      rgba(255, 69, 0, 0.18) 0%,
+      rgba(255, 120, 0, 0.07) 50%,
+      transparent 75%
+    );
+    animation: fire-glow 4s ease-in-out infinite;
+  }
+}
+
+@keyframes fire-glow {
+  0%, 100% { opacity: 0.65; transform: scale(1); }
+  50%       { opacity: 1;    transform: scale(1.1); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
