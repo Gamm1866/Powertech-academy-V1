@@ -7,20 +7,22 @@ import React, { useState, Suspense, lazy } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { Routes, Route, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import { Button, Chip, Card, Accordion, Input, Checkbox, Form } from "@heroui/react";
 
 const TechBackground = lazy(() =>
   import('./components/QuantumScene').then(m => ({ default: m.TechBackground }))
 );
 import { BentoGrid, MagneticButton } from './components/Diagrams';
-import { PrivacyPolicy } from './components/PrivacyPolicy';
-import { FAQPage } from './src/pages/FAQPage';
-import HollywoodFlPage from './src/pages/HollywoodFlPage';
-import TrainingFloridaPage from './src/pages/TrainingFloridaPage';
-import WhatDoesATechnicianDo from './src/pages/blog/WhatDoesATechnicianDo';
-import HowLongTraining from './src/pages/blog/HowLongTraining';
-import FireAlarmVsElectrician from './src/pages/blog/FireAlarmVsElectrician';
-import Advisory from './src/pages/Advisory';
-import ThankYou from './src/pages/ThankYou';
+
+const PrivacyPolicy = lazy(() => import('./components/PrivacyPolicy').then(m => ({ default: m.PrivacyPolicy })));
+const FAQPage = lazy(() => import('./src/pages/FAQPage').then(m => ({ default: m.FAQPage })));
+const HollywoodFlPage = lazy(() => import('./src/pages/HollywoodFlPage'));
+const TrainingFloridaPage = lazy(() => import('./src/pages/TrainingFloridaPage'));
+const WhatDoesATechnicianDo = lazy(() => import('./src/pages/blog/WhatDoesATechnicianDo'));
+const HowLongTraining = lazy(() => import('./src/pages/blog/HowLongTraining'));
+const FireAlarmVsElectrician = lazy(() => import('./src/pages/blog/FireAlarmVsElectrician'));
+const Advisory = lazy(() => import('./src/pages/Advisory'));
+const ThankYou = lazy(() => import('./src/pages/ThankYou'));
 import { LanguageProvider, useLanguage } from './contexts/LanguageContext';
 import { CheckCircle2, ArrowRight, Zap, ChevronDown, Send } from 'lucide-react';
 import Header from './components/Header';
@@ -39,7 +41,7 @@ const ParallaxSection = ({
 
 // --- HERO ---
 const Hero = () => {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 500], [0, 200]);
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
@@ -94,45 +96,20 @@ const Hero = () => {
         </svg>
       </div>
 
-      {/* Animated scan line */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 1 }}>
-        <div className="scan-line-hero" />
-      </div>
-
-      {/* Corner bracket decorations */}
-      <div className="absolute top-24 left-4 md:left-10 pointer-events-none" style={{ zIndex: 2 }}>
-        <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-          <path d="M2 20 L2 2 L20 2" stroke="#FF4500" strokeWidth="1.5" strokeLinecap="round" opacity="0.5" />
-        </svg>
-      </div>
-      <div className="absolute top-24 right-4 md:right-10 pointer-events-none" style={{ zIndex: 2 }}>
-        <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-          <path d="M34 20 L34 2 L16 2" stroke="#FF4500" strokeWidth="1.5" strokeLinecap="round" opacity="0.5" />
-        </svg>
-      </div>
-      <div className="absolute bottom-8 left-4 md:left-10 pointer-events-none" style={{ zIndex: 2 }}>
-        <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-          <path d="M2 16 L2 34 L20 34" stroke="#FF4500" strokeWidth="1.5" strokeLinecap="round" opacity="0.5" />
-        </svg>
-      </div>
-      <div className="absolute bottom-8 right-4 md:right-10 pointer-events-none" style={{ zIndex: 2 }}>
-        <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-          <path d="M34 16 L34 34 L16 34" stroke="#FF4500" strokeWidth="1.5" strokeLinecap="round" opacity="0.5" />
-        </svg>
-      </div>
 
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-power-bg/50 to-power-bg pointer-events-none" style={{ zIndex: 1 }} />
 
       <div className="power-grid items-center" style={{ position: 'relative', zIndex: 10, height: '100%' }}>
-        <motion.div style={{ y: y1, opacity }} className="col-span-12 flex flex-col items-center justify-center text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="inline-block mb-4 px-4 py-1.5 rounded-full glass-badge text-power-accent text-xs font-bold uppercase tracking-widest"
+        <motion.div style={{ y: y1, opacity }} className="col-span-12 md:col-span-7 flex flex-col items-start justify-center text-left">
+          <Chip
+           
+            variant="soft"
+            className="mb-6 font-bold tracking-widest uppercase"
+            size="md"
+           
           >
             {t.hero.badge}
-          </motion.div>
+          </Chip>
 
           <motion.h1
             initial={{ opacity: 0, scale: 0.9 }}
@@ -152,7 +129,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="max-w-2xl mx-auto text-lg md:text-xl text-power-muted mb-10 leading-relaxed"
+            className="text-lg md:text-xl text-power-muted mb-10 leading-relaxed max-w-xl"
           >
             {t.hero.sub}
           </motion.p>
@@ -161,15 +138,51 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="flex justify-center"
+            className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
           >
-            <MagneticButton
-              className="px-10 py-5 glass-btn-accent text-white font-bold text-lg rounded-full flex items-center justify-center gap-2"
-              onClick={scrollToApply}
+            <Link
+              to={lang === 'es' ? '/es/advisory' : '/advisory'}
+              className="glass-btn-accent inline-flex items-center justify-center font-bold px-8 py-4 text-lg text-white rounded-lg w-full sm:w-auto gap-2 hover:brightness-110"
             >
-              {t.hero.cta} <ArrowRight size={20} />
-            </MagneticButton>
+              {t.hero.cta}
+              <ArrowRight size={20} />
+            </Link>
+            <Link
+              to="/blog/what-does-a-fire-alarm-technician-do-florida"
+              className="glass-btn inline-flex items-center justify-center font-bold px-8 py-4 text-lg text-white rounded-lg w-full sm:w-auto hover:bg-white/10"
+            >
+              {lang === 'es' ? 'Saber más' : 'Learn more'}
+            </Link>
           </motion.div>
+        </motion.div>
+
+        {/* Right Side Visuals - Using HeroUI Card */}
+        <motion.div 
+          style={{ y: y1, opacity }} 
+          className="col-span-12 md:col-span-5 hidden md:flex flex-col items-center justify-center"
+        >
+          <div className="glass-card rounded-lg w-full max-w-md overflow-hidden">
+            <div className="p-8 flex flex-col gap-8">
+              <div className="flex items-center gap-5">
+                <div className="w-14 h-14 bg-white/10 rounded-lg flex items-center justify-center shrink-0">
+                  <Zap className="text-white" size={28} />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-white mb-1">{lang === 'es' ? 'Programa de 40h' : '40h Program'}</h3>
+                  <p className="text-gray-400 text-sm">{lang === 'es' ? 'Práctica en laboratorios reales' : 'Hands-on practical training'}</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-5">
+                <div className="w-14 h-14 bg-white/10 rounded-[8px] flex items-center justify-center shrink-0">
+                  <CheckCircle2 className="text-white" size={28} />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-white mb-1">{lang === 'es' ? 'Enfoque NFPA 72' : 'NFPA 72 Focused'}</h3>
+                  <p className="text-gray-400 text-sm">{lang === 'es' ? 'Aprende los estándares de la industria' : 'Learn industry standards'}</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>
@@ -187,51 +200,70 @@ const Benefits = () => {
             <h2 className="text-4xl font-bold mb-8">
               {t.benefits.title} <span className="text-power-accent">{t.benefits.titleAccent}</span>
             </h2>
-            <div className="space-y-6">
+            <div className="space-y-3">
               {t.benefits.items.map((item, i) => (
                 <div
                   key={i}
-                  className="flex items-start gap-4 p-4 rounded-xl glass-card-interactive"
+                  className="glass-card-interactive rounded-lg"
                 >
-                  <div className="mt-1 w-6 h-6 rounded-full bg-power-accent/20 flex items-center justify-center text-power-accent shrink-0">
-                    <CheckCircle2 size={14} />
+                  <div className="flex flex-row items-center gap-4 p-4">
+                    <div className="w-6 h-6 rounded-full bg-[#FF4500]/20 flex items-center justify-center text-[#FF4500] shrink-0">
+                      <CheckCircle2 size={14} />
+                    </div>
+                    <p className="text-gray-300">{item}</p>
                   </div>
-                  <p className="text-lg text-gray-300">{item}</p>
                 </div>
               ))}
             </div>
           </ParallaxSection>
 
-          <div className="relative">
-            <ParallaxSection offset={-50} className="absolute inset-0 z-0">
-              <div className="absolute inset-0 bg-power-accent/20 blur-[100px] rounded-full opacity-20"></div>
-            </ParallaxSection>
-
-            <ParallaxSection offset={40} className="relative z-10">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-4 pt-8">
-                  <div className="glass-card-interactive p-6 rounded-2xl h-48 flex flex-col justify-end">
-                    <div className="text-4xl font-bold text-white mb-1">🔥</div>
-                    <div className="text-sm text-power-muted">{t.benefits.placementRate}</div>
-                  </div>
-                  <div className="glass-card-interactive p-6 rounded-2xl h-32 flex flex-col justify-end">
-                    <div className="text-xl font-bold text-white mb-1">{t.benefits.entryLevel}</div>
-                    <div className="text-sm text-power-muted">{t.benefits.entryLevelSub}</div>
-                  </div>
+          <div className="relative z-10 space-y-4">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="glass-card rounded-lg">
+                <div className="p-5 flex flex-col gap-3">
+                  <div className="w-9 h-9 rounded-xl bg-[#FF4500]/15 flex items-center justify-center text-lg">🔥</div>
+                  <div className="text-sm font-bold text-white leading-tight">{t.benefits.placementRate}</div>
                 </div>
-                <div className="space-y-4">
-                  <div className="glass-card-interactive p-6 rounded-2xl h-32 flex flex-col justify-end">
-                    <div className="text-xl font-bold text-white mb-1">{t.benefits.certified}</div>
-                    <div className="text-sm text-power-muted">{t.benefits.certifiedSub}</div>
+              </div>
+              <div className="glass-card rounded-lg">
+                <div className="p-5 flex flex-col gap-3">
+                  <div className="w-9 h-9 rounded-xl bg-[#FF4500]/15 flex items-center justify-center">
+                    <CheckCircle2 size={18} className="text-[#FF4500]" />
                   </div>
-                  <div className="glass-card-interactive p-6 rounded-2xl h-48 flex flex-col justify-end">
-                    <div className="text-4xl font-bold text-power-accent mb-1">$65k+</div>
-                    <div className="text-sm text-power-muted">{t.benefits.salary}</div>
-                    <div className="text-xs text-power-muted mt-2 opacity-70">*Fuente: BLS 2024 / Source: BLS 2024</div>
+                  <div>
+                    <div className="text-sm font-bold text-white leading-tight">{t.benefits.certified}</div>
+                    <div className="text-xs text-power-muted mt-0.5">{t.benefits.certifiedSub}</div>
                   </div>
                 </div>
               </div>
-            </ParallaxSection>
+            </div>
+
+            <div className="glass-card rounded-lg">
+              <div className="p-5 flex flex-row items-center gap-4">
+                <div className="w-9 h-9 rounded-xl bg-[#FF4500]/15 flex items-center justify-center shrink-0">
+                  <Zap size={18} className="text-[#FF4500]" fill="currentColor" />
+                </div>
+                <div>
+                  <div className="text-base font-bold text-white">{t.benefits.entryLevel}</div>
+                  <div className="text-sm text-power-muted">{t.benefits.entryLevelSub}</div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              className="glass-card rounded-lg overflow-hidden"
+              style={{ background: 'linear-gradient(135deg, rgba(255,69,0,0.08) 0%, rgba(14,14,14,0.85) 60%)' }}
+            >
+              <div className="p-7 relative">
+                <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, rgba(255,69,0,0.6), rgba(255,200,0,0.2), transparent)' }} />
+                <p className="text-xs text-power-muted uppercase tracking-widest mb-3">{t.benefits.salary}</p>
+                <div className="text-7xl font-bold text-[#FF4500] leading-none mb-3" style={{ textShadow: '0 0 50px rgba(255,69,0,0.45)' }}>
+                  $65k+
+                </div>
+                <p className="text-sm text-gray-400">Avg. entry-level salary · South Florida</p>
+                <p className="text-xs text-power-muted/50 mt-3">*Source: BLS 2024</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -239,31 +271,7 @@ const Benefits = () => {
   );
 };
 
-// --- SOCIAL PROOF ---
-const SocialProof = () => {
-  const { t } = useLanguage();
-  return (
-    <section className="py-20 border-y border-white/5 bg-black/40 overflow-hidden">
-      <ParallaxSection offset={20}>
-        <div className="container mx-auto px-6 text-center">
-          <p className="text-sm text-power-muted uppercase tracking-widest font-bold mb-10">
-            {t.socialProof.title}
-          </p>
-          <div className="flex flex-wrap justify-center gap-12 md:gap-20 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
-            {['Securitas', 'ADT Commercial', 'Johnson Controls', 'Siemens', 'Honeywell'].map((brand, i) => (
-              <div
-                key={i}
-                className="text-2xl font-bold font-sans text-white hover:text-power-accent cursor-default transition-colors"
-              >
-                {brand}
-              </div>
-            ))}
-          </div>
-        </div>
-      </ParallaxSection>
-    </section>
-  );
-};
+
 
 // --- CURRICULUM ACCORDION ---
 const Curriculum = () => {
@@ -287,59 +295,28 @@ const Curriculum = () => {
 
         <div className="space-y-3">
           {t.curriculum.modules.map((mod, i) => (
-            <div
-              key={i}
-              className="glass-card-interactive glass-border-animated rounded-2xl overflow-hidden"
-            >
-              <button
-                className="w-full flex items-center justify-between p-5 md:p-6 text-left"
-                onClick={() => setOpenModule(openModule === i ? null : i)}
-              >
+            <details key={i} className="group bg-[#121212]/60 border border-white/10 backdrop-blur-md rounded-2xl mb-3 shadow-none data-[open=true]:border-[#FF4500]/30 [&_summary::-webkit-details-marker]:hidden">
+              <summary className="w-full text-left p-6 flex justify-between items-center cursor-pointer list-none">
                 <div className="flex items-center gap-4">
-                  <div className="w-8 h-8 rounded-full bg-power-accent/10 border border-power-accent/20 flex items-center justify-center text-power-accent text-sm font-bold shrink-0">
+                  <div className="w-8 h-8 rounded-full bg-[#FF4500]/10 border border-[#FF4500]/20 flex items-center justify-center text-[#FF4500] text-sm font-bold shrink-0">
                     {i + 1}
                   </div>
-                  <span className="font-semibold text-power-text">{mod.title}</span>
+                  <span className="font-semibold text-white">{mod.title}</span>
                 </div>
-                <div className="flex items-center gap-3 shrink-0 ml-4">
-                  <span className="hidden sm:block text-sm text-power-muted">{mod.hours}</span>
-                  <motion.div
-                    animate={{ rotate: openModule === i ? 180 : 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <ChevronDown className="text-power-muted" size={20} />
-                  </motion.div>
+                <div className="flex items-center gap-4">
+                  <span className="hidden sm:block text-sm text-gray-400">{mod.hours}</span>
+                  <ChevronDown className="text-gray-400 group-open:rotate-180 transition-transform duration-300" size={20} />
                 </div>
-              </button>
-
-              <AnimatePresence initial={false}>
-                {openModule === i && (
-                  <motion.div
-                    key={`module-content-${i}`}
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.28, ease: 'easeInOut' }}
-                    style={{ overflow: 'hidden' }}
-                  >
-                    <div className="px-5 md:px-6 pb-6 pl-[4.5rem]">
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        <span className="text-xs px-3 py-1.5 rounded-full bg-power-accent/10 border border-power-accent/20 text-power-accent font-medium">
-                          {mod.theory}
-                        </span>
-                        <span className="text-xs px-3 py-1.5 rounded-full bg-white/5 border border-power-border text-power-muted font-medium">
-                          {mod.lab}
-                        </span>
-                        <span className="text-xs px-3 py-1.5 rounded-full bg-white/5 border border-power-border text-power-muted font-medium">
-                          {mod.hours}
-                        </span>
-                      </div>
-                      <p className="text-gray-400 leading-relaxed">{mod.desc}</p>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+              </summary>
+              <div className="pb-6 pl-[4.5rem]">
+                <div className="flex flex-wrap gap-2 mb-4">
+                  <Chip size="sm" variant="soft">{mod.theory}</Chip>
+                  <Chip size="sm" variant="soft" className="border-white/10 text-gray-400">{mod.lab}</Chip>
+                  <Chip size="sm" variant="soft" className="border-white/10 text-gray-400">{mod.hours}</Chip>
+                </div>
+                <p className="text-gray-400 leading-relaxed">{mod.desc}</p>
+              </div>
+            </details>
           ))}
         </div>
       </div>
@@ -416,9 +393,6 @@ const EnrollmentCTA = () => {
     }
   };
 
-  const inputClass =
-    "w-full glass-input rounded-xl px-4 py-3";
-
   return (
     <section id="apply" className="py-32 bg-power-bg relative overflow-hidden">
       {/* Decorative background glow */}
@@ -443,100 +417,93 @@ const EnrollmentCTA = () => {
               <p className="text-lg font-semibold text-power-text">{t.enrollment.success}</p>
             </motion.div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm text-power-muted mb-1.5">{t.enrollment.firstName}</label>
+            <Form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
+                <div className="flex flex-col gap-2">
+                  <label className="text-sm font-semibold">{t.enrollment.firstName}</label>
                   <input
-                    type="text"
+                    required
                     name="firstName"
                     value={formData.firstName}
-                    onChange={handleChange}
-                    required
+                    onChange={(e) => setFormData(prev => ({ ...prev, firstName: e.target.value }))}
                     placeholder={t.enrollment.firstName}
-                    className={inputClass}
+                    className="w-full bg-[#121212]/50 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-[#FF4500] focus:ring-1 focus:ring-[#FF4500] transition-colors outline-none"
                   />
                 </div>
-                <div>
-                  <label className="block text-sm text-power-muted mb-1.5">{t.enrollment.lastName}</label>
+                <div className="flex flex-col gap-2">
+                  <label className="text-sm font-semibold">{t.enrollment.lastName}</label>
                   <input
-                    type="text"
+                    required
                     name="lastName"
                     value={formData.lastName}
-                    onChange={handleChange}
-                    required
+                    onChange={(e) => setFormData(prev => ({ ...prev, lastName: e.target.value }))}
                     placeholder={t.enrollment.lastName}
-                    className={inputClass}
+                    className="w-full bg-[#121212]/50 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-[#FF4500] focus:ring-1 focus:ring-[#FF4500] transition-colors outline-none"
                   />
                 </div>
               </div>
 
-              <div>
-                <label className="block text-sm text-power-muted mb-1.5">{t.enrollment.email}</label>
+              <div className="flex flex-col gap-2">
+                <label className="text-sm font-semibold">{t.enrollment.email}</label>
                 <input
+                  required
                   type="email"
                   name="email"
                   value={formData.email}
-                  onChange={handleChange}
-                  required
+                  onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
                   placeholder="you@example.com"
-                  className={inputClass}
+                  className="w-full bg-[#121212]/50 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-[#FF4500] focus:ring-1 focus:ring-[#FF4500] transition-colors outline-none"
                 />
               </div>
 
-              <div>
-                <label className="block text-sm text-power-muted mb-1.5">{t.enrollment.phone}</label>
+              <div className="flex flex-col gap-2">
+                <label className="text-sm font-semibold">{t.enrollment.phone}</label>
                 <input
+                  required
                   type="tel"
                   name="phone"
                   value={formData.phone}
-                  onChange={handleChange}
-                  required
+                  onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
                   placeholder="+1 (305) 000-0000"
-                  className={inputClass}
+                  className="w-full bg-[#121212]/50 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:border-[#FF4500] focus:ring-1 focus:ring-[#FF4500] transition-colors outline-none"
                 />
               </div>
 
-              <div className="flex items-start gap-3 pt-2">
-                <input
-                  type="checkbox"
-                  id="consent"
-                  name="consent"
-                  checked={formData.consent}
-                  onChange={handleChange}
+              <label className="flex items-start gap-3 mt-4 group cursor-pointer">
+                <input 
+                  type="checkbox" 
                   required
-                  className="mt-1 w-4 h-4 shrink-0 cursor-pointer accent-[#FF4500]"
+                  checked={formData.consent}
+                  onChange={(e) => setFormData(prev => ({ ...prev, consent: e.target.checked }))}
+                  className="mt-1 w-5 h-5 rounded border-white/20 bg-[#121212]/50 text-[#FF4500] focus:ring-[#FF4500]/50"
                 />
-                <label htmlFor="consent" className="text-sm text-power-muted cursor-pointer leading-relaxed">
+                <span className="text-sm text-power-muted leading-relaxed">
                   {t.enrollment.consent}{' '}
                   <a
                     href="https://www.powertech.academy/privacy-policy"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-power-accent hover:underline"
+                    className="text-[#FF4500] hover:text-white transition-colors"
                   >
                     {t.enrollment.privacyLink}
                   </a>
                   .
-                </label>
-              </div>
+                </span>
+              </label>
 
               {status === 'error' && (
                 <p className="text-red-400 text-sm">{t.enrollment.error}</p>
               )}
 
-              <MagneticButton
+              <button
                 type="submit"
                 disabled={!formData.consent || status === 'submitting'}
-                className="w-full py-4 glass-btn-accent text-white font-bold text-base rounded-full flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed mt-2"
+                className="w-full mt-2 font-bold text-base flex justify-center items-center gap-2 bg-[#FF4500] hover:bg-[#FF4500]/90 text-white rounded-xl py-4 px-6 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
               >
-                {status === 'submitting' ? (
-                  t.enrollment.submitting
-                ) : (
-                  <>{t.enrollment.submit} <Send size={18} /></>
-                )}
-              </MagneticButton>
-            </form>
+                {status === 'submitting' ? t.enrollment.submitting : t.enrollment.submit}
+                {status !== 'submitting' && <Send size={18} />}
+              </button>
+            </Form>
           )}
         </div>
       </div>
@@ -633,33 +600,34 @@ const InstalacionesAprendizaje = () => {
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              <div className="glass-card-elevated p-4 rounded-lg">
-                <p className="text-[#FF4500] font-bebas-neue text-xl font-bold">40h</p>
-                <p className="text-sm text-gray-400 font-barlow">{language === 'es' ? 'Práctica' : 'Hands-on'}</p>
+              <div className="glass-card rounded-lg">
+                <div className="p-4">
+                  <p className="text-[#FF4500] text-xl font-bold">40h</p>
+                  <p className="text-sm text-gray-400">{language === 'es' ? 'Práctica' : 'Hands-on'}</p>
+                </div>
               </div>
-              <div className="glass-card-elevated p-4 rounded-lg">
-                <p className="text-[#FF4500] font-bebas-neue text-xl font-bold">Real</p>
-                <p className="text-sm text-gray-400 font-barlow">{language === 'es' ? 'Equipamiento' : 'Equipment'}</p>
+              <div className="glass-card rounded-lg">
+                <div className="p-4">
+                  <p className="text-[#FF4500] text-xl font-bold">Real</p>
+                  <p className="text-sm text-gray-400">{language === 'es' ? 'Equipamiento' : 'Equipment'}</p>
+                </div>
               </div>
             </div>
 
-            <div className="space-y-3">
-              <Link 
+            <div className="flex flex-col sm:flex-row gap-4 mt-8">
+              <Link
                 to={language === 'es' ? '/es/hollywood-fl' : '/hollywood-fl'}
-                className="block w-full bg-[#FF4500] hover:bg-[#E63E00] text-white font-barlow-condensed font-bold py-4 px-6 rounded-lg text-center transition-all"
+                className="glass-btn-accent inline-flex items-center justify-center font-bold px-8 py-4 text-lg text-white rounded-lg w-full sm:w-auto hover:brightness-110"
               >
                 {language === 'es' ? '🎯 Conoce las Instalaciones' : '🎯 Explore Facilities'}
               </Link>
-              <a 
-                href={language === 'es' ? '#cta-es' : '#apply'}
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById('apply')?.scrollIntoView({ behavior: 'smooth' });
-                }}
-                className="block w-full border-2 border-[#FF4500] text-[#FF4500] hover:bg-[#FF4500] hover:text-white font-barlow-condensed font-bold py-4 px-6 rounded-lg text-center transition-all"
+              <button
+                type="button"
+                onClick={() => document.getElementById('apply')?.scrollIntoView({ behavior: 'smooth' })}
+                className="glass-btn inline-flex items-center justify-center font-bold px-8 py-4 text-lg text-white rounded-lg w-full sm:w-auto hover:bg-white/10"
               >
                 {language === 'es' ? '📞 Agendar Asesoría' : '📞 Schedule Advisory'}
-              </a>
+              </button>
             </div>
           </div>
         </div>
@@ -696,10 +664,10 @@ const BlogSection: React.FC = () => {
   return (
     <section className="py-20 bg-[#050505] px-6">
       <div className="max-w-5xl mx-auto">
-        <p className="text-[#FF4500] text-xs font-bold uppercase tracking-widest mb-3 text-center">
+        <Chip variant="soft" size="sm" className="font-bold uppercase tracking-widest mb-4 mx-auto flex justify-center w-fit">
           {isEs ? 'Recursos' : 'Resources'}
-        </p>
-        <h2 className="text-4xl md:text-5xl font-bebas-neue font-bold text-white text-center mb-4">
+        </Chip>
+        <h2 className="text-4xl md:text-5xl font-bold text-white text-center mb-4">
           {isEs ? 'Aprende Sobre la Industria' : 'Learn About the Industry'}
         </h2>
         <p className="text-gray-400 text-center mb-12 max-w-xl mx-auto">
@@ -709,24 +677,27 @@ const BlogSection: React.FC = () => {
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {blogPosts.map((post) => (
-            <Link
-              key={post.slug}
-              to={post.slug}
-              className="group glass-card-interactive glass-border-animated rounded-xl p-6 flex flex-col"
-            >
-              <span className="text-[#FF4500] text-xs font-bold uppercase tracking-widest mb-3">{post.label}</span>
-              <h3 className="text-white font-bold text-base leading-snug mb-3 group-hover:text-[#FF4500] transition-colors">
-                {post.title}
-              </h3>
-              <p className="text-gray-400 text-sm leading-relaxed flex-1">{post.excerpt}</p>
-              <span className="text-[#FF4500] text-sm font-semibold mt-4 inline-block">
-                {isEs ? 'Leer artículo →' : 'Read article →'}
-              </span>
+            <Link key={post.slug} to={post.slug} className="block group">
+              <div className="glass-card-interactive rounded-lg h-full overflow-hidden">
+                <div className="p-6 flex flex-col gap-3 h-full text-left">
+                  <Chip variant="soft" className="font-bold uppercase tracking-widest w-fit">
+                    {post.label}
+                  </Chip>
+                  <h3 className="text-white font-bold text-base leading-snug">{post.title}</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed flex-1">{post.excerpt}</p>
+                  <span className="text-[#FF4500] text-sm font-semibold mt-2 inline-block group-hover:text-[#cc3700] transition-colors">
+                    {isEs ? 'Leer artículo →' : 'Read article →'}
+                  </span>
+                </div>
+              </div>
             </Link>
           ))}
         </div>
-        <div className="text-center mt-10">
-          <Link to="/blog" className="text-gray-400 hover:text-white text-sm transition-colors">
+        <div className="flex justify-center mt-10">
+          <Link
+            to="/blog"
+            className="glass-btn inline-flex items-center justify-center font-bold px-8 py-4 text-lg text-white rounded-lg hover:bg-white/10 gap-2"
+          >
             {isEs ? 'Ver todos los artículos →' : 'View all articles →'}
           </Link>
         </div>
@@ -769,7 +740,6 @@ const MainLayout: React.FC = () => {
       <div id="program"><BentoGrid /></div>
       <Benefits />
       <InstalacionesAprendizaje />
-      <SocialProof />
       <Curriculum />
       <BlogSection />
       <EnrollmentCTA />
@@ -796,23 +766,25 @@ const MainLayout: React.FC = () => {
 const App: React.FC = () => {
   return (
     <LanguageProvider>
-      <Routes>
-        <Route path="/" element={<MainLayout />} />
-        <Route path="/es" element={<MainLayout />} />
-        <Route path="/faq" element={<FAQPage />} />
-        <Route path="/es/faq" element={<FAQPage />} />
-        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-        <Route path="/es/privacy-policy" element={<PrivacyPolicy />} />
-        <Route path="/hollywood-fl" element={<HollywoodFlPage />} />
-        <Route path="/es/hollywood-fl" element={<HollywoodFlPage />} />
-        <Route path="/advisory" element={<Advisory />} />
-        <Route path="/es/advisory" element={<Advisory />} />
-        <Route path="/fire-alarm-technician-training-florida" element={<TrainingFloridaPage />} />
-        <Route path="/blog/what-does-a-fire-alarm-technician-do-florida" element={<WhatDoesATechnicianDo />} />
-        <Route path="/blog/how-long-does-fire-alarm-training-take" element={<HowLongTraining />} />
-        <Route path="/blog/fire-alarm-technician-vs-electrician-florida" element={<FireAlarmVsElectrician />} />
-        <Route path="/gracias" element={<ThankYou />} />
-      </Routes>
+      <Suspense fallback={null}>
+        <Routes>
+          <Route path="/" element={<MainLayout />} />
+          <Route path="/es" element={<MainLayout />} />
+          <Route path="/faq" element={<FAQPage />} />
+          <Route path="/es/faq" element={<FAQPage />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/es/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/hollywood-fl" element={<HollywoodFlPage />} />
+          <Route path="/es/hollywood-fl" element={<HollywoodFlPage />} />
+          <Route path="/advisory" element={<Advisory />} />
+          <Route path="/es/advisory" element={<Advisory />} />
+          <Route path="/fire-alarm-technician-training-florida" element={<TrainingFloridaPage />} />
+          <Route path="/blog/what-does-a-fire-alarm-technician-do-florida" element={<WhatDoesATechnicianDo />} />
+          <Route path="/blog/how-long-does-fire-alarm-training-take" element={<HowLongTraining />} />
+          <Route path="/blog/fire-alarm-technician-vs-electrician-florida" element={<FireAlarmVsElectrician />} />
+          <Route path="/gracias" element={<ThankYou />} />
+        </Routes>
+      </Suspense>
     </LanguageProvider>
   );
 };
