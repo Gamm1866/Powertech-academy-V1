@@ -133,26 +133,26 @@ const HollywoodFlPage: React.FC = () => {
       </section>
 
       {/* LOCATION */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-[#0a0a0a]">
         <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-4xl font-bebas-neue font-bold mb-10 text-center text-[#050505]">
+          <h2 className="text-4xl font-bebas-neue font-bold mb-10 text-center text-white">
             {t.locationTitle}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-            <div className="bg-gray-50 border border-gray-200 p-8 rounded-xl space-y-4">
-              <p className="flex items-start gap-3 font-barlow text-gray-700">
+            <div className="bg-[#121212] border border-[#27272a] p-8 rounded-xl space-y-4">
+              <p className="flex items-start gap-3 font-barlow text-gray-300">
                 <span className="text-xl">📍</span>
                 <span>{t.address}</span>
               </p>
-              <p className="flex items-center gap-3 font-barlow text-gray-700">
+              <p className="flex items-center gap-3 font-barlow text-gray-300">
                 <span className="text-xl">📞</span>
                 <a href="tel:+17864609020" className="hover:text-[#FF4500] transition-colors">+1 (786) 460-9020</a>
               </p>
-              <p className="flex items-center gap-3 font-barlow text-gray-700">
+              <p className="flex items-center gap-3 font-barlow text-gray-300">
                 <span className="text-xl">✉️</span>
                 <a href="mailto:sales@powertech.academy" className="hover:text-[#FF4500] transition-colors">sales@powertech.academy</a>
               </p>
-              <p className="flex items-center gap-3 font-barlow text-gray-700">
+              <p className="flex items-center gap-3 font-barlow text-gray-300">
                 <span className="text-xl">🕐</span>
                 <span>{t.hours}</span>
               </p>
@@ -199,9 +199,9 @@ const HollywoodFlPage: React.FC = () => {
       </section>
 
       {/* PROGRAM */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-[#0a0a0a]">
         <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-4xl font-bebas-neue font-bold mb-10 text-center text-[#050505]">
+          <h2 className="text-4xl font-bebas-neue font-bold mb-10 text-center text-white">
             {t.programTitle}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4">

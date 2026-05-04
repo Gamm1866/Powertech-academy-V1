@@ -2,6 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import Header from '../../../components/Header';
+import { useLanguage } from '../../../contexts/LanguageContext';
 
 const articleSchema = {
   '@context': 'https://schema.org',
@@ -20,7 +21,10 @@ const articleSchema = {
   mainEntityOfPage: 'https://www.powertech.academy/blog/what-does-a-fire-alarm-technician-do-florida',
 };
 
-const WhatDoesATechnicianDo: React.FC = () => (
+const WhatDoesATechnicianDo: React.FC = () => {
+  const { lang } = useLanguage();
+  const isEs = lang === 'es';
+  return (
   <>
     <Header />
     <Helmet>
@@ -162,11 +166,14 @@ const WhatDoesATechnicianDo: React.FC = () => (
           </Link>
         </div>
         <div className="mt-8 text-sm text-gray-500">
-          <Link to="/blog" className="hover:text-gray-300 transition-colors">← All articles</Link>
+          <Link to={isEs ? '/es/blog' : '/blog'} className="hover:text-gray-300 transition-colors">
+            {isEs ? '← Todos los artículos' : '← All articles'}
+          </Link>
         </div>
       </div>
     </section>
   </>
-);
+  );
+};
 
 export default WhatDoesATechnicianDo;

@@ -1,0 +1,29 @@
+
+> powertech-academy@0.0.0 build
+> vite build
+
+vite v6.4.2 building for production...
+transforming...
+✓ 4362 modules transformed.
+✗ Build failed in 5.67s
+error during build:
+components/Header.tsx (5:9): "Navbar" is not exported by "node_modules/@heroui/react/dist/index.js", imported by "components/Header.tsx".
+file: /Users/germanmoreno/Documents/GitHub/Powertech-academy-V1/components/Header.tsx:5:9
+
+3: import { useLanguage } from '../contexts/LanguageContext';
+4: import { Zap } from 'lucide-react';
+5: import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Button } from ...
+            ^
+6: 
+7: const Header: React.FC = () => {
+
+    at getRollupError (file:///Users/germanmoreno/Documents/GitHub/Powertech-academy-V1/node_modules/rollup/dist/es/shared/parseAst.js:406:41)
+    at error (file:///Users/germanmoreno/Documents/GitHub/Powertech-academy-V1/node_modules/rollup/dist/es/shared/parseAst.js:402:42)
+    at Module.error (file:///Users/germanmoreno/Documents/GitHub/Powertech-academy-V1/node_modules/rollup/dist/es/shared/node-entry.js:17380:16)
+    at Module.traceVariable (file:///Users/germanmoreno/Documents/GitHub/Powertech-academy-V1/node_modules/rollup/dist/es/shared/node-entry.js:17813:29)
+    at ModuleScope.findVariable (file:///Users/germanmoreno/Documents/GitHub/Powertech-academy-V1/node_modules/rollup/dist/es/shared/node-entry.js:15403:39)
+    at ReturnValueScope.findVariable (file:///Users/germanmoreno/Documents/GitHub/Powertech-academy-V1/node_modules/rollup/dist/es/shared/node-entry.js:5676:38)
+    at FunctionBodyScope.findVariable (file:///Users/germanmoreno/Documents/GitHub/Powertech-academy-V1/node_modules/rollup/dist/es/shared/node-entry.js:5676:38)
+    at Identifier.bind (file:///Users/germanmoreno/Documents/GitHub/Powertech-academy-V1/node_modules/rollup/dist/es/shared/node-entry.js:5450:40)
+    at CallExpression.bind (file:///Users/germanmoreno/Documents/GitHub/Powertech-academy-V1/node_modules/rollup/dist/es/shared/node-entry.js:2828:28)
+    at CallExpression.bind (file:///Users/germanmoreno/Documents/GitHub/Powertech-academy-V1/node_modules/rollup/dist/es/shared/node-entry.js:12512:15)

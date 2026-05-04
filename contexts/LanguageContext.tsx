@@ -330,6 +330,7 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | null>(null);
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
+  console.log("LanguageProvider mounting...");
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -354,6 +355,11 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
 
 export const useLanguage = (): LanguageContextType => {
   const ctx = useContext(LanguageContext);
-  if (!ctx) throw new Error('useLanguage must be used within LanguageProvider');
+  console.log("useLanguage called, ctx is:", !!ctx);
+  if (!ctx) {
+    console.error('useLanguage called outside of LanguageProvider!');
+    console.trace();
+    return { lang: 'en', setLang: () => {}, t: translations.en };
+  }
   return ctx;
 };

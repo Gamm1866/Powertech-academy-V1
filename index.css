@@ -189,6 +189,27 @@
     transition: opacity 0.35s ease;
   }
 
+  .glass-border-animated-always {
+    position: relative;
+  }
+
+  .glass-border-animated-always::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 69, 0, 0.6),
+      rgba(255, 200, 0, 0.25),
+      rgba(255, 69, 0, 0.08),
+      rgba(255, 69, 0, 0.5)
+    );
+    background-size: 300% 300%;
+    animation: shimmer 4s linear infinite;
+    z-index: -1;
+  }
+
   .glass-border-animated:hover::before {
     opacity: 1;
   }
