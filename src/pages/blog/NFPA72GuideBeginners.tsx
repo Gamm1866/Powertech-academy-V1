@@ -45,6 +45,9 @@ const NFPA72GuideBeginners: React.FC = () => {
           content="What NFPA 72 actually covers and why it matters for fire alarm work in Florida. A practical intro for new technicians — no jargon, just what you need to know."
         />
         <link rel="canonical" href="https://www.powertech.academy/blog/nfpa-72-guide-florida-fire-alarm-technicians" />
+        <link rel="alternate" hrefLang="en" href="https://www.powertech.academy/blog/nfpa-72-guide-florida-fire-alarm-technicians" />
+        <link rel="alternate" hrefLang="es" href="https://www.powertech.academy/es/blog/nfpa-72-guide-florida-fire-alarm-technicians" />
+        <link rel="alternate" hrefLang="x-default" href="https://www.powertech.academy/blog/nfpa-72-guide-florida-fire-alarm-technicians" />
         <meta property="og:title" content="NFPA 72 Explained: Guide for Florida Fire Alarm Technicians" />
         <meta property="og:description" content="What NFPA 72 covers, why Florida enforces it, and what new technicians need to understand on day one." />
         <meta property="og:url" content="https://www.powertech.academy/blog/nfpa-72-guide-florida-fire-alarm-technicians" />

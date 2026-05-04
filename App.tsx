@@ -44,8 +44,14 @@ const App: React.FC = () => {
           <Route path="/blog/how-long-does-fire-alarm-training-take" element={<HowLongTraining />} />
           <Route path="/blog/fire-alarm-technician-vs-electrician-florida" element={<FireAlarmVsElectrician />} />
           <Route path="/blog/fire-alarm-technician-salary-florida" element={<FireAlarmSalaryFlorida />} />
+          <Route path="/es/blog/fire-alarm-technician-salary-florida" element={<FireAlarmSalaryFlorida />} />
           <Route path="/blog/nfpa-72-guide-florida-fire-alarm-technicians" element={<NFPA72GuideBeginners />} />
+          <Route path="/es/blog/nfpa-72-guide-florida-fire-alarm-technicians" element={<NFPA72GuideBeginners />} />
           <Route path="/blog/how-to-get-hired-fire-alarm-technician-south-florida" element={<HowToGetHiredFireAlarmFlorida />} />
+          <Route path="/es/blog/how-to-get-hired-fire-alarm-technician-south-florida" element={<HowToGetHiredFireAlarmFlorida />} />
+          <Route path="/es/blog/what-does-a-fire-alarm-technician-do-florida" element={<WhatDoesATechnicianDo />} />
+          <Route path="/es/blog/how-long-does-fire-alarm-training-take" element={<HowLongTraining />} />
+          <Route path="/es/blog/fire-alarm-technician-vs-electrician-florida" element={<FireAlarmVsElectrician />} />
           <Route path="/gracias" element={<ThankYou />} />
         </Routes>
       </Suspense>

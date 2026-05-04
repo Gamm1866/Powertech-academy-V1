@@ -45,6 +45,9 @@ const HowToGetHiredFireAlarmFlorida: React.FC = () => {
           content="Practical steps to land your first fire alarm technician job in Broward, Miami-Dade, or Palm Beach County. What employers look for, where to find openings, and how to stand out."
         />
         <link rel="canonical" href="https://www.powertech.academy/blog/how-to-get-hired-fire-alarm-technician-south-florida" />
+        <link rel="alternate" hrefLang="en" href="https://www.powertech.academy/blog/how-to-get-hired-fire-alarm-technician-south-florida" />
+        <link rel="alternate" hrefLang="es" href="https://www.powertech.academy/es/blog/how-to-get-hired-fire-alarm-technician-south-florida" />
+        <link rel="alternate" hrefLang="x-default" href="https://www.powertech.academy/blog/how-to-get-hired-fire-alarm-technician-south-florida" />
         <meta property="og:title" content="How to Get Hired as Entry-Level Fire Alarm Tech in South Florida" />
         <meta property="og:description" content="Where to find jobs, what employers actually look for, and how to stand out as a new fire alarm technician in Broward and Miami-Dade." />
         <meta property="og:url" content="https://www.powertech.academy/blog/how-to-get-hired-fire-alarm-technician-south-florida" />

@@ -34,6 +34,9 @@ const WhatDoesATechnicianDo: React.FC = () => {
         content="A practical look at the day-to-day work of fire alarm technicians in Florida — installation, testing, panel config, and what skills the job actually requires."
       />
       <link rel="canonical" href="https://www.powertech.academy/blog/what-does-a-fire-alarm-technician-do-florida" />
+      <link rel="alternate" hrefLang="en" href="https://www.powertech.academy/blog/what-does-a-fire-alarm-technician-do-florida" />
+      <link rel="alternate" hrefLang="es" href="https://www.powertech.academy/es/blog/what-does-a-fire-alarm-technician-do-florida" />
+      <link rel="alternate" hrefLang="x-default" href="https://www.powertech.academy/blog/what-does-a-fire-alarm-technician-do-florida" />
       <meta property="og:title" content="What Does a Fire Alarm Technician Do in Florida?" />
       <meta property="og:description" content="Day-to-day work, required skills, and where fire alarm technicians work across South Florida." />
       <meta property="og:url" content="https://www.powertech.academy/blog/what-does-a-fire-alarm-technician-do-florida" />

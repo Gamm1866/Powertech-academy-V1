@@ -34,6 +34,9 @@ const FireAlarmVsElectrician: React.FC = () => {
         content="Comparing fire alarm technician and electrician career paths in Florida — entry requirements, licensing timeline, and which is more accessible for career changers."
       />
       <link rel="canonical" href="https://www.powertech.academy/blog/fire-alarm-technician-vs-electrician-florida" />
+      <link rel="alternate" hrefLang="en" href="https://www.powertech.academy/blog/fire-alarm-technician-vs-electrician-florida" />
+      <link rel="alternate" hrefLang="es" href="https://www.powertech.academy/es/blog/fire-alarm-technician-vs-electrician-florida" />
+      <link rel="alternate" hrefLang="x-default" href="https://www.powertech.academy/blog/fire-alarm-technician-vs-electrician-florida" />
       <meta property="og:title" content="Fire Alarm Technician vs Electrician in Florida | 2026" />
       <meta property="og:description" content="Entry requirements, licensing, timelines — an honest comparison of both trades for someone starting in Florida." />
       <meta property="og:url" content="https://www.powertech.academy/blog/fire-alarm-technician-vs-electrician-florida" />

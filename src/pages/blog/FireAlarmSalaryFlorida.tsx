@@ -45,6 +45,9 @@ const FireAlarmSalaryFlorida: React.FC = () => {
           content="Fire alarm technician salaries in Florida range from $38,000 entry-level to $75,000+ experienced. See what affects your pay in South Florida and how to grow faster."
         />
         <link rel="canonical" href="https://www.powertech.academy/blog/fire-alarm-technician-salary-florida" />
+        <link rel="alternate" hrefLang="en" href="https://www.powertech.academy/blog/fire-alarm-technician-salary-florida" />
+        <link rel="alternate" hrefLang="es" href="https://www.powertech.academy/es/blog/fire-alarm-technician-salary-florida" />
+        <link rel="alternate" hrefLang="x-default" href="https://www.powertech.academy/blog/fire-alarm-technician-salary-florida" />
         <meta property="og:title" content="Fire Alarm Technician Salary in Florida 2026" />
         <meta property="og:description" content="Entry-level to senior pay ranges for fire alarm techs in Florida. What affects your salary and how to move up faster." />
         <meta property="og:url" content="https://www.powertech.academy/blog/fire-alarm-technician-salary-florida" />

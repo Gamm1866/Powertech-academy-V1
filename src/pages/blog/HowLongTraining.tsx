@@ -34,6 +34,9 @@ const HowLongTraining: React.FC = () => {
         content="Fire alarm technician training in Florida takes 2–3 months in an intensive program or 1–4 years via apprenticeship. Learn what each path covers and which fits your goals."
       />
       <link rel="canonical" href="https://www.powertech.academy/blog/how-long-does-fire-alarm-training-take" />
+      <link rel="alternate" hrefLang="en" href="https://www.powertech.academy/blog/how-long-does-fire-alarm-training-take" />
+      <link rel="alternate" hrefLang="es" href="https://www.powertech.academy/es/blog/how-long-does-fire-alarm-training-take" />
+      <link rel="alternate" hrefLang="x-default" href="https://www.powertech.academy/blog/how-long-does-fire-alarm-training-take" />
       <meta property="og:title" content="How Long Does Fire Alarm Technician Training Take? | Florida 2026" />
       <meta property="og:description" content="Comparing training timelines — fast-track programs vs apprenticeships — for fire alarm technicians in Florida." />
       <meta property="og:url" content="https://www.powertech.academy/blog/how-long-does-fire-alarm-training-take" />
