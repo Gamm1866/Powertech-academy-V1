@@ -8,8 +8,43 @@ import { ArrowRight } from 'lucide-react';
 
 const blogPosts = [
   {
+    slug: '/blog/fire-alarm-technician-salary-florida',
+    title: {
+      en: 'Fire Alarm Technician Salary in Florida: What to Expect in 2026',
+      es: 'Salario de Técnico de Alarmas en Florida: Qué esperar en 2026'
+    },
+    excerpt: {
+      en: 'Entry-level to senior pay ranges, what affects your earnings, and how fast you can move up in South Florida.',
+      es: 'Rangos salariales de entrada hasta senior, qué afecta tus ingresos y qué tan rápido puedes avanzar en el Sur de Florida.'
+    },
+    category: { en: 'Salary Guide', es: 'Guía Salarial' }
+  },
+  {
+    slug: '/blog/how-to-get-hired-fire-alarm-technician-south-florida',
+    title: {
+      en: 'How to Get Hired as Entry-Level Fire Alarm Tech in South Florida',
+      es: 'Cómo Conseguir Empleo de Técnico de Alarmas en el Sur de Florida'
+    },
+    excerpt: {
+      en: 'What Broward and Miami-Dade contractors actually look for, where to find openings, and how to stand out with no experience.',
+      es: 'Qué buscan los contratistas de Broward y Miami-Dade, dónde encontrar vacantes y cómo destacar sin experiencia.'
+    },
+    category: { en: 'Career Guide', es: 'Guía de Carrera' }
+  },
+  {
+    slug: '/blog/nfpa-72-guide-florida-fire-alarm-technicians',
+    title: {
+      en: 'NFPA 72 Explained: A Beginner\'s Guide for Florida Technicians',
+      es: 'NFPA 72 Explicado: Guía para Principiantes en Florida'
+    },
+    excerpt: {
+      en: 'What NFPA 72 actually covers, how Florida enforces it, and what a new technician needs to understand before day one.',
+      es: 'Qué cubre el NFPA 72, cómo lo aplica Florida y qué debe entender un nuevo técnico antes de su primer día.'
+    },
+    category: { en: 'Technical Guide', es: 'Guía Técnica' }
+  },
+  {
     slug: '/blog/what-does-a-fire-alarm-technician-do-florida',
-    label: 'Career Guide',
     title: {
       en: 'What Does a Fire Alarm Technician Do in Florida?',
       es: '¿Qué hace un Técnico de Alarmas contra Incendio en Florida?'
@@ -18,14 +53,10 @@ const blogPosts = [
       en: 'Installation, inspection, panel programming, troubleshooting — a practical look at the day-to-day work and skills required.',
       es: 'Instalación, inspección, programación de paneles, resolución de problemas: una mirada práctica al trabajo diario.'
     },
-    category: {
-      en: 'Career Guide',
-      es: 'Guía de Carrera'
-    }
+    category: { en: 'Career Guide', es: 'Guía de Carrera' }
   },
   {
     slug: '/blog/how-long-does-fire-alarm-training-take',
-    label: 'Training',
     title: {
       en: 'How Long Does Fire Alarm Technician Training Take?',
       es: '¿Cuánto tiempo dura la capacitación de Técnico de Alarmas?'
@@ -34,14 +65,10 @@ const blogPosts = [
       en: 'Intensive programs vs apprenticeships vs community college — an honest breakdown of timelines and what each path covers.',
       es: 'Programas intensivos vs. aprendizajes vs. institutos: un desglose honesto de los plazos y lo que cubre cada camino.'
     },
-    category: {
-      en: 'Training',
-      es: 'Capacitación'
-    }
+    category: { en: 'Training', es: 'Capacitación' }
   },
   {
     slug: '/blog/fire-alarm-technician-vs-electrician-florida',
-    label: 'Comparison',
     title: {
       en: 'Fire Alarm Technician vs Electrician in Florida',
       es: 'Técnico de Alarmas contra Incendio vs. Electricista en Florida'
@@ -50,10 +77,7 @@ const blogPosts = [
       en: 'Entry requirements, licensing timelines, and scope of work — a side-by-side comparison for career changers in Florida.',
       es: 'Requisitos de entrada, plazos de licencia y alcance del trabajo: una comparación detallada para quienes cambian de carrera.'
     },
-    category: {
-      en: 'Comparison',
-      es: 'Comparación'
-    }
+    category: { en: 'Comparison', es: 'Comparación' }
   },
 ];
 

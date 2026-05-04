@@ -15,6 +15,9 @@ const TrainingFloridaPage = lazy(() => import('./src/pages/TrainingFloridaPage')
 const WhatDoesATechnicianDo = lazy(() => import('./src/pages/blog/WhatDoesATechnicianDo'));
 const HowLongTraining = lazy(() => import('./src/pages/blog/HowLongTraining'));
 const FireAlarmVsElectrician = lazy(() => import('./src/pages/blog/FireAlarmVsElectrician'));
+const FireAlarmSalaryFlorida = lazy(() => import('./src/pages/blog/FireAlarmSalaryFlorida'));
+const NFPA72GuideBeginners = lazy(() => import('./src/pages/blog/NFPA72GuideBeginners'));
+const HowToGetHiredFireAlarmFlorida = lazy(() => import('./src/pages/blog/HowToGetHiredFireAlarmFlorida'));
 const Advisory = lazy(() => import('./src/pages/Advisory'));
 const ThankYou = lazy(() => import('./src/pages/ThankYou'));
 const BlogPage = lazy(() => import('./src/pages/BlogPage'));
@@ -40,6 +43,9 @@ const App: React.FC = () => {
           <Route path="/blog/what-does-a-fire-alarm-technician-do-florida" element={<WhatDoesATechnicianDo />} />
           <Route path="/blog/how-long-does-fire-alarm-training-take" element={<HowLongTraining />} />
           <Route path="/blog/fire-alarm-technician-vs-electrician-florida" element={<FireAlarmVsElectrician />} />
+          <Route path="/blog/fire-alarm-technician-salary-florida" element={<FireAlarmSalaryFlorida />} />
+          <Route path="/blog/nfpa-72-guide-florida-fire-alarm-technicians" element={<NFPA72GuideBeginners />} />
+          <Route path="/blog/how-to-get-hired-fire-alarm-technician-south-florida" element={<HowToGetHiredFireAlarmFlorida />} />
           <Route path="/gracias" element={<ThankYou />} />
         </Routes>
       </Suspense>
